@@ -57,11 +57,14 @@ $(function () {
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
-            <div class="menu-item" id="${menuItem.id}">
-              <h3>${menuItem.name}</h3>
-              <p>${menuItem.description}</p>
-              <p>$${menuItem.price}</p>
-            </div>
+          <div class="card" style="width: 12rem;">
+          <img src="https://picsum.photos/150/150" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${menuItem.name}</h5>
+            <p class="card-text">${menuItem.description}</p>
+            <a href="#" class="btn btn-primary">Add to cart</a>
+          </div>
+        </div>
           `);
         });
       },
