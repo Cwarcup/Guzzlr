@@ -1,0 +1,17 @@
+.header-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+
+  h1 {
+    margin: 5px;
+  }
+
+  p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 5px;
+  }
+}
