@@ -329,19 +329,19 @@ const makeInsertStatement = function(foodType, priceAdjust = Math.floor(Math.ran
 
   if (foodType === 'entree') {
     // set price between $10 and $16 plus the price adjustment
-    let price = (Math.floor(Math.random() * 7) + 10 + priceAdjust);
+    let price = 100 * (Math.floor(Math.random() * 7) + 10 + priceAdjust);
     myStatement += `('${entreeName}', '${entreeDesc}', ${price}, 'Entrees')`;
   } else if (foodType === 'appetizer') {
-    let price = (Math.floor(Math.random() * 4) + 6 + priceAdjust);
+    let price = 100 * (Math.floor(Math.random() * 4) + 6 + priceAdjust);
     myStatement += `('${appyName}', '${appyDesc}', ${price}, 'Appetizers')`;
   } else if (foodType === 'side') {
-    let price = (Math.floor(Math.random() * 3) + 2 + priceAdjust);
+    let price = 100 * (Math.floor(Math.random() * 3) + 2 + priceAdjust);
     myStatement += `('${sideName}', ' - ', ${price}, 'Sides')`;
   } else if (foodType === 'drink') {
-    let price = (Math.floor(Math.random() * 5) + 6 + priceAdjust);
+    let price = 100 * (Math.floor(Math.random() * 5) + 6 + priceAdjust);
     myStatement += `('${drinkName}', ' - ', ${price}, 'Drinks')`;
   } else if (foodType === 'dessert') {
-    let price = (Math.floor(Math.random() * 4) + 7 + priceAdjust);
+    let price = 100 * (Math.floor(Math.random() * 4) + 7 + priceAdjust);
     myStatement += `('${dessertName}', ' - ', ${price}, 'Desserts')`;
   }
   // console.log('\n');
