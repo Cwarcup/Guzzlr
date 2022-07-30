@@ -1,6 +1,6 @@
 -- Drop and recreate Restaurants table (Example)
-
 DROP TABLE IF EXISTS restaurants CASCADE;
+
 CREATE TABLE restaurants (
   id SERIAL PRIMARY KEY NOT NULL,
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,

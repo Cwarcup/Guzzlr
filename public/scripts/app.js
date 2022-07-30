@@ -41,6 +41,42 @@ $(function () {
     // console.log(id);
   });
 
+  // render list of all menu items
+
+
+  // load menu items from /api/homepageMenu
+  // returns an
+  const getMenuItems = () => {
+    console.log('getMenuItems has run');
+    $.ajax({
+      url: '/homepageMenu',
+      method: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        const menuItems = data.menuItems;
+        // iterate through menuItems and append to DOM
+        menuItems.forEach((menuItem) => {
+          $('.menu-options-container').append(`
+            <div class="menu-item" id="${menuItem.id}">
+              <h3>${menuItem.name}</h3>
+              <p>${menuItem.description}</p>
+              <p>$${menuItem.price}</p>
+            </div>
+          `);
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  };
+
+  getMenuItems();
+
+
+    
+
+
 
 
 
