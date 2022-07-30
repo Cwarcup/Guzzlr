@@ -377,3 +377,15 @@ fs.writeFile('./db/seeds/04a_generated_menu_items.sql', content, err => {
     console.error(err);
   }
 });
+
+let menuBuilder = "";
+
+for (let i = 1; i <= numTreats * 5; i++) {
+  menuBuilder += `INSERT INTO menus (restaurant_id, menu_item) VALUES (1,${i});\n`
+}
+
+fs.writeFile('./db/seeds/05a_generated_menus.sql', menuBuilder, err => {
+  if (err) {
+    console.error(err);
+  }
+});
