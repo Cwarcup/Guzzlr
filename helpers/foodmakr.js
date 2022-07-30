@@ -11,7 +11,7 @@ const fs = require('fs');
 
 
 // PUT HOW MANY TREAT ITEMS YOU WANT BELOW!
-const numTreats = 200;
+const numTreats = 8;
 
 
 
