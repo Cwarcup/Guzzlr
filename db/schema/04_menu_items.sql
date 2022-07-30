@@ -6,5 +6,6 @@ CREATE TABLE menu_items (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   price INTEGER NOT NULL,
+  menu_section VARCHAR(50),
   is_active BOOLEAN DEFAULT TRUE
 );
