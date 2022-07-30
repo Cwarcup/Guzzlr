@@ -11,7 +11,7 @@ const fs = require('fs');
 
 
 // PUT HOW MANY TREAT ITEMS YOU WANT BELOW!
-const numTreats = 20;
+const numTreats = 200;
 
 
 
@@ -372,7 +372,7 @@ for (let k = 0; k < numTreats; k++) {
   content += makeInsertStatement('dessert');
 }
 
-fs.writeFile('../seeds/RENAME-ME-menuitems.sql', content, err => {
+fs.writeFile('./db/seeds/04a_generated_menu_items.sql', content, err => {
   if (err) {
     console.error(err);
   }
