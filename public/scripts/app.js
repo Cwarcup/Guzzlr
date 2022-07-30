@@ -15,6 +15,8 @@ $(function () {
     $('#login').show();
   });
 
+  // login page
+  // login-btn renders users login page
   $('.login-btn').click((event) => {
     event.preventDefault();
     // add margin because we remove the main-container
@@ -28,6 +30,18 @@ $(function () {
     // change login btn htl
     $('.login').html('Logout');
   });
+
+
+
+
+  // listen for menu-item being clicked
+  $('.menu-item').click(function (event) {
+    // get id of closest div
+    let id = $(event.target).closest('.menu-item').attr('id');
+    // console.log(id);
+  });
+
+
 
 
 
