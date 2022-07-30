@@ -2,40 +2,38 @@
 // Client facing scripts here
 $(function () {
   
-  // login html
-  const login = () => {
-    return (
-      `
-      <div class='login-container'>
-        <h1>Login</h1>
-        <form action="/login" method="POST">
-          <div class="">
-            <label class="" for="email">Email address</label>
-            <input name="email" type="email" class="" placeholder="Enter email" id="email" />
-          </div>
+  // hide login HTML on load
+  $('#login').hide();
 
-          <div class="">
-            <label class="" for="password">Password</label>
-            <input name="password" type="password" class="" placeholder="Password" id="password" />
-          </div>
 
-          <div class="">
-            <button type="submit" class="">Login
-            </button>
-          </div>
-        </form>
-      </div>
-      `
-    );
-  };
-
+  // login btn top right of main page
   $('.login').click((event) => {
     event.preventDefault();
     $('.header-welcome').hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
-    const loginHTML = login();
-    $('#main-cont').append(loginHTML);
-
+    $('#login').show();
   });
+
+  $('.login-btn').click((event) => {
+    event.preventDefault();
+    // add margin because we remove the main-container
+    $('.main-container').css('margin-top', '100px');
+
+    $('.menu-options-container').show();
+    $('.previous-orders-container').show();
+    $('#login').hide();
+    $('.sign-up').hide();
+
+    // change login btn htl
+    $('.login').html('Logout');
+  });
+
+
+
+
+  // do not delete below this line
 });
+
+
+
