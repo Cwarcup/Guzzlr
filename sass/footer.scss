@@ -1,0 +1,16 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  min-height: 50px;
+  width: 100%;
+  background: PapayaWhip;
+  opacity: 0.8;
+  margin-top: auto;
+
+  a {
+    color: rgba(163, 208, 219, 1);
+    text-decoration: none;
+  }
+}
