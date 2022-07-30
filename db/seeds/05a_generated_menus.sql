@@ -1,4 +1,3 @@
-INSERT INTO menus (restaurant_id, menu_item) VALUES (1,0);
 INSERT INTO menus (restaurant_id, menu_item) VALUES (1,1);
 INSERT INTO menus (restaurant_id, menu_item) VALUES (1,2);
 INSERT INTO menus (restaurant_id, menu_item) VALUES (1,3);
@@ -998,3 +997,4 @@ INSERT INTO menus (restaurant_id, menu_item) VALUES (1,996);
 INSERT INTO menus (restaurant_id, menu_item) VALUES (1,997);
 INSERT INTO menus (restaurant_id, menu_item) VALUES (1,998);
 INSERT INTO menus (restaurant_id, menu_item) VALUES (1,999);
+INSERT INTO menus (restaurant_id, menu_item) VALUES (1,1000);
