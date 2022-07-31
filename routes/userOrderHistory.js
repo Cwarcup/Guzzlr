@@ -2,8 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 // have hard coded user id for now = 1
-// TODO: dynamic user id
-// TODO: create query with orders and menu_items
+// TODO: returning all the same prices for now
 module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
@@ -28,7 +27,9 @@ module.exports = (db) => {
       restaurants.name,
       orders.order_placed,
       menu_items.name,
-      orders.price;
+      orders.price
+    LIMIT
+      4;
   `)
       .then(data => {
         const userOrderHistory = data.rows;

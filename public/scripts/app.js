@@ -3,7 +3,7 @@
 $(function () {
   
   // hide login HTML on load
-  $('#login').hide();
+  // $('#login').hide();
 
 
   // login btn top right of main page
@@ -12,12 +12,30 @@ $(function () {
     $('.header-welcome').hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
-    $('#login').show();
+    $('#login').append(`
+        <h1>Login</h1>
+        <div>
+          <div class="">
+            <label class="" for="email">Email address</label>
+            <input name="email" type="email" class="" placeholder="Enter email" id="email" />
+          </div>
+          <div class="">
+            <label class="" for="password">Password</label>
+            <input name="password" type="password" class="" placeholder="Password" id="password" />
+          </div>
+          <div class="">
+            <button type="submit" class="login-btn">Login
+            </button>
+          </div>
+        </div>
+
+    `);
   });
+
 
   // login page
   // login-btn renders users login page
-  $('.login-btn').click((event) => {
+  $('#login').click('.login-btn', (event) => {
     event.preventDefault();
     // add margin because we remove the main-container
     $('.main-container').css('margin-top', '100px');
@@ -31,9 +49,6 @@ $(function () {
     $('.login').html('Logout');
   });
 
-
-
-
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
     // get id of closest div
@@ -41,9 +56,9 @@ $(function () {
     // console.log(id);
   });
 
+
+
   // render list of all menu items
-
-
   // load menu items from /api/homepageMenu
   // returns an
   const getMenuItems = () => {
@@ -57,7 +72,7 @@ $(function () {
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
             <div class="card" style="width: 12rem;">
-              <img src="https://picsum.photos/150/150?random=${menuItem.id}" class="card-img-top" alt="...">
+              <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">${menuItem.name}</h5>
                 <p class="card-text">${menuItem.description}</p>
@@ -87,12 +102,10 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         const userOrderHistory = data.userOrderHistory;
-        console.log('userOrderHistory', userOrderHistory);
-        // iterate through userOrderHistory and append to DOM
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-container').append(`
           <div class="card" style="width: 12rem;">
-          <img src="https://picsum.photos/150/150?random=${prevOrder.order_id}" class="card-img-top" alt="${prevOrder.name}">
+          <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="${prevOrder.name}">
           <div class="card-body">
             <h5 class="card-title">${prevOrder.name}</h5>
             <p class="card-text">$${prevOrder.price / 100}</p>
@@ -110,7 +123,23 @@ $(function () {
   getUserOrderHistory();
 
 
-    
+  // @Adam: renders this on the homepage at the moment
+  // display cart items for logged in user
+  const userCart = () => {
+    console.log('userCart has run');
+    $.ajax({
+      url: '/userCart',
+      method: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        const userCart = data.userCart;
+        console.log('userCart', userCart);
+
+      }
+    });
+  };
+
+  userCart();
 
 
 
