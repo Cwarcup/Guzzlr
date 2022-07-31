@@ -70,7 +70,9 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         const menuItems = data.menuItems;
-        console.log(menuItems);
+        const restaurantName = `<h2 class="display-6 align-self-start rest-name">${menuItems[0].rest_name}</h2>`;
+        $('.main-container').prepend(restaurantName);
+
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
@@ -91,8 +93,8 @@ $(function () {
       }
     });
   };
-
   getMenuItems();
+
 
 
   // load previous orders from /api/userOrderHistory
