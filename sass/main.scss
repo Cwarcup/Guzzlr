@@ -13,6 +13,10 @@ body {
       rgba(163, 208, 219, 1) 74%,
       rgba(163, 208, 219, 1) 100%);
 
+  main {
+    margin-top: auto;
+  }
+
   .main-container {
     display: flex;
     flex-direction: column;

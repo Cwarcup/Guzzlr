@@ -3,7 +3,7 @@
 $(function () {
   
   // hide login HTML on load
-  $('#login').hide();
+  // $('#login').hide();
 
 
   // login btn top right of main page
@@ -12,12 +12,29 @@ $(function () {
     $('.header-welcome').hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
-    $('#login').show();
+    $('#login').append(`
+        <h1>Login</h1>
+        <div>
+          <div class="">
+            <label class="" for="email">Email address</label>
+            <input name="email" type="email" class="" placeholder="Enter email" id="email" />
+          </div>
+          <div class="">
+            <label class="" for="password">Password</label>
+            <input name="password" type="password" class="" placeholder="Password" id="password" />
+          </div>
+          <div class="">
+            <button type="submit" class="login-btn">Login
+            </button>
+          </div>
+        </div>
+
+    `);
   });
 
   // login page
   // login-btn renders users login page
-  $('.login-btn').click((event) => {
+  $('#login').click('.login-btn', (event) => {
     event.preventDefault();
     // add margin because we remove the main-container
     $('.main-container').css('margin-top', '100px');
