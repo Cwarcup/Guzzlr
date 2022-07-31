@@ -89,14 +89,13 @@ $(function () {
         const userOrderHistory = data.userOrderHistory;
         console.log('userOrderHistory', userOrderHistory);
         // iterate through userOrderHistory and append to DOM
-        userOrderHistory.forEach((order) => {
+        userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-container').append(`
           <div class="card" style="width: 12rem;">
-          <img src="https://picsum.photos/150/150?random=${menuItem.id}" class="card-img-top" alt="...">
+          <img src="https://picsum.photos/150/150?random=${prevOrder.order_id}" class="card-img-top" alt="${prevOrder.name}">
           <div class="card-body">
-            <h5 class="card-title">${order.name}</h5>
-            <p class="card-text">${menuItem.description}</p>
-            <p class="card-text">$${menuItem.price / 100}</p>
+            <h5 class="card-title">${prevOrder.name}</h5>
+            <p class="card-text">$${prevOrder.price / 100}</p>
             <a href="#" class="btn btn-primary">Add to cart</a>
           </div>
         </div>
@@ -108,7 +107,7 @@ $(function () {
       }
     });
   };
-  // getUserOrderHistory();
+  getUserOrderHistory();
 
 
     
