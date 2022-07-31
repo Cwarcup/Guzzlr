@@ -47,9 +47,8 @@ $(function () {
   // load menu items from /api/homepageMenu
   // returns an
   const getMenuItems = () => {
-    console.log('getMenuItems has run');
     $.ajax({
-      url: '/homepageMenu',
+      url: '/userOrderHistory',
       method: 'GET',
       dataType: 'json',
       success: (data) => {
@@ -57,15 +56,15 @@ $(function () {
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
-          <div class="card" style="width: 12rem;">
-          <img src="https://picsum.photos/150/150?random=${menuItem.id}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">${menuItem.name}</h5>
-            <p class="card-text">${menuItem.description}</p>
-            <p class="card-text">$${menuItem.price / 100}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
+            <div class="card" style="width: 12rem;">
+              <img src="https://picsum.photos/150/150?random=${menuItem.id}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">${menuItem.name}</h5>
+                <p class="card-text">${menuItem.description}</p>
+                <p class="card-text">$${menuItem.price / 100}</p>
+                <a href="#" class="btn btn-primary">Add to cart</a>
+              </div>
+            </div>
           `);
         });
       },
@@ -76,6 +75,39 @@ $(function () {
   };
 
   getMenuItems();
+
+
+  // load previous orders from /api/userOrderHistory
+  // only if a user is logged in
+  const getUserOrderHistory = () => {
+    console.log('getUserOrderHistory has run');
+    $.ajax({
+      url: '/userOrderHistory',
+      method: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        const userOrderHistory = data.userOrderHistory;
+        // iterate through userOrderHistory and append to DOM
+        userOrderHistory.forEach((order) => {
+          $('.previous-orders-container').append(`
+          <div class="card" style="width: 12rem;">
+          <img src="https://picsum.photos/150/150?random=${menuItem.id}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${order.name}</h5>
+            <p class="card-text">${menuItem.description}</p>
+            <p class="card-text">$${menuItem.price / 100}</p>
+            <a href="#" class="btn btn-primary">Add to cart</a>
+          </div>
+        </div>
+        `);
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  };
+  getUserOrderHistory();
 
 
     
