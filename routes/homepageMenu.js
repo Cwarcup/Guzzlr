@@ -9,7 +9,8 @@ module.exports = (db) => {
         restaurant_id,
         menu_items.name,
         menu_items.price,
-        menu_items.description
+        menu_items.description,
+        menu_items.id
       FROM
         restaurants
         JOIN menus ON restaurants.id = menus.restaurant_id
@@ -17,7 +18,7 @@ module.exports = (db) => {
       WHERE
         restaurants.id = 1
       LIMIT
-        10;
+        4;
       `
     )
       .then(data => {
