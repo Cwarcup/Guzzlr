@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 // have hard coded user id for now = 1
-// TODO: returning all the same price, Bug?
+// TODO: returning all the same prices for now
 module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
