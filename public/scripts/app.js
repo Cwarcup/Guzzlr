@@ -70,6 +70,7 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         const menuItems = data.menuItems;
+        console.log(menuItems);
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
