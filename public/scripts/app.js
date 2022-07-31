@@ -32,6 +32,7 @@ $(function () {
     `);
   });
 
+
   // login page
   // login-btn renders users login page
   $('#login').click('.login-btn', (event) => {
@@ -48,9 +49,6 @@ $(function () {
     $('.login').html('Logout');
   });
 
-
-
-
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
     // get id of closest div
@@ -58,9 +56,9 @@ $(function () {
     // console.log(id);
   });
 
+
+
   // render list of all menu items
-
-
   // load menu items from /api/homepageMenu
   // returns an
   const getMenuItems = () => {
@@ -104,8 +102,6 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         const userOrderHistory = data.userOrderHistory;
-        console.log('userOrderHistory', userOrderHistory);
-        // iterate through userOrderHistory and append to DOM
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-container').append(`
           <div class="card" style="width: 12rem;">
@@ -127,7 +123,23 @@ $(function () {
   getUserOrderHistory();
 
 
-    
+  // @Adam: renders this on the homepage at the moment
+  // display cart items for logged in user
+  const userCart = () => {
+    console.log('userCart has run');
+    $.ajax({
+      url: '/userCart',
+      method: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        const userCart = data.userCart;
+        console.log('userCart', userCart);
+
+      }
+    });
+  };
+
+  userCart();
 
 
 
