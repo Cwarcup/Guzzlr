@@ -5,6 +5,7 @@ INSERT INTO
     restaurant_id,
     order_placed,
     order_completed,
+    notes,
     price
   )
 VALUES
@@ -13,5 +14,6 @@ VALUES
     1,
     '2015-03-08 02:00:00',
     '2015-03-08 02:30:00',
+    '',
     2000
   );
