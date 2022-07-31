@@ -115,6 +115,7 @@ $(function () {
           <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="${prevOrder.name}">
           <div class="card-body">
             <h5 class="card-title">${prevOrder.name}</h5>
+            <p class="text-muted">${prevOrder.restaurant}</p>
             <p class="card-text">$${prevOrder.price / 100}</p>
             <a href="#" class="btn btn-primary">Add to cart</a>
           </div>
