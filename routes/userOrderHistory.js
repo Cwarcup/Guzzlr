@@ -9,6 +9,7 @@ module.exports = (db) => {
     db.query(
       `
     SELECT
+      orders.id as order_id,
       orders.order_placed,
       restaurants.name,
       orders.price,
