@@ -48,7 +48,7 @@ $(function () {
   // returns an
   const getMenuItems = () => {
     $.ajax({
-      url: '/userOrderHistory',
+      url: '/homepageMenu',
       method: 'GET',
       dataType: 'json',
       success: (data) => {
@@ -87,6 +87,7 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         const userOrderHistory = data.userOrderHistory;
+        console.log('userOrderHistory', userOrderHistory);
         // iterate through userOrderHistory and append to DOM
         userOrderHistory.forEach((order) => {
           $('.previous-orders-container').append(`
@@ -107,7 +108,7 @@ $(function () {
       }
     });
   };
-  getUserOrderHistory();
+  // getUserOrderHistory();
 
 
     
