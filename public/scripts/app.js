@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 $(function () {
-  
+
   // hide login HTML on load
   $('#login').hide();
 
@@ -37,8 +37,8 @@ $(function () {
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
     // get id of closest div
-    let id = $(event.target).closest('.menu-item').attr('id');
-    // console.log(id);
+    let id = $(event.target).closest('.menu-item').attr('id', '#done');
+    console.log(this.id);
   });
 
   // render list of all menu items
@@ -109,11 +109,10 @@ $(function () {
   };
   getUserOrderHistory();
 
-
-    
-
-
-
+  $(".menu-options-container").on("click", "a", function (event) {
+    event.preventDefault();
+    console.log(event['originalEvent']['path'][1]);
+  });
 
 
 
