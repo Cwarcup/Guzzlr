@@ -57,7 +57,7 @@ $(function () {
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
             <div class="card" style="width: 12rem;">
-              <img src="https://picsum.photos/150/150?random=${menuItem.id}" class="card-img-top" alt="...">
+              <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">${menuItem.name}</h5>
                 <p class="card-text">${menuItem.description}</p>
@@ -92,7 +92,7 @@ $(function () {
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-container').append(`
           <div class="card" style="width: 12rem;">
-          <img src="https://picsum.photos/150/150?random=${prevOrder.order_id}" class="card-img-top" alt="${prevOrder.name}">
+          <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="${prevOrder.name}">
           <div class="card-body">
             <h5 class="card-title">${prevOrder.name}</h5>
             <p class="card-text">$${prevOrder.price / 100}</p>
