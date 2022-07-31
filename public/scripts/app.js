@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
+let cartArr = [];
 $(function () {
-  
+
   // hide login HTML on load
   // $('#login').hide();
 
@@ -52,8 +53,8 @@ $(function () {
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
     // get id of closest div
-    let id = $(event.target).closest('.menu-item').attr('id');
-    // console.log(id);
+    let id = $(event.target).closest('.menu-item').attr('id', '#done');
+    console.log(this.id);
   });
 
 
@@ -71,7 +72,7 @@ $(function () {
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
-            <div class="card" style="width: 12rem;">
+            <div id="${menuItem.id}" class="card" style="width: 12rem;">
               <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">${menuItem.name}</h5>
@@ -143,6 +144,12 @@ $(function () {
 
 
 
+  $(".menu-options-container").on("click", "a", function (event) {
+    event.preventDefault();
+    cartArr.push(Number(event['originalEvent']['path'][2]['id']));
+    console.log(event['originalEvent']['path'][2]['id'] + ' added to cart!');
+    console.log('cartArr', cartArr);
+  });
 
 
 
