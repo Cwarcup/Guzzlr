@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 // TODO: return a users current order
+// code inside is for placeholder and testing route
 module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
