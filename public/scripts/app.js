@@ -1,6 +1,8 @@
+
 /* eslint-disable no-undef */
 // Client facing scripts here
 $(function () {
+
   
   // hide login HTML on load
   // $('#login').hide();
@@ -122,9 +124,13 @@ $(function () {
   };
   getUserOrderHistory();
 
-
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
+
+
+
+
+
   const userCart = () => {
     console.log('userCart has run');
     $.ajax({
@@ -132,8 +138,10 @@ $(function () {
       method: 'GET',
       dataType: 'json',
       success: (data) => {
-        const userCart = data.userCart;
+        const cartData = data.userCart;
+
         $('.main-container').append(`
+
         <section class="h-100 h-custom" style="background-color: #eee;">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -142,6 +150,7 @@ $(function () {
                 <div class="card-body p-4">
                   <div class="row">
                     <div class="col-lg-7">
+                    <!-- order container -->
                       <h5 class="mb-3">
                         <a href="#!" class="text-body">
                           <i class="fas fa-long-arrow-alt-left me-2"></i>
@@ -154,6 +163,7 @@ $(function () {
                           <p class="mb-1">Current cart</p>
                         </div>
                       </div>
+                      <!-- loop over this -->
                       <div class="card mb-3">
                         <div class="card-body">
                           <div class="d-flex justify-content-between">
@@ -179,15 +189,17 @@ $(function () {
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <!-- TO THIS! -->
+                      
+                      
+                      <!-- card details -->
+                      </div>
                     <div class="col-lg-5">
-    
+
                       <div class="card bg-primary text-white rounded-3">
                         <div class="card-body">
                           <div class="d-flex justify-content-between align-items-center mb-4">
                             <h5 class="mb-0">Card details</h5>
-                            <img src="https://picsum.photos/150/150?random=1" class="img-fluid rounded-3"
-                              style="width: 45px;" alt="Avatar">
                           </div>
     
                           <p class="small mb-2">Card type</p>
