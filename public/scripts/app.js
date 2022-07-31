@@ -6,7 +6,7 @@ $(function () {
 
 
   // hide login HTML on load
-  // $('#login').hide();
+  $('#login').hide();
 
 
   // login btn top right of main page
@@ -15,6 +15,7 @@ $(function () {
     $('.header-welcome').hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
+    $('#login').show();
     $('#login').append(`
         <h1>Login</h1>
         <div>
