@@ -288,17 +288,17 @@ $(function () {
     userCart();
     $('.main-container').children().hide();
 
-  $(".menu-options-container").on("click", "a", function (event) {
-    event.preventDefault();
-    cartArr.push(Number(event['originalEvent']['path'][2]['id']));
-    console.log(event['originalEvent']['path'][2]['id'] + ' added to cart!');
-    console.log('cartArr', cartArr);
-  });
+    $(".menu-options-container").on("click", "a", function (event) {
+      event.preventDefault();
+      cartArr.push(Number(event['originalEvent']['path'][2]['id']));
+      console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
+      console.log('cartArr', cartArr);
+    });
 
 
 
 
   // do not delete below this line
-});
+  });
 
 });

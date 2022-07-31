@@ -29,7 +29,8 @@ module.exports = (db) => {
       orders.order_placed,
       menu_items.name,
       menu_items.id,
-      menu_items.price;
+      menu_items.price
+    LIMIT 4;
   `)
       .then(data => {
         const userOrderHistory = data.rows;
