@@ -13,6 +13,7 @@ module.exports = (db) => {
       restaurants.name as restaurant,
       menu_items.price,
       menu_items.name,
+      menu_items.id as menu_item_id,
       count(menu_items.name)
     FROM
       orders
@@ -27,7 +28,8 @@ module.exports = (db) => {
       restaurants.name,
       orders.order_placed,
       menu_items.name,
-      menu_items.price
+      menu_items.id,
+      menu_items.price;
   `)
       .then(data => {
         const userOrderHistory = data.rows;
