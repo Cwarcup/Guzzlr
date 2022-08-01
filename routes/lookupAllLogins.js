@@ -9,8 +9,9 @@ module.exports = (db) => {
         FROM users
         WHERE email = $1 AND password_REPLACE_ME = $2;
         `;
-    db.query(queryText, [req.body.email, req.body.password])
+    db.query(queryText, [req.body.email.trim(), req.body.password.trim()])
       .then(result => {
+        console.log('💸  AFTER .THEN :', result);
         res.json(result.rows);
       })
       .catch(err => {

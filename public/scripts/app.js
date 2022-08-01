@@ -56,7 +56,7 @@ $(function () {
 
   // render list of all menu items
   // load menu items from /api/homepageMenu
-  // returns an
+  // use for first render to initialize menu items and containers
   const getMenuItems = () => {
     $.ajax({
       url: '/homepageMenu',
@@ -93,11 +93,13 @@ $(function () {
 
   // load previous orders from /api/userOrderHistory
   // only if a user is logged in
-  const getUserOrderHistory = () => {
+  const getUserOrderHistory = (userLoginData) => {
     $.ajax({
       url: '/userOrderHistory',
-      method: 'GET',
-      dataType: 'json',
+      method: 'POST',
+      data: {
+        userId: userLoginData
+      },
       success: (data) => {
         const userOrderHistory = data.userOrderHistory;
         userOrderHistory.forEach((prevOrder) => {
@@ -327,14 +329,16 @@ $(function () {
     // display user name in nav
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
     // add button to logout on navbar
-    $('.nav-links').append(`
-      <a class="nav-link" href="#" id="logout-btn">Logout</a>
-    `);
+    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
+    
+    // run function with the user's id to get order history and display it
+    getUserOrderHistory(data.id);
   });
 
 
 
   // function to reset homepage to default state
+  // use for logout and page first render and NOT logged in
   const resetToDefaultHomepage = () => {
     $('.main-container').css('margin-top', '0px');
     $('.menu-options-container').show();

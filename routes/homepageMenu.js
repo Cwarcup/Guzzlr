@@ -23,7 +23,6 @@ module.exports = (db) => {
       `
     )
       .then(data => {
-        console.log(data);
         const menuItems = data.rows;
         res.json({ menuItems });
       })
