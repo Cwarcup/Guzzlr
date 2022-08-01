@@ -1,6 +1,14 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
+
+// doesnt work - Cannot use import statement outside a module
+// import Cookies from 'js-cookie';
+
+// require is not defined
+// const Cookies = require('js-cookie');
+
 let cartArr = [];
+
 $(function () {
 
 
@@ -290,26 +298,6 @@ $(function () {
 
     event.preventDefault();
 
-    // ajax request for lookupAllLogins
-    // let settings = {
-    //   "url": "http://localhost:8080/lookupAllLogins",
-    //   "method": "POST",
-    //   "timeout": 0,
-    //   "headers": {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   "data": {
-    //     "email": `${formData.email}`,
-    //     "password": `${formData.password}`
-    //   }
-    // };
-    // console.log("settings", settings);
-    
-    // $.ajax(settings)
-    //   .done(function (response) {
-    //     console.log("🔥 data returned from AJAX request!", response);
-    //   });
-
     $.ajax({
       url: 'http://localhost:8080/lookupAllLogins',
       method: 'POST',
@@ -321,6 +309,10 @@ $(function () {
         console.log('response', response);
         if (response.length > 0) {
           console.log('user found in database ✅✅✅✅✅');
+          // create homepage according to user information
+          console.log('response from database', response);
+          createHomepageForUser(response[0]);
+
         } else {
           console.log('user not found in database ❌❌❌❌❌');
         }
@@ -331,18 +323,18 @@ $(function () {
   // // TODO: dont think we will need this. Conflicts with the proper login functionality
   // // login page
   // // login-btn renders users login page
-  // $('#login').click('.login-btn', (event) => {
-  //   event.preventDefault();
-  //   // add margin because we remove the main-container
-  //   $('.main-container').css('margin-top', '100px');
-  //   $('.menu-options-container').show();
-  //   $('.previous-orders-container').show();
-  //   $('#login').hide();
-  //   $('.sign-up').hide();
+  const createHomepageForUser = ((data) => {
+    event.preventDefault();
+    // add margin because we remove the main-container
+    $('.main-container').css('margin-top', '100px');
+    $('.menu-options-container').show();
+    $('.previous-orders-container').show();
+    $('#login').hide();
+    $('.sign-up').hide();
 
-  //   // change login btn htl
-  //   $('.login').html('Logout');
-  // });
+    // change login btn htl
+    $('.login').html(`Welcome back ${data.email}`);
+  });
 
 
 
