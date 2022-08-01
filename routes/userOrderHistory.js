@@ -21,7 +21,7 @@ module.exports = (db) => {
         JOIN order_items ON order_id = orders.id
         JOIN menu_items ON order_items.menu_item = menu_items.id
       WHERE
-        user_id = 1
+        user_id = $1
       GROUP BY
         orders.id,
         restaurants.name,
@@ -31,7 +31,7 @@ module.exports = (db) => {
         menu_items.price
       LIMIT 4;
     `;
-    const userId = parseInt(req.body.userId);
+    const userId = parseInt(req.body.userId.trim());
     const values = [userId];
     console.log('💸 USER ORDER HISTORY :', values);
 
