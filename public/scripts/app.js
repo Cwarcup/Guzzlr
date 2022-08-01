@@ -33,7 +33,7 @@ $(function () {
           </div>
           <div>
             <label for="password">Password</label>
-            <input name="password" placeholder="Password" id="login-password" />
+            <input name="password" placeholder="Password" id="login-password" value="1234"/>
           </div>
           <div>
             <button type="submit" class="login-btn">Login
@@ -119,10 +119,10 @@ $(function () {
       }
     });
   };
-  getUserOrderHistory();
+  // getUserOrderHistory();
+  // !! removed order history from homepage
 
 
-  // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
   const userCart = () => {
     $.ajax({
@@ -285,9 +285,8 @@ $(function () {
 
 
   // function to run if user is logged in
-  // Login btn to create a cookie when clicked
+  // only accessible when user has already clicked the login link on nav
   $('#login').submit(function (event) {
-
     // gets the form data from userId field on login page
     const formData = {
       email: $('#login-email').val(),
@@ -315,21 +314,39 @@ $(function () {
     });
   });
 
-  // // TODO: dont think we will need this. Conflicts with the proper login functionality
-  // // login page
-  // // login-btn renders users login page
+
+
+  // use to render homepage for user if logged in successfully
   const createHomepageForUser = ((data) => {
-    event.preventDefault();
-    // add margin because we remove the main-container
-    $('.main-container').css('margin-top', '100px');
-    $('.menu-options-container').show();
-    $('.previous-orders-container').show();
+    // DOM already has restaurant name and food items. We just need to show them.
+    $('.main-container').children().show();
     $('#login').hide();
     $('.sign-up').hide();
-
     // change login btn htl
-    $('.login').html(`Welcome back ${data.email}`);
+    $('.login').hide();
+    // display user name in nav
+    $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
+    // add button to logout on navbar
+    $('.nav-links').append(`
+      <a class="nav-link" href="#" id="logout-btn">Logout</a>
+    `);
   });
+
+
+
+  // function to reset homepage to default state
+  const resetToDefaultHomepage = () => {
+    $('.main-container').css('margin-top', '0px');
+    $('.menu-options-container').show();
+    // hide the login html and container
+    $('#login').hide();
+    // show sign up button
+    $('.sign-up').show();
+    // change login btn text
+    $('.login').html(`Login`);
+  };
+  resetToDefaultHomepage();
+
 
 
 
