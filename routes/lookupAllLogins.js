@@ -13,7 +13,7 @@ module.exports = (db) => {
         `;
     db.query(queryText, [req.body.email, req.body.password])
       .then(result => {
-        console.log('✅ result from query:', result);
+        console.log('✅ result from query:', result.rows);
         res.json(result.rows);
       })
       .catch(err => {

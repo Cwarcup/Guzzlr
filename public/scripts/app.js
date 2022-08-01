@@ -21,7 +21,7 @@ $(function () {
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="Ralph.Wong@gmail.com " id="login-email" value='Ralph.Wong@gmail.com '/>
+            <input name="email" placeholder="Ralph.Wong@gmail.com " id="login-email" value='Ralph.Wong@gmail.com'/>
           </div>
           <div>
             <label for="password">Password</label>
@@ -291,24 +291,41 @@ $(function () {
     event.preventDefault();
 
     // ajax request for lookupAllLogins
-    let settings = {
-      "url": "http://localhost:8080/lookupAllLogins",
-      "method": "POST",
-      "timeout": 0,
-      "headers": {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "data": {
-        "email": `${formData.email}`,
-        "password": `${formData.password}`
-      }
-    };
-    console.log("settings", settings);
+    // let settings = {
+    //   "url": "http://localhost:8080/lookupAllLogins",
+    //   "method": "POST",
+    //   "timeout": 0,
+    //   "headers": {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   "data": {
+    //     "email": `${formData.email}`,
+    //     "password": `${formData.password}`
+    //   }
+    // };
+    // console.log("settings", settings);
     
-    $.ajax(settings)
-      .done(function (response) {
-        console.log("🔥 data returned from AJAX request!", response);
-      });
+    // $.ajax(settings)
+    //   .done(function (response) {
+    //     console.log("🔥 data returned from AJAX request!", response);
+    //   });
+
+    $.ajax({
+      url: 'http://localhost:8080/lookupAllLogins',
+      method: 'POST',
+      data: {
+        email: `${formData.email}`,
+        password: `${formData.password}`
+      },
+      success: (response) => {
+        console.log('response', response);
+        if (response.length > 0) {
+          console.log('user found in database ✅✅✅✅✅');
+        } else {
+          console.log('user not found in database ❌❌❌❌❌');
+        }
+      }
+    });
   });
 
   // // TODO: dont think we will need this. Conflicts with the proper login functionality
