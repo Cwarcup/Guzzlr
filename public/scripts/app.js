@@ -21,8 +21,12 @@ $(function () {
         <h1>Login</h1>
         <form id="login-form">
           <div>
-            <label for="id">User Id:</label>
-            <input name="email" placeholder="Enter user Id" id="id" />
+            <label for="email">Email address</label>
+            <input name="email" placeholder="Enter email" id="login-email" />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input name="password" placeholder="Password" id="login-password" />
           </div>
           <div>
             <button type="submit" class="login-btn">Login
@@ -33,22 +37,6 @@ $(function () {
     `);
   });
 
-  // TODO: dont think we will need this. Conflicts with the proper login functionality
-  // login page
-  // login-btn renders users login page
-  // $('#login').click('.login-btn', (event) => {
-  //   event.preventDefault();
-  //   // add margin because we remove the main-container
-  //   $('.main-container').css('margin-top', '100px');
-
-  //   $('.menu-options-container').show();
-  //   $('.previous-orders-container').show();
-  //   $('#login').hide();
-  //   $('.sign-up').hide();
-
-  //   // change login btn htl
-  //   $('.login').html('Logout');
-  // });
 
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
@@ -127,13 +115,9 @@ $(function () {
   };
   getUserOrderHistory();
 
+
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
-
-
-
-
-
   const userCart = () => {
     console.log('userCart has run');
     $.ajax({
@@ -295,32 +279,50 @@ $(function () {
   });
 
 
-
-
+  // function to run if user is logged in
+  const userLoggedIn = (userData) => {};
   // TODO:
   // Login btn to create a cookie when clicked
   $('#login').submit(function (event) {
 
     // gets the form data from userId field on login page
     const formData = {
-      userId: $('#id').val(),
+      email: $('#login-email').val(),
+      password: $('#login-password').val()
     };
 
     event.preventDefault();
 
-    // TODO: idk what this is doing. Looks like nothing is happening.
     $.ajax({
       type: 'POST',
       url: '/lookupAllLogins',
       data: formData,
       success: (data) => {
-        console.log(data);
+        console.log('data from login', data);
+        // TODO: render homepage with user content
       },
       error: (err) => {
         console.log(err);
       }
     });
   });
+
+  // TODO: dont think we will need this. Conflicts with the proper login functionality
+  // login page
+  // login-btn renders users login page
+  $('#login').click('.login-btn', (event) => {
+    event.preventDefault();
+    // add margin because we remove the main-container
+    $('.main-container').css('margin-top', '100px');
+    $('.menu-options-container').show();
+    $('.previous-orders-container').show();
+    $('#login').hide();
+    $('.sign-up').hide();
+
+    // change login btn htl
+    $('.login').html('Logout');
+  });
+
 
 
 

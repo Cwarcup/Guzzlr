@@ -62,23 +62,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// TODO: determine if this is working correctly
-// if request sent to /lookupAllLogins,compare incoming login info with db
-app.post('/lookupAllLogins', (req, res) => {
-  const { name } = req.body;
-  console.log(name);
-  db.query(`
-    SELECT * 
-      FROM users 
-    WHERE users.name = '${name}';`)
-    .then(result => {
-      console.log(result.rows);
-      res.json(result.rows);
-    }).catch(err => {
-      console.log(err);
-      res.json(err);
-    });
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
