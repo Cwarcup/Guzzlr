@@ -231,13 +231,13 @@ const proEmail = function(fname, lname) {
   } else {
     first = fname[0];
   }
-  return (first + joiner + lname + suffix + "@" + domainArray[Math.floor(Math.random() * domainArray.length)]);
+  return (first + joiner + lname + suffix + "@" + domainArray[Math.floor(Math.random() * domainArray.length)]).toLowerCase();
 };
 
 const sillyEmail = function() {
   let joiner = joinerMaker();
   let suffix = suffixMaker();
-  return (adjArray[Math.floor(Math.random() * adjArray.length)] + joiner + nounArray[Math.floor(Math.random() * nounArray.length)] + suffix + "@" + domainArray[Math.floor(Math.random() * domainArray.length)]);
+  return (adjArray[Math.floor(Math.random() * adjArray.length)] + joiner + nounArray[Math.floor(Math.random() * nounArray.length)] + suffix + "@" + domainArray[Math.floor(Math.random() * domainArray.length)]).toLowerCase();
 };
 
 // INSERT INTO users (name, phone, email) VALUES ('Adam', '(250) 555-1234', punished_gamer@aol.com);
