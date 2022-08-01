@@ -6,12 +6,14 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilio = require('twilio');
 const client = new twilio(accountSid, authToken);
 
+// sends a message to the owner of the restaurant when an order is placed.
+// not hooked up to the button yet.
 module.exports = () => {
-  router.get('/', (req, res) => {
+  router.post('/', (req, res) => {
     // test the route by sending back to client hello world
     client.messages
       .create({
-        body: 'Learn to code you twat 🙃',
+        body: 'An order has come in. Please log into Guzzlr to view the order.',
         from: '+19896449291',
         to: '+16043744652'
       })
