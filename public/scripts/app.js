@@ -348,9 +348,15 @@ $(function () {
   // };
   // resetToDefaultHomepage();
 
+  // function to get numbers from form
+  // converts string into phone number format
+  $('.main-container').on('click', '#checkout-btn', function (event) {
+    event.preventDefault();
+    const formData = `${$('#areaCode').val() + $('#exchangeNum').val() + $('#lineNum').val()}`;
 
 
-
+    console.log(formData);
+  });
 
 
   // do not delete below this line
