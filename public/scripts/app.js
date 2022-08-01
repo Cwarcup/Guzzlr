@@ -129,18 +129,18 @@ $(function () {
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
 
-  const addZeroes = function(num) {
+  const addZeroes = function (num) {
     return num.toFixed(2);
-  }
+  };
 
   const createOrder = (arr, price) => {
     console.log('createOrder has run');
     price = Number(price.substring(1, price.length));
     $.post("/createOrder", { arr, price },
-    function(data, status){
-      alert("Data: " + data + "\nStatus: " + status);
-    });
-  }
+      function (data, status) {
+        alert(`Data: ${  data  }\nStatus: ${  status}`);
+      });
+  };
 
 
   // display cart items for logged in user
@@ -199,7 +199,7 @@ $(function () {
         if (cartCopy.length > 0) {
           for (let i of cartCopy) {
 
-            cartTotal += count[i] * menuItemData[i-1].price;
+            cartTotal += count[i] * menuItemData[i - 1].price;
             cartItem += `<div id="cartItem_${i}" class="card-body">
               <div class="d-flex justify-content-between">
                 <div class="d-flex flex-row align-items-center">
@@ -208,8 +208,8 @@ $(function () {
                       alt="Shopping item" style="width: 65px;">
                   </div>
                   <div class="ms-3">
-                    <h5>${menuItemData[i-1].name}</h5>
-                    <p class="small mb-0">${menuItemData[i-1].description}</p>
+                    <h5>${menuItemData[i - 1].name}</h5>
+                    <p class="small mb-0">${menuItemData[i - 1].description}</p>
                   </div>
                 </div>
                 <div class="d-flex flex-row align-items-center">
@@ -217,14 +217,14 @@ $(function () {
                     <h5 class="fw-normal mb-0">${count[i]}</h5>
                   </div>
                   <div style="width: 80px;">
-                    <h5 class="mb-0">$${addZeroes(count[i] * menuItemData[i-1].price / 100)}</h5>
+                    <h5 class="mb-0">$${addZeroes(count[i] * menuItemData[i - 1].price / 100)}</h5>
                   </div>
                   <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                 </div>
               </div>
             </div>\n`;
-          };
-        };
+          }
+        }
 
         let cartBottom = `
         </div>
@@ -307,8 +307,7 @@ $(function () {
       `;
         if (cartArr.length > 0) {
           $('.main-container').append(cartTop + cartItem + cartBottom);
-        }
-        else {
+        } else {
           $('.main-container').append(cartTop + cartBottom);
         }
 
@@ -352,14 +351,14 @@ $(function () {
     console.log(event);
     if ((originalItemCount) > 1) {
       event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent = newItemCount;
-      event.originalEvent.path[2].children[1].children[0].textContent = `$${(addZeroes(newItemCount*pricePerItem))}`;
+      event.originalEvent.path[2].children[1].children[0].textContent = `$${(addZeroes(newItemCount * pricePerItem))}`;
 
-    }else {
+    } else {
       document.getElementById(event.originalEvent.path[4].id).remove();
     }
     event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent = `$${addZeroes(subtotal)}`;
-      event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent = `$${addZeroes(subtotal * 1.12)}`;
-      event.originalEvent.path[7].children[1].children[0].children[0].children[10].children[0].children[0].textContent = `$${addZeroes(subtotal * 1.12)}`;
+    event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent = `$${addZeroes(subtotal * 1.12)}`;
+    event.originalEvent.path[7].children[1].children[0].children[0].children[10].children[0].children[0].textContent = `$${addZeroes(subtotal * 1.12)}`;
 
     //originalEvent.path[4].children[0].children[1].children[0].children[0].textContent
     //originalEvent.path[2].children[1].children[0].textContent
@@ -369,23 +368,82 @@ $(function () {
   $(".menu-options-container").on("click", "a", function (event) {
     event.preventDefault();
     cartArr.push(Number(event['originalEvent']['path'][2]['id']));
-    console.log(event['originalEvent']['path'][2]['id'] + ' added to cart!');
+    console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
     console.log('cartArr', cartArr);
     document.getElementsByClassName("cart-demo-btn")[0]['children'][1]['textContent']++;
     console.log(document.getElementsByClassName("cart-demo-btn")[0]['children'][1]['textContent']);
   });
 
 
-// <a href="#transitionExample" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">Slide down</a>
-// <div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
-// <p>I'm a simple popup.</p>
-// </div>
+  // <a href="#transitionExample" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">Slide down</a>
+  // <div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
+  // <p>I'm a simple popup.</p>
+  // </div>
 
 
 
 
-  // do not delete below this line
+  // #login is the button only visible AFTER a user clicked the login link in navbar
+  $('#login').submit(function (event) {
+    event.preventDefault();
 
+    // gets the form data from userId field on login page
+    const formData = {
+      email: $('#login-email').val(),
+      password: $('#login-password').val()
+    };
+
+    $.ajax({
+      url: 'http://localhost:8080/lookupAllLogins',
+      method: 'POST',
+      data: {
+        email: `${formData.email}`,
+        password: `${formData.password}`
+      },
+      success: (response) => {
+        if (response.length > 0) {
+          // create homepage according to user information
+          createHomepageForUser(response[0]);
+        } else {
+          console.log('❌ ❌ user not found in database ❌ ❌ ');
+        }
+      }
+    });
+  });
+
+
+  // use to render homepage for user if logged in successfully
+  const createHomepageForUser = ((data) => {
+    // DOM already has restaurant name and food items. We just need to show them.
+    $('.main-container').children().show();
+    $('#login').hide();
+    $('.sign-up').hide();
+    // change login btn htl
+    $('.login').hide();
+    // display user name in nav
+    $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
+    // add button to logout on navbar
+    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
+    
+    // run function with the user's id to get order history and display it
+    getUserOrderHistory(data.id);
+  });
+
+
+  // TODO: work in progress
+  // function to reset homepage to default state
+  // use for logout and page first render and NOT logged in
+  // const resetToDefaultHomepage = () => {
+  //   $('.main-container').css('margin-top', '0px');
+  //   $('.menu-options-container').show();
+  //   // hide the login html and container
+  //   $('#login').hide();
+  //   // show sign up button
+  //   $('.sign-up').show();
+  //   // change login btn text
+  //   $('.login').html(`Login`);
+  // };
+  // resetToDefaultHomepage();
 
 
 
