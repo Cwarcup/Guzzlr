@@ -178,7 +178,7 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         let cartCopy = cartArr.map(x => x);
-        cartArr.sort();
+        cartCopy.sort();
         const menuItemData = data.menuItems;
         console.log('menuItemData', menuItemData);
         let cartItem = `\n`;
@@ -186,7 +186,7 @@ $(function () {
         const count = {};
 
         for (let index = 0; index < cartArr.length; index++) {
-          const element = cartArr[index];
+          const element = cartCopy[index];
 
           if (count[element]) {
             count[element] += 1;
@@ -252,7 +252,7 @@ $(function () {
             </div>
 
             <div class="form-outline form-white mb-4">
-              <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+              <input type="text" class="typeText form-control form-control-lg" siez="17"
                 placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
               <label class="form-label" for="typeText">Card Number</label>
             </div>
@@ -267,7 +267,7 @@ $(function () {
               </div>
               <div class="col-md-6">
                 <div class="form-outline form-white">
-                  <input type="password" id="typeText" class="form-control form-control-lg"
+                  <input type="password" class="typeText form-control form-control-lg"
                     placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
                   <label class="form-label" for="typeText">Cvv</label>
                 </div>
@@ -341,7 +341,7 @@ $(function () {
     let itemId = Number(event.originalEvent.path[4].id.substring(9,event.originalEvent.path[4].id.length));
     let index = cartArr.indexOf(itemId);
     if (index > -1) {
-      cartArr.splice(index,index + 1);
+      cartArr.splice(index,1);
     }
     let temp = event.originalEvent.path[2].children[1].children[0].textContent;
     let pricePerItem = (Number(temp.substring(1,temp.length)) / Number(event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent));
