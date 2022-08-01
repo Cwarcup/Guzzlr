@@ -160,7 +160,7 @@ const makeRandomPostalCode = function() {
 
 const makeInsertStatements = function() {
 
-  let template = `INSERT INTO restaurants (owner_id, name, phone_number, country, street, city, province, post_code) VALUES `;
+  let template = `INSERT INTO restaurants (owner_id, name, cuisine_type, phone_number, country, street, city, province, post_code) VALUES `;
 
   let toReturn = "";
   let idNumber = 1;
@@ -168,7 +168,7 @@ const makeInsertStatements = function() {
   for (let cuisine in restaurantNamesByCuisine) {
     for (let i = 0; i < restaurantNamesByCuisine[cuisine].length; i++) {
       toReturn += template;
-      toReturn += `(${idNumber}, '${restaurantNamesByCuisine[cuisine][i]}', '${makeRandomPhoneNumber()}', 'Canada', '${intBetweenZeroAnd(3000) + ' ' + streets[intBetweenZeroAnd(streets.length - 1)]}', '${cities[intBetweenZeroAnd(cities.length - 1)]}', 'BC', '${makeRandomPostalCode()}'); \n`;
+      toReturn += `(${idNumber}, '${restaurantNamesByCuisine[cuisine][i]}', '${cuisine}', '${makeRandomPhoneNumber()}', 'Canada', '${intBetweenZeroAnd(3000) + ' ' + streets[intBetweenZeroAnd(streets.length - 1)]}', '${cities[intBetweenZeroAnd(cities.length - 1)]}', 'BC', '${makeRandomPostalCode()}'); \n`;
       idNumber++;
     }
   }
@@ -181,7 +181,7 @@ let content = makeInsertStatements();
 
 // Let's get a statement together to put into a file!
 
-fs.writeFile('../db/seeds/02a_generated_restaurants.sql', content, err => {
+fs.writeFile('./db/seeds/02a_generated_restaurants.sql', content, err => {
   if (err) {
     console.error(err);
   }
