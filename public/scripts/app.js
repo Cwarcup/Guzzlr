@@ -133,6 +133,17 @@ $(function () {
   const addZeroes = function(num) {
     return num.toFixed(2);
   }
+
+  const createOrder = (arr, price) => {
+    console.log('createOrder has run');
+    price = Number(price.substring(1, price.length));
+    $.post("/createOrder", { arr, price },
+    function(data, status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+  }
+
+
   const userCart = () => {
     console.log('userCart has run');
     let cartTop = `
@@ -319,7 +330,9 @@ $(function () {
 
   $(".main-container").on("click", ".checkout", function (event) {
     event.preventDefault();
-    console.log('checout');
+    //console.log(event.originalEvent.path[1].children[0].textContent);
+    createOrder(cartArr, event.originalEvent.path[1].children[0].textContent);
+
   });
 
   $(".main-container").on("click", ".fa-trash-alt", function (event) {
@@ -327,7 +340,6 @@ $(function () {
     let subtotal = event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent;
     let total = event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent;
     subtotal = Number(subtotal.substring(1,subtotal.length));
-    console.log(subtotal);
     let itemId = Number(event.originalEvent.path[4].id.substring(9,event.originalEvent.path[4].id.length));
     let index = cartArr.indexOf(itemId);
     if (index > -1) {
@@ -342,13 +354,17 @@ $(function () {
     if ((originalItemCount) > 1) {
       event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent = newItemCount;
       event.originalEvent.path[2].children[1].children[0].textContent = `$${(addZeroes(newItemCount*pricePerItem))}`;
-      event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent = `$${addZeroes(subtotal)}`;
+
+    }else {
+      document.getElementById(event.originalEvent.path[4].id).remove();
+    }
+    event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent = `$${addZeroes(subtotal)}`;
       event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent = `$${addZeroes(subtotal * 1.12)}`;
       event.originalEvent.path[7].children[1].children[0].children[0].children[10].children[0].children[0].textContent = `$${addZeroes(subtotal * 1.12)}`;
-    }
 
     //originalEvent.path[4].children[0].children[1].children[0].children[0].textContent
     //originalEvent.path[2].children[1].children[0].textContent
+    console.log(cartArr);
   });
 
   $(".menu-options-container").on("click", "a", function (event) {
