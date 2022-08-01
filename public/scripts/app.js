@@ -1,7 +1,14 @@
-
 /* eslint-disable no-undef */
 // Client facing scripts here
+
+// doesnt work - Cannot use import statement outside a module
+// import Cookies from 'js-cookie';
+
+// require is not defined
+// const Cookies = require('js-cookie');
+
 let cartArr = [];
+
 $(function () {
 
 
@@ -13,45 +20,29 @@ $(function () {
   $('.login').click((event) => {
     event.preventDefault();
     $('.header-welcome').hide();
+    $('.main-container').children().hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
     $('#login').show();
     $('#login').append(`
         <h1>Login</h1>
-        <div>
-          <div class="">
-            <label class="" for="email">Email address</label>
-            <input name="email" type="email" class="" placeholder="Enter email" id="email" />
+        <form id="login-form">
+          <div>
+            <label for="email">Email address</label>
+            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='do_not_perceive_me@outlook.com'/>
           </div>
-          <div class="">
-            <label class="" for="password">Password</label>
-            <input name="password" type="password" class="" placeholder="Password" id="password" />
+          <div>
+            <label for="password">Password</label>
+            <input name="password" placeholder="Password" id="login-password" value="1234"/>
           </div>
-          <div class="">
+          <div>
             <button type="submit" class="login-btn">Login
             </button>
           </div>
-        </div>
-
+        </form>
     `);
   });
 
-
-  // login page
-  // login-btn renders users login page
-  $('#login').click('.login-btn', (event) => {
-    event.preventDefault();
-    // add margin because we remove the main-container
-    $('.main-container').css('margin-top', '100px');
-
-    $('.menu-options-container').show();
-    $('.previous-orders-container').show();
-    $('#login').hide();
-    $('.sign-up').hide();
-
-    // change login btn htl
-    $('.login').html('Logout');
-  });
 
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
@@ -64,7 +55,7 @@ $(function () {
 
   // render list of all menu items
   // load menu items from /api/homepageMenu
-  // returns an
+  // use for first render to initialize menu items and containers
   const getMenuItems = () => {
     $.ajax({
       url: '/homepageMenu',
@@ -99,27 +90,32 @@ $(function () {
 
 
 
-  // load previous orders from /api/userOrderHistory
+  // POST request to /userOrderHistory with userId
   // only if a user is logged in
-  const getUserOrderHistory = () => {
-    console.log('getUserOrderHistory has run');
+  const getUserOrderHistory = (userLoginData) => {
     $.ajax({
       url: '/userOrderHistory',
-      method: 'GET',
-      dataType: 'json',
+      method: 'POST',
+      data: {
+        userId: userLoginData
+      },
       success: (data) => {
         const userOrderHistory = data.userOrderHistory;
+
+        $('.previous-orders-container').append(`<h2>Previous Orders</h2>`);
+        $('.previous-orders-container').append(`<div class="previous-orders-list">`);
+
         userOrderHistory.forEach((prevOrder) => {
-          $('.previous-orders-container').append(`
-          <div class="card" style="width: 12rem;">
-          <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="${prevOrder.name}">
-          <div class="card-body">
-            <h5 class="card-title">${prevOrder.name}</h5>
-            <p class="text-muted">${prevOrder.restaurant}</p>
-            <p class="card-text">$${prevOrder.price / 100}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+          $('.previous-orders-list').append(`
+          <div id="${prevOrder.id}" class="card" style="width: 12rem;">
+            <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${prevOrder.name}</h5>
+                <p class="card-text">${prevOrder.description}</p>
+              <p class="card-text">$${prevOrder.price / 100}</p>
+              <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
           </div>
-        </div>
         `);
         });
       },
@@ -128,17 +124,10 @@ $(function () {
       }
     });
   };
-  getUserOrderHistory();
 
-  // @Adam: renders this on the homepage at the moment
+
   // display cart items for logged in user
-
-
-
-
-
   const userCart = () => {
-    console.log('userCart has run');
     $.ajax({
       url: '/userCart',
       method: 'GET',
@@ -147,7 +136,6 @@ $(function () {
         const cartData = data.userCart;
 
         $('.main-container').append(`
-
         <section class="h-100 h-custom" style="background-color: #eee;">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -286,21 +274,84 @@ $(function () {
   // cart demo button in nav
   $('.cart-demo-btn').click((event) => {
     event.preventDefault();
-    console.log('cart demo button has been clicked');
     userCart();
     $('.main-container').children().hide();
 
     $(".menu-options-container").on("click", "a", function (event) {
       event.preventDefault();
       cartArr.push(Number(event['originalEvent']['path'][2]['id']));
-      console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
-      console.log('cartArr', cartArr);
+      // console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
+      // console.log('cartArr', cartArr);
     });
+  });
+
+
+  // #login is the button only visible AFTER a user clicked the login link in navbar
+  $('#login').submit(function (event) {
+    event.preventDefault();
+
+    // gets the form data from userId field on login page
+    const formData = {
+      email: $('#login-email').val(),
+      password: $('#login-password').val()
+    };
+
+    $.ajax({
+      url: 'http://localhost:8080/lookupAllLogins',
+      method: 'POST',
+      data: {
+        email: `${formData.email}`,
+        password: `${formData.password}`
+      },
+      success: (response) => {
+        if (response.length > 0) {
+          // create homepage according to user information
+          createHomepageForUser(response[0]);
+        } else {
+          console.log('❌ ❌ user not found in database ❌ ❌ ');
+        }
+      }
+    });
+  });
+
+
+  // use to render homepage for user if logged in successfully
+  const createHomepageForUser = ((data) => {
+    // DOM already has restaurant name and food items. We just need to show them.
+    $('.main-container').children().show();
+    $('#login').hide();
+    $('.sign-up').hide();
+    // change login btn htl
+    $('.login').hide();
+    // display user name in nav
+    $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
+    // add button to logout on navbar
+    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
+    
+    // run function with the user's id to get order history and display it
+    getUserOrderHistory(data.id);
+  });
+
+
+  // TODO: work in progress
+  // function to reset homepage to default state
+  // use for logout and page first render and NOT logged in
+  // const resetToDefaultHomepage = () => {
+  //   $('.main-container').css('margin-top', '0px');
+  //   $('.menu-options-container').show();
+  //   // hide the login html and container
+  //   $('#login').hide();
+  //   // show sign up button
+  //   $('.sign-up').show();
+  //   // change login btn text
+  //   $('.login').html(`Login`);
+  // };
+  // resetToDefaultHomepage();
+
+
 
 
 
 
   // do not delete below this line
-  });
-
 });

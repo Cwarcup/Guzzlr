@@ -42,6 +42,7 @@ const widgetsRoutes = require('./routes/widgets');
 const homepageMenu = require('./routes/homepageMenu');
 const userOrderHistory = require('./routes/userOrderHistory');
 const userCart = require('./routes/userCart');
+const lookupAllLogins = require('./routes/lookupAllLogins');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,6 +51,7 @@ app.use('/api/widgets', widgetsRoutes(db));
 app.use('/homepageMenu', homepageMenu(db));
 app.use('/userOrderHistory', userOrderHistory(db));
 app.use('/userCart', userCart(db));
+app.use('/lookupAllLogins', lookupAllLogins(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -59,6 +61,7 @@ app.use('/userCart', userCart(db));
 app.get('/', (req, res) => {
   res.render('index');
 });
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

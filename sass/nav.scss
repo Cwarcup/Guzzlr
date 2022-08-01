@@ -20,7 +20,14 @@ nav {
     text-decoration: none;
   }
 
-  .nav-links a {
-    padding-right: 1em;
+  .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
   }
 }
