@@ -285,10 +285,8 @@ $(function () {
 
 
   // function to run if user is logged in
-
   // Login btn to create a cookie when clicked
   $('#login').submit(function (event) {
-    console.log('login form submitted');
 
     // gets the form data from userId field on login page
     const formData = {
@@ -306,15 +304,12 @@ $(function () {
         password: `${formData.password}`
       },
       success: (response) => {
-        console.log('response', response);
         if (response.length > 0) {
-          console.log('user found in database ✅✅✅✅✅');
           // create homepage according to user information
           console.log('response from database', response);
           createHomepageForUser(response[0]);
-
         } else {
-          console.log('user not found in database ❌❌❌❌❌');
+          console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
       }
     });
