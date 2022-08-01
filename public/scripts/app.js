@@ -13,45 +13,42 @@ $(function () {
   $('.login').click((event) => {
     event.preventDefault();
     $('.header-welcome').hide();
+    $('.main-container').children().hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
     $('#login').show();
     $('#login').append(`
         <h1>Login</h1>
-        <div>
-          <div class="">
-            <label class="" for="email">Email address</label>
-            <input name="email" type="email" class="" placeholder="Enter email" id="email" />
+        <form id="login-form">
+          <div>
+            <label for="id">User Id:</label>
+            <input name="email" placeholder="Enter user Id" id="id" />
           </div>
-          <div class="">
-            <label class="" for="password">Password</label>
-            <input name="password" type="password" class="" placeholder="Password" id="password" />
-          </div>
-          <div class="">
+          <div>
             <button type="submit" class="login-btn">Login
             </button>
           </div>
-        </div>
+        </form>
 
     `);
   });
 
-
+  // TODO: dont think we will need this. Conflicts with the proper login functionality
   // login page
   // login-btn renders users login page
-  $('#login').click('.login-btn', (event) => {
-    event.preventDefault();
-    // add margin because we remove the main-container
-    $('.main-container').css('margin-top', '100px');
+  // $('#login').click('.login-btn', (event) => {
+  //   event.preventDefault();
+  //   // add margin because we remove the main-container
+  //   $('.main-container').css('margin-top', '100px');
 
-    $('.menu-options-container').show();
-    $('.previous-orders-container').show();
-    $('#login').hide();
-    $('.sign-up').hide();
+  //   $('.menu-options-container').show();
+  //   $('.previous-orders-container').show();
+  //   $('#login').hide();
+  //   $('.sign-up').hide();
 
-    // change login btn htl
-    $('.login').html('Logout');
-  });
+  //   // change login btn htl
+  //   $('.login').html('Logout');
+  // });
 
   // listen for menu-item being clicked
   $('.menu-item').click(function (event) {
@@ -286,7 +283,6 @@ $(function () {
   // cart demo button in nav
   $('.cart-demo-btn').click((event) => {
     event.preventDefault();
-    console.log('cart demo button has been clicked');
     userCart();
     $('.main-container').children().hide();
 
@@ -296,11 +292,40 @@ $(function () {
       console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
       console.log('cartArr', cartArr);
     });
+  });
+
+
+
+
+  // TODO:
+  // Login btn to create a cookie when clicked
+  $('#login').submit(function (event) {
+
+    // gets the form data from userId field on login page
+    const formData = {
+      userId: $('#id').val(),
+    };
+
+    event.preventDefault();
+
+    // TODO: idk what this is doing. Looks like nothing is happening.
+    $.ajax({
+      type: 'POST',
+      url: '/lookupAllLogins',
+      data: formData,
+      success: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  });
 
 
 
 
   // do not delete below this line
-  });
+
 
 });
