@@ -11,7 +11,6 @@ module.exports = (db) => {
         `;
     db.query(queryText, [req.body.email.trim(), req.body.password.trim()])
       .then(result => {
-        console.log('💸  AFTER .THEN :', result);
         res.json(result.rows);
       })
       .catch(err => {

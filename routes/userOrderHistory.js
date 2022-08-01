@@ -33,11 +33,8 @@ module.exports = (db) => {
     `;
     const userId = parseInt(req.body.userId.trim());
     const values = [userId];
-    console.log('💸 USER ORDER HISTORY :', values);
-
     db.query(queryText, values)
       .then(data => {
-        console.log('💸  AFTER .THEN :', data.rows);
         const userOrderHistory = data.rows;
         res.json({ userOrderHistory });
       })

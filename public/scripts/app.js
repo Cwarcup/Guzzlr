@@ -29,7 +29,7 @@ $(function () {
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="Ralph.Wong@gmail.com " id="login-email" value='Ralph.Wong@gmail.com'/>
+            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='do_not_perceive_me@outlook.com'/>
           </div>
           <div>
             <label for="password">Password</label>
@@ -40,7 +40,6 @@ $(function () {
             </button>
           </div>
         </form>
-
     `);
   });
 
@@ -49,7 +48,7 @@ $(function () {
   $('.menu-item').click(function (event) {
     // get id of closest div
     let id = $(event.target).closest('.menu-item').attr('id', '#done');
-    // console.log(this.id);
+    console.log(this.id);
   });
 
 
@@ -91,7 +90,7 @@ $(function () {
 
 
 
-  // load previous orders from /api/userOrderHistory
+  // POST request to /userOrderHistory with userId
   // only if a user is logged in
   const getUserOrderHistory = (userLoginData) => {
     $.ajax({
@@ -102,17 +101,21 @@ $(function () {
       },
       success: (data) => {
         const userOrderHistory = data.userOrderHistory;
+
+        $('.previous-orders-container').append(`<h2>Previous Orders</h2>`);
+        $('.previous-orders-container').append(`<div class="previous-orders-list">`);
+
         userOrderHistory.forEach((prevOrder) => {
-          $('.previous-orders-container').append(`
-          <div class="card" style="width: 12rem;">
-          <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="${prevOrder.name}">
-          <div class="card-body">
-            <h5 class="card-title">${prevOrder.name}</h5>
-            <p class="text-muted">${prevOrder.restaurant}</p>
-            <p class="card-text">$${prevOrder.price / 100}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+          $('.previous-orders-list').append(`
+          <div id="${prevOrder.id}" class="card" style="width: 12rem;">
+            <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${prevOrder.name}</h5>
+                <p class="card-text">${prevOrder.description}</p>
+              <p class="card-text">$${prevOrder.price / 100}</p>
+              <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
           </div>
-        </div>
         `);
         });
       },
@@ -121,8 +124,6 @@ $(function () {
       }
     });
   };
-  // getUserOrderHistory();
-  // !! removed order history from homepage
 
 
   // display cart items for logged in user
@@ -135,7 +136,6 @@ $(function () {
         const cartData = data.userCart;
 
         $('.main-container').append(`
-
         <section class="h-100 h-custom" style="background-color: #eee;">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -286,16 +286,15 @@ $(function () {
   });
 
 
-  // function to run if user is logged in
-  // only accessible when user has already clicked the login link on nav
+  // #login is the button only visible AFTER a user clicked the login link in navbar
   $('#login').submit(function (event) {
+    event.preventDefault();
+
     // gets the form data from userId field on login page
     const formData = {
       email: $('#login-email').val(),
       password: $('#login-password').val()
     };
-
-    event.preventDefault();
 
     $.ajax({
       url: 'http://localhost:8080/lookupAllLogins',
@@ -307,7 +306,6 @@ $(function () {
       success: (response) => {
         if (response.length > 0) {
           // create homepage according to user information
-          console.log('response from database', response);
           createHomepageForUser(response[0]);
         } else {
           console.log('❌ ❌ user not found in database ❌ ❌ ');
@@ -315,7 +313,6 @@ $(function () {
       }
     });
   });
-
 
 
   // use to render homepage for user if logged in successfully
@@ -336,20 +333,20 @@ $(function () {
   });
 
 
-
+  // TODO: work in progress
   // function to reset homepage to default state
   // use for logout and page first render and NOT logged in
-  const resetToDefaultHomepage = () => {
-    $('.main-container').css('margin-top', '0px');
-    $('.menu-options-container').show();
-    // hide the login html and container
-    $('#login').hide();
-    // show sign up button
-    $('.sign-up').show();
-    // change login btn text
-    $('.login').html(`Login`);
-  };
-  resetToDefaultHomepage();
+  // const resetToDefaultHomepage = () => {
+  //   $('.main-container').css('margin-top', '0px');
+  //   $('.menu-options-container').show();
+  //   // hide the login html and container
+  //   $('#login').hide();
+  //   // show sign up button
+  //   $('.sign-up').show();
+  //   // change login btn text
+  //   $('.login').html(`Login`);
+  // };
+  // resetToDefaultHomepage();
 
 
 
@@ -357,6 +354,4 @@ $(function () {
 
 
   // do not delete below this line
-
-
 });
