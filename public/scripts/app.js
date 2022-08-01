@@ -22,7 +22,7 @@ $(function () {
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="Enter email" id="login-email" />
+            <input name="email" placeholder="Ralph.Wong@gmail.com " id="login-email" value='Ralph.Wong@gmail.com '/>
           </div>
           <div>
             <label for="password">Password</label>
@@ -42,7 +42,7 @@ $(function () {
   $('.menu-item').click(function (event) {
     // get id of closest div
     let id = $(event.target).closest('.menu-item').attr('id', '#done');
-    console.log(this.id);
+    // console.log(this.id);
   });
 
 
@@ -87,7 +87,6 @@ $(function () {
   // load previous orders from /api/userOrderHistory
   // only if a user is logged in
   const getUserOrderHistory = () => {
-    console.log('getUserOrderHistory has run');
     $.ajax({
       url: '/userOrderHistory',
       method: 'GET',
@@ -119,7 +118,6 @@ $(function () {
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
   const userCart = () => {
-    console.log('userCart has run');
     $.ajax({
       url: '/userCart',
       method: 'GET',
@@ -273,17 +271,17 @@ $(function () {
     $(".menu-options-container").on("click", "a", function (event) {
       event.preventDefault();
       cartArr.push(Number(event['originalEvent']['path'][2]['id']));
-      console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
-      console.log('cartArr', cartArr);
+      // console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
+      // console.log('cartArr', cartArr);
     });
   });
 
 
   // function to run if user is logged in
-  const userLoggedIn = (userData) => {};
-  // TODO:
+
   // Login btn to create a cookie when clicked
   $('#login').submit(function (event) {
+    console.log('login form submitted');
 
     // gets the form data from userId field on login page
     const formData = {
@@ -307,21 +305,21 @@ $(function () {
     });
   });
 
-  // TODO: dont think we will need this. Conflicts with the proper login functionality
-  // login page
-  // login-btn renders users login page
-  $('#login').click('.login-btn', (event) => {
-    event.preventDefault();
-    // add margin because we remove the main-container
-    $('.main-container').css('margin-top', '100px');
-    $('.menu-options-container').show();
-    $('.previous-orders-container').show();
-    $('#login').hide();
-    $('.sign-up').hide();
+  // // TODO: dont think we will need this. Conflicts with the proper login functionality
+  // // login page
+  // // login-btn renders users login page
+  // $('#login').click('.login-btn', (event) => {
+  //   event.preventDefault();
+  //   // add margin because we remove the main-container
+  //   $('.main-container').css('margin-top', '100px');
+  //   $('.menu-options-container').show();
+  //   $('.previous-orders-container').show();
+  //   $('#login').hide();
+  //   $('.sign-up').hide();
 
-    // change login btn htl
-    $('.login').html('Logout');
-  });
+  //   // change login btn htl
+  //   $('.login').html('Logout');
+  // });
 
 
 
