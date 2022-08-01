@@ -1,4 +1,3 @@
-
 /* eslint-disable no-undef */
 // Client facing scripts here
 let cartArr = [];
