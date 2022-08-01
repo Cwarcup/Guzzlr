@@ -169,6 +169,7 @@ const makeInsertStatements = function() {
     for (let i = 0; i < restaurantNamesByCuisine[cuisine].length; i++) {
       toReturn += template;
       toReturn += `(${idNumber}, '${restaurantNamesByCuisine[cuisine][i]}', '${makeRandomPhoneNumber()}', 'Canada', '${intBetweenZeroAnd(3000) + ' ' + streets[intBetweenZeroAnd(streets.length - 1)]}', '${cities[intBetweenZeroAnd(cities.length - 1)]}', 'BC', '${makeRandomPostalCode()}'); \n`;
+      idNumber++;
     }
   }
 
