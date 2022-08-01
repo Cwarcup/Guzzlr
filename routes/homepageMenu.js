@@ -7,6 +7,7 @@ module.exports = (db) => {
       `
       SELECT
         restaurant_id,
+        restaurants.name as rest_name,
         menu_items.name,
         menu_items.price,
         menu_items.description,
@@ -22,7 +23,6 @@ module.exports = (db) => {
       `
     )
       .then(data => {
-        console.log(data);
         const menuItems = data.rows;
         res.json({ menuItems });
       })
