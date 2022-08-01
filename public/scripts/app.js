@@ -288,6 +288,7 @@ $(function () {
       email: $('#login-email').val(),
       password: $('#login-password').val()
     };
+    console.log("formData send!", formData);
 
     event.preventDefault();
 
@@ -296,8 +297,13 @@ $(function () {
       url: '/lookupAllLogins',
       data: formData,
       success: (data) => {
-        console.log('data from login', data);
-        // TODO: render homepage with user content
+        console.log("data returned!", data);
+        if (data.length === 0) {
+          console.log("no user found");
+          $('#login-error').text("No user found");
+        } else {
+          console.log("user found");
+        }
       },
       error: (err) => {
         console.log(err);
