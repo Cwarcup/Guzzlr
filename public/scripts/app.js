@@ -178,7 +178,7 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         let cartCopy = cartArr.map(x => x);
-        cartArr.sort();
+        cartCopy.sort();
         const menuItemData = data.menuItems;
         console.log('menuItemData', menuItemData);
         let cartItem = `\n`;
@@ -186,7 +186,7 @@ $(function () {
         const count = {};
 
         for (let index = 0; index < cartArr.length; index++) {
-          const element = cartArr[index];
+          const element = cartCopy[index];
 
           if (count[element]) {
             count[element] += 1;
@@ -342,7 +342,7 @@ $(function () {
     let itemId = Number(event.originalEvent.path[4].id.substring(9,event.originalEvent.path[4].id.length));
     let index = cartArr.indexOf(itemId);
     if (index > -1) {
-      cartArr.splice(index,index + 1);
+      cartArr.splice(index,1);
     }
     let temp = event.originalEvent.path[2].children[1].children[0].textContent;
     let pricePerItem = (Number(temp.substring(1,temp.length)) / Number(event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent));
