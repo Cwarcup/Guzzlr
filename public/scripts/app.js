@@ -292,23 +292,41 @@ $(function () {
 
     event.preventDefault();
 
-    $.ajax({
-      type: 'POST',
-      url: '/lookupAllLogins',
-      data: formData,
-      success: (data) => {
-        console.log("data returned!", data);
-        if (data.length === 0) {
-          console.log("no user found");
-          $('#login-error').text("No user found");
-        } else {
-          console.log("user found");
-        }
+    // $.ajax({
+    //   type: 'POST',
+    //   url: '/lookupAllLogins',
+    //   data: formData,
+    //   success: (data) => {
+    //     console.log("data returned!", data);
+    //     if (data.length === 0) {
+    //       console.log("no user found");
+
+    //     } else {
+    //       console.log("user found");
+    //     }
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // });
+    let settings = {
+      "url": "http://localhost:8080/lookupAllLogins",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      error: (err) => {
-        console.log(err);
+      "data": {
+        "email": `${formData.email}`,
+        "password": `${formData.password}`
       }
-    });
+    };
+    console.log("settings", settings);
+    
+    $.ajax(settings)
+      .done(function (response) {
+        console.log(response);
+      });
   });
 
   // // TODO: dont think we will need this. Conflicts with the proper login functionality
