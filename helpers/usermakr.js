@@ -165,6 +165,27 @@ const domainArray = [
 ];
 
 
+// === FUNCTIONS ===
+
+// return int between zero and #
+const intBetweenZeroAnd = function(input) {
+  return Math.floor(Math.random() * (input + 1));
+};
+
+// return a random plausible BC phone number
+const makeRandomPhoneNumber = function() {
+  let phoneNumber = "(";
+  let areaCodes = ['250', '604', '778'];
+  phoneNumber += areaCodes[Math.floor(Math.random() * 3)];
+  phoneNumber += ") ";
+  for (let i = 0; i < 7; i++) {
+    if (i === 3) {
+      phoneNumber += "-";
+    }
+    phoneNumber += intBetweenZeroAnd(9);
+  }
+  return phoneNumber;
+};
 
 
 // email-maker helper functions:
@@ -219,7 +240,7 @@ const sillyEmail = function() {
   return (adjArray[Math.floor(Math.random() * adjArray.length)] + joiner + nounArray[Math.floor(Math.random() * nounArray.length)] + suffix + "@" + domainArray[Math.floor(Math.random() * domainArray.length)]);
 };
 
-// INSERT INTO users (name, email) VALUES ('Adam', punished_gamer@aol.com);
+// INSERT INTO users (name, phone, email) VALUES ('Adam', '(250) 555-1234', punished_gamer@aol.com);
 
 const makeUser = function() {
   let fname = fNameArray[Math.floor(Math.random() * fNameArray.length)];
@@ -231,7 +252,8 @@ const makeUser = function() {
     email = sillyEmail();
   }
   let name = (fname + " " + lname);
-  return `'${name}', '${email}'`;
+  let phone = makeRandomPhoneNumber();
+  return `'${name}', '${phone}', '${email}'`;
 };
 
 
@@ -239,7 +261,7 @@ const makeUser = function() {
 let content = "";
 
 for (let i = 0; i < numUsers; i++) {
-  content += `INSERT INTO users (name, email) VALUES (${makeUser()}); \n`;
+  content += `INSERT INTO users (name, phone, email) VALUES (${makeUser()}); \n`;
 }
 
 
