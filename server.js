@@ -19,8 +19,6 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
-
-
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
@@ -42,6 +40,7 @@ const widgetsRoutes = require('./routes/widgets');
 const homepageMenu = require('./routes/homepageMenu');
 const userOrderHistory = require('./routes/userOrderHistory');
 const userCart = require('./routes/userCart');
+const menuItems = require('./routes/menuItems');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,6 +49,7 @@ app.use('/api/widgets', widgetsRoutes(db));
 app.use('/homepageMenu', homepageMenu(db));
 app.use('/userOrderHistory', userOrderHistory(db));
 app.use('/userCart', userCart(db));
+app.use('/menuItems', menuItems(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
