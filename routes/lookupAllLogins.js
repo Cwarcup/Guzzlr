@@ -3,7 +3,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post('/', (req, res) => {
-    console.log('req.body:', req.body);
+    console.log('DATA FROM FORM = req.body:', req.body);
 
     const queryText = `
         SELECT
@@ -13,7 +13,7 @@ module.exports = (db) => {
         `;
     db.query(queryText, [req.body.email, req.body.password])
       .then(result => {
-        console.log('result:', result);
+        console.log('✅ result from query:', result);
         res.json(result.rows);
       })
       .catch(err => {

@@ -287,27 +287,10 @@ $(function () {
       email: $('#login-email').val(),
       password: $('#login-password').val()
     };
-    console.log("formData send!", formData);
 
     event.preventDefault();
 
-    // $.ajax({
-    //   type: 'POST',
-    //   url: '/lookupAllLogins',
-    //   data: formData,
-    //   success: (data) => {
-    //     console.log("data returned!", data);
-    //     if (data.length === 0) {
-    //       console.log("no user found");
-
-    //     } else {
-    //       console.log("user found");
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   }
-    // });
+    // ajax request for lookupAllLogins
     let settings = {
       "url": "http://localhost:8080/lookupAllLogins",
       "method": "POST",
@@ -324,7 +307,7 @@ $(function () {
     
     $.ajax(settings)
       .done(function (response) {
-        console.log(response);
+        console.log("🔥 data returned from AJAX request!", response);
       });
   });
 
