@@ -66,12 +66,12 @@
         <div class="owner-dash-header">
           <h1>Welcome back, Adam</h1>
         </div>
-
+        <!-- header - orders -->
         <div class="owner-dash-grid-col-header">
           <h2>Your Orders</h2>
         </div>
         <div class="owner-dash-grid-row">
-          <div class="">Order Number</div>
+          <div class="order-num-header">Order Number</div>
           <div class="">Special Requests</div>
           <div class="items-list">
             <div class="single-item">
@@ -84,11 +84,58 @@
             </div>
           </div>
           <div class="accept-decline">
-            <label>Accept or Decline</label>
+            <label>Accept</label>
           </div>
-          <div class="time-created">Order placed at:</div>
+          <div class="time-created">Time</div>
+          <div class="pickup-time">Pickup time</div>
           <div class="confirm-order">
             <p>Confirm</p>
+          </div>
+        </div>
+        <!-- single order -->
+        <div class="owner-dash-grid-row">
+          <div class="order-num-header">#345</div>
+          <div class="">No pickles</div>
+          <div class="items-list">
+            <div class="single-item">
+              <div class="quality">
+                <span>1</span>
+              </div>
+              <div class="item-name">
+                <span>Hamburger</span>
+              </div>
+            </div>
+            <div class="single-item">
+              <div class="quality">
+                <span>1</span>
+              </div>
+              <div class="item-name">
+                <span>Hamburger</span>
+              </div>
+            </div>
+            <div class="single-item">
+              <div class="quality">
+                <span>1</span>
+              </div>
+              <div class="item-name">
+                <span>Hamburger</span>
+              </div>
+            </div>
+          </div>
+          <div class="accept-decline">
+            <label>Accept</label>
+            <input type="checkbox" name="accept" value="accept">
+          </div>
+          <div class="time-created">
+            <span>12:00</span>
+          </div>
+          <div>
+            <span class="pickup-time">
+              3:00pm
+            </span>
+          </div>
+          <div class="confirm-order">
+            <button>Send</button>
           </div>
         </div>
 
