@@ -10,4 +10,23 @@
   .owner-dash-header {
     align-self: flex-start;
   }
+
+  // create a grid that is 2 row, 7 columns wide
+  // all columns should space 2 rows except for the last two columns
+  .owner-dash-grid-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-areas:
+      "dash-header dash-header dash-header dash-header dash-header dash-header dash-header"
+      "dash-body dash-body dash-body dash-body dash-body dash-body dash-body";
+    grid-gap: 1em;
+    margin-top: 1em;
+  }
+
+  .single-item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
 }
