@@ -4,7 +4,7 @@ const router  = express.Router();
 // have hard coded user id for now = 1
 // TODO: returning all the same prices for now
 module.exports = (db) => {
-  router.post('/', (req, res) => {
+  router.get('/', (req, res) => {
     const queryText = `
       SELECT
         orders.id as order_id,

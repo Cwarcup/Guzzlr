@@ -9,6 +9,7 @@
 let cartArr = [];
 
 $(function () {
+  console.log('app.js is loaded');
 
 
   // hide login HTML on load
@@ -85,7 +86,7 @@ $(function () {
       }
     });
   };
-  // getMenuItems();
+  getMenuItems();
 
 
 
@@ -94,7 +95,7 @@ $(function () {
   const getUserOrderHistory = (userLoginData) => {
     $.ajax({
       url: '/userOrderHistory',
-      method: 'POST',
+      method: 'GET',
       data: {
         userId: userLoginData
       },
@@ -123,7 +124,7 @@ $(function () {
       }
     });
   };
-  getUserOrderHistory();
+  // getUserOrderHistory();
 
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
