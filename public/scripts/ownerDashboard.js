@@ -41,10 +41,10 @@ const singleIncomingOrder = (order) => {
   return `
   <div class="owner-dash-grid-row">
     <div class="order-num-header">
-      ${order.id}
+      ${order.order_id}
     </div>
     <div class="request-text">
-      ${order.request}
+      ${order.order_notes}
     </div>
     <div class="items-list">
       ${order.items.map(item => {

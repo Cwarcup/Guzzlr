@@ -17,3 +17,20 @@ VALUES
     '',
     2000
   );
+
+INSERT INTO
+  orders (
+    user_id,
+    restaurant_id,
+    order_placed,
+    notes,
+    price
+  )
+VALUES
+  (
+    1,
+    1,
+    '2015-03-08 04:00:00',
+    '',
+    2000
+  );
