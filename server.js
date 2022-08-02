@@ -43,6 +43,7 @@ const userCart = require('./routes/userCart');
 const menuItems = require('./routes/menuItems');
 const createOrder = require('./routes/createOrder');
 const lookupAllLogins = require('./routes/lookupAllLogins');
+const incomingOrder = require('./routes/incomingOrder');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -54,6 +55,7 @@ app.use('/userCart', userCart(db));
 app.use('/menuItems', menuItems(db));
 app.use('/createOrder', createOrder(db));
 app.use('/lookupAllLogins', lookupAllLogins(db));
+app.use('/incomingOrder', incomingOrder(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
