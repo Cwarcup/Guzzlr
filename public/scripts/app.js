@@ -86,7 +86,7 @@ $(function () {
       }
     });
   };
-  getMenuItems();
+  // getMenuItems();
 
 
 
