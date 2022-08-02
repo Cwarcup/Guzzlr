@@ -7,6 +7,7 @@ CREATE TABLE orders (
   user_id INTEGER REFERENCES users(id) NOT NULL,
   restaurant_id INTEGER REFERENCES restaurants(id) NOT NULL,
   order_placed TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  order_started TIMESTAMP DEFAULT NULL,
   order_completed TIMESTAMP DEFAULT NULL,
   notes TEXT,
   price INTEGER DEFAULT 0
