@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-
 const ownerHeader = (name) => {
   return `
         <div class="owner-dash-header">
@@ -88,7 +87,6 @@ const singleIncomingOrder = (order) => {
 };
 
 const renderOwnerDashboard = (owner) => {
-  console.log("render owner has run");
   $('.menu-options-container').hide();
   $('.previous-orders-container').hide();
   $('.login-container').hide();

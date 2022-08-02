@@ -353,7 +353,6 @@ $(function () {
             renderOwnerDashboard(response[0]);
             return;
           }
-          createHomepageForUser(response[0].name);
         } else {
           console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
