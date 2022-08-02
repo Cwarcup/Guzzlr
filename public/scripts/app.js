@@ -6,7 +6,6 @@
 
 // require is not defined
 // const Cookies = require('js-cookie');
-
 let cartArr = [];
 
 $(function () {
@@ -75,7 +74,7 @@ $(function () {
                 <h5 class="card-title">${menuItem.name}</h5>
                 <p class="card-text">${menuItem.description}</p>
                 <p class="card-text">$${menuItem.price / 100}</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <a href="#" class="addToCart btn btn-primary">Add to cart</a>
               </div>
             </div>
           `);
@@ -132,16 +131,6 @@ $(function () {
   const addZeroes = function (num) {
     return num.toFixed(2);
   };
-
-  const createOrder = (arr, price) => {
-    console.log('createOrder has run');
-    price = Number(price.substring(1, price.length));
-    $.post("/createOrder", { arr, price },
-      function (data, status) {
-        alert(`Data: ${  data  }\nStatus: ${  status}`);
-      });
-  };
-
 
   // display cart items for logged in user
   const userCart = () => {
@@ -326,53 +315,8 @@ $(function () {
 
   });
 
-  $(".main-container").on("click", ".checkout", function (event) {
-    event.preventDefault();
-    //console.log(event.originalEvent.path[1].children[0].textContent);
-    createOrder(cartArr, event.originalEvent.path[1].children[0].textContent);
 
-  });
 
-  $(".main-container").on("click", ".fa-trash-alt", function (event) {
-    event.preventDefault();
-    let subtotal = event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent;
-    let total = event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent;
-    subtotal = Number(subtotal.substring(1,subtotal.length));
-    let itemId = Number(event.originalEvent.path[4].id.substring(9,event.originalEvent.path[4].id.length));
-    let index = cartArr.indexOf(itemId);
-    if (index > -1) {
-      cartArr.splice(index,1);
-    }
-    let temp = event.originalEvent.path[2].children[1].children[0].textContent;
-    let pricePerItem = (Number(temp.substring(1,temp.length)) / Number(event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent));
-    let originalItemCount = (event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent);
-    let newItemCount = originalItemCount - 1;
-    subtotal -= pricePerItem;
-    console.log(event);
-    if ((originalItemCount) > 1) {
-      event.originalEvent.path[4].children[0].children[1].children[0].children[0].textContent = newItemCount;
-      event.originalEvent.path[2].children[1].children[0].textContent = `$${(addZeroes(newItemCount * pricePerItem))}`;
-
-    } else {
-      document.getElementById(event.originalEvent.path[4].id).remove();
-    }
-    event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent = `$${addZeroes(subtotal)}`;
-    event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent = `$${addZeroes(subtotal * 1.12)}`;
-    event.originalEvent.path[7].children[1].children[0].children[0].children[10].children[0].children[0].textContent = `$${addZeroes(subtotal * 1.12)}`;
-
-    //originalEvent.path[4].children[0].children[1].children[0].children[0].textContent
-    //originalEvent.path[2].children[1].children[0].textContent
-    console.log(cartArr);
-  });
-
-  $(".menu-options-container").on("click", "a", function (event) {
-    event.preventDefault();
-    cartArr.push(Number(event['originalEvent']['path'][2]['id']));
-    console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
-    console.log('cartArr', cartArr);
-    document.getElementsByClassName("cart-demo-btn")[0]['children'][1]['textContent']++;
-    console.log(document.getElementsByClassName("cart-demo-btn")[0]['children'][1]['textContent']);
-  });
 
 
   // <a href="#transitionExample" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">Slide down</a>
@@ -424,7 +368,7 @@ $(function () {
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
     // add button to logout on navbar
     $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
-    
+
     // run function with the user's id to get order history and display it
     getUserOrderHistory(data.id);
   });
