@@ -20,8 +20,6 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
-
-
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
@@ -43,6 +41,8 @@ const widgetsRoutes = require('./routes/widgets');
 const homepageMenu = require('./routes/homepageMenu');
 const userOrderHistory = require('./routes/userOrderHistory');
 const userCart = require('./routes/userCart');
+const menuItems = require('./routes/menuItems');
+const createOrder = require('./routes/createOrder');
 const lookupAllLogins = require('./routes/lookupAllLogins');
 const incomingOrder = require('./routes/incomingOrder');
 const getOwner = require('./routes/getOwner');
@@ -54,10 +54,9 @@ app.use('/api/widgets', widgetsRoutes(db));
 app.use('/homepageMenu', homepageMenu(db));
 app.use('/userOrderHistory', userOrderHistory(db));
 app.use('/userCart', userCart(db));
+app.use('/menuItems', menuItems(db));
+app.use('/createOrder', createOrder(db));
 app.use('/lookupAllLogins', lookupAllLogins(db));
-app.use('/incomingOrder', incomingOrder(db));
-app.use('/getOwner', getOwner(db));
-
 // Note: mount other resources here, using the same pattern above
 
 // Home page
