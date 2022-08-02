@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 
-// doesnt work - Cannot use import statement outside a module
-// import Cookies from 'js-cookie';
 
-// require is not defined
-// const Cookies = require('js-cookie');
+
+
+
+
 let cartArr = [];
 
 $(function () {
@@ -347,8 +347,13 @@ $(function () {
       },
       success: (response) => {
         if (response.length > 0) {
+          console.log("login success", response);
           // create homepage according to user information
-          createHomepageForUser(response[0]);
+          if (response[0].id === 3) {
+            renderOwnerDashboard(response[0]);
+            return;
+          }
+          createHomepageForUser(response[0].name);
         } else {
           console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
@@ -399,6 +404,7 @@ $(function () {
 
     console.log(formData);
   });
+  
 
 
   // do not delete below this line

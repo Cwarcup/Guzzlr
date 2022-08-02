@@ -1,15 +1,15 @@
 /* eslint-disable no-undef */
-$(function () {
-  const ownerHeader = (name) => {
-    return `
+
+const ownerHeader = (name) => {
+  return `
         <div class="owner-dash-header">
           <h1>Welcome back, ${name}</h1>
         </div>
     `;
-  };
+};
 
-  const pendingOrderHeader = () => {
-    return `
+const pendingOrderHeader = () => {
+  return `
         <div class="owner-dash-grid-col-header">
           <h2>Pending Orders</h2>
         </div>
@@ -36,10 +36,10 @@ $(function () {
           </div>
         </div>
         `;
-  };
+};
 
-  const singleIncomingOrder = (order) => {
-    return `
+const singleIncomingOrder = (order) => {
+  return `
   <div class="owner-dash-grid-row">
     <div class="order-num-header">
       ${order.id}
@@ -85,13 +85,17 @@ $(function () {
     </form>
   </div>
     `;
-  };
+};
 
-  console.log('this shit ran');
-
+const renderOwnerDashboard = (owner) => {
+  console.log("render owner has run");
+  $('.menu-options-container').hide();
+  $('.previous-orders-container').hide();
+  $('.login-container').hide();
 
   $('.owner-dashboard-container')
-    .append(ownerHeader('John'))
+    .show()
+    .append(ownerHeader(owner.name))
     .append(pendingOrderHeader())
     .append(singleIncomingOrder({
       id: 1,
@@ -102,7 +106,4 @@ $(function () {
       }],
       createdAt: '12:00'
     }));
-
-
-
-});
+};

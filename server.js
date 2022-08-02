@@ -45,7 +45,6 @@ const menuItems = require('./routes/menuItems');
 const createOrder = require('./routes/createOrder');
 const lookupAllLogins = require('./routes/lookupAllLogins');
 const incomingOrder = require('./routes/incomingOrder');
-const getOwner = require('./routes/getOwner');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
