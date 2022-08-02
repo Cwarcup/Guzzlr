@@ -75,7 +75,7 @@ $(function () {
                 <h5 class="card-title">${menuItem.name}</h5>
                 <p class="card-text">${menuItem.description}</p>
                 <p class="card-text">$${menuItem.price / 100}</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <a href="#" class="addToCart btn btn-primary">Add to cart</a>
               </div>
             </div>
           `);
@@ -328,8 +328,7 @@ $(function () {
 
   $(".main-container").on("click", ".checkout", function (event) {
     event.preventDefault();
-    //console.log(event.originalEvent.path[1].children[0].textContent);
-    createOrder(cartArr, event.originalEvent.path[1].children[0].textContent);
+    createOrder(cartArr, event.currentTarget.children[0].children[0].textContent);
 
   });
 
@@ -365,7 +364,7 @@ $(function () {
     console.log(cartArr);
   });
 
-  $(".menu-options-container").on("click", "a", function (event) {
+  $(".menu-options-container").on("click", ".addToCart", function (event) {
     event.preventDefault();
     cartArr.push(Number(event['originalEvent']['path'][2]['id']));
     console.log(`${event['originalEvent']['path'][2]['id']  } added to cart!`);
@@ -424,7 +423,7 @@ $(function () {
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
     // add button to logout on navbar
     $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
-    
+
     // run function with the user's id to get order history and display it
     getUserOrderHistory(data.id);
   });
