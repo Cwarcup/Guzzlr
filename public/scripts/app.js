@@ -1,14 +1,15 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 
-// doesnt work - Cannot use import statement outside a module
-// import Cookies from 'js-cookie';
 
-// require is not defined
-// const Cookies = require('js-cookie');
+
+
+
+
 let cartArr = [];
 
 $(function () {
+  console.log('app.js is loaded');
 
 
   // hide login HTML on load
@@ -28,7 +29,7 @@ $(function () {
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='do_not_perceive_me@outlook.com'/>
+            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='AdamRoxx97@gmail.com'/>
           </div>
           <div>
             <label for="password">Password</label>
@@ -47,7 +48,6 @@ $(function () {
   $('.menu-item').click(function (event) {
     // get id of closest div
     let id = $(event.target).closest('.menu-item').attr('id', '#done');
-    console.log(this.id);
   });
 
 
@@ -92,9 +92,11 @@ $(function () {
   // POST request to /userOrderHistory with userId
   // only if a user is logged in
   const getUserOrderHistory = (userLoginData) => {
+    console.log("userLoginData", userLoginData);
     $.ajax({
       url: '/userOrderHistory',
-      method: 'POST',
+      method: 'get',
+      dataType: 'json',
       data: {
         userId: userLoginData
       },
@@ -119,11 +121,12 @@ $(function () {
         });
       },
       error: (err) => {
+        console.log("error bro:");
         console.log(err);
       }
     });
   };
-  getUserOrderHistory();
+  // getUserOrderHistory();
 
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
@@ -169,7 +172,6 @@ $(function () {
         let cartCopy = cartArr.map(x => x);
         cartCopy.sort();
         const menuItemData = data.menuItems;
-        console.log('menuItemData', menuItemData);
         let cartItem = `\n`;
         let cartTotal = 0;
         const count = {};
@@ -346,7 +348,14 @@ $(function () {
       },
       success: (response) => {
         if (response.length > 0) {
+          console.log("login success", response);
           // create homepage according to user information
+          if (response[0].id === 3) {
+            console.log("owner id is 3");
+            renderOwnerDashboard(response[0]);
+            return;
+          }
+
           createHomepageForUser(response[0]);
         } else {
           console.log('❌ ❌ user not found in database ❌ ❌ ');
@@ -370,6 +379,7 @@ $(function () {
     $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
 
     // run function with the user's id to get order history and display it
+    console.log("data.id from createhomepage:", data.id);
     getUserOrderHistory(data.id);
   });
 
@@ -389,9 +399,16 @@ $(function () {
   // };
   // resetToDefaultHomepage();
 
+  // function to get numbers from form
+  // converts string into phone number format
+  $('.main-container').on('click', '#checkout-btn', function (event) {
+    event.preventDefault();
+    const formData = `${$('#areaCode').val() + $('#exchangeNum').val() + $('#lineNum').val()}`;
 
 
-
+    console.log(formData);
+  });
+  
 
 
   // do not delete below this line

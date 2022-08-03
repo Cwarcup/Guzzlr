@@ -1,11 +1,9 @@
-const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
   router.post('/', (req, res) => {
     let restaurantID = 0;
-    console.log('body!:', req.body);
     //console.log('RESPONSE!:', res);
     db.query(
       `
@@ -17,9 +15,6 @@ module.exports = (db) => {
     )
       .then(data => {
         restaurantID = data.rows[0].id;
-        return restaurantID;
-      })
-      .then(restaurantID => {
         db.query(
           `
           INSERT INTO
@@ -36,8 +31,7 @@ module.exports = (db) => {
           );
           `
         )
-      })
-        .then(data => {
+          .then(data => {
             db.query(
               `
               SELECT id FROM orders
@@ -46,35 +40,32 @@ module.exports = (db) => {
               LIMIT 1;
               `
             )
-            .then(data => {
-              let orderID = data.rows[0].id;
-              console.log('orderID', orderID);
-              return orderID;
-            })
-            .then(orderID => {
-              let queryStatement =`INSERT INTO
-              order_items (order_id, menu_item)
-            VALUES
-            `
-              for (const i of req.body.arr) {
-                queryStatement += `(${orderID}, ${i}),\n`
-
-              }
-              queryStatement = queryStatement.substring(0, queryStatement.length-2);
-              queryStatement += `\n;`;
-
-              db.query(queryStatement)
-                .then(data => {
-
-                })
-            })
-
+              .then(data => {
+                let orderID = data.rows[0].id;
+                let queryStatement =
+                `INSERT INTO
+                order_items (order_id, menu_item)
+                VALUES
+                `
+                for (const i of req.body.arr) {
+                 queryStatement += `(${orderID}, ${i}),\n`
+                }
+                queryStatement = queryStatement.substring(0, queryStatement.length-2);
+                queryStatement += `\n;`;
+                db.query(queryStatement)
+                  .then(data => {
+                    res.status(201)
+                    res.json( { data });
+                  })
+              })
+              .catch(err => {
+                res
+                  .status(500)
+                  .json({ error: err.message });
+              })
           })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          })
+        })
+
   });
   return router;
 };

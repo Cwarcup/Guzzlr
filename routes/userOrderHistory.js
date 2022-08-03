@@ -4,7 +4,9 @@ const router  = express.Router();
 // have hard coded user id for now = 1
 // TODO: returning all the same prices for now
 module.exports = (db) => {
-  router.post('/', (req, res) => {
+  router.get('/', (req, res) => {
+    console.log('get all orders', req.query);
+    console.log("req.body", req.body);
     const queryText = `
       SELECT
         orders.id as order_id,
@@ -31,10 +33,8 @@ module.exports = (db) => {
         menu_items.price
       LIMIT 4;
     `;
-    console.log('req.body: ', req.body);
-    const userId = parseInt(req.body.userId);
+    const userId = parseInt(req.query.userId);
     const values = [userId];
-    console.log('values from order history:', values);
     db.query(queryText, values)
       .then(data => {
         const userOrderHistory = data.rows;

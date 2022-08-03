@@ -14,8 +14,8 @@ module.exports = () => {
     client.messages
       .create({
         body: 'An order has come in. Please log into Guzzlr to view the order.',
-        from: '+19896449291',
-        to: '+16043744652'
+        from: process.env.TWILIO_FROM,
+        to: process.env.TWILIO_TO
       })
       .then(message => console.log(message.status))
       .done();
