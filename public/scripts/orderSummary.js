@@ -61,6 +61,21 @@ const getRestaurant = (id) => {
     });
 };
 
+const sendText = function() {
+  $.ajax({
+    url: '/incomingOrder',
+    method: 'POST',
+    dataType: 'json',
+    success: (data) => {
+      console.log('sent text');
+    },
+    error: (err) => {
+      console.log(err);
+    }
+    });
+
+}
+
 
 
 
@@ -119,6 +134,7 @@ $(function () {
   $(".main-container").on("click", ".checkout", function (event) {
     event.preventDefault();
     createOrder(cartArr, event.currentTarget.children[0].children[0].textContent);
+    sendText();
   });
 
 })
