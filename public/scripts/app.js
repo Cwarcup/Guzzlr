@@ -401,14 +401,16 @@ $(function () {
 
   // function to get numbers from form
   // converts string into phone number format
-  $('.main-container').on('click', '#checkout-btn', function (event) {
-    event.preventDefault();
-    const formData = `${$('#areaCode').val() + $('#exchangeNum').val() + $('#lineNum').val()}`;
+  // !! used for getting phone numbner. NOT IN USE ATM
+  // $('.main-container').on('click', '#checkout-btn', function (event) {
+  //   event.preventDefault();
+  //   const formData = `${$('#areaCode').val() + $('#exchangeNum').val() + $('#lineNum').val()}`;
 
 
-    console.log(formData);
-  });
+  //   console.log(formData);
+  // });
   
+
 
   $(".main-container").on("click", '#submit-forms', function (event) {
     event.preventDefault();

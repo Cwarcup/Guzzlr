@@ -1,7 +1,7 @@
 /* eslint-disable prefer-template */
 /* eslint-disable no-undef */
 
-
+// displays admin ame on  under navbar
 const ownerHeader = (name) => {
   return `
         <div class="owner-dash-header">
@@ -10,6 +10,7 @@ const ownerHeader = (name) => {
     `;
 };
 
+// creates a grid of 7 columns with each column representing a field of the order (order id, notes, quantity...)
 const pendingOrderHeader = () => {
   return `
         <div class="owner-dash-grid-col-header">
@@ -40,6 +41,12 @@ const pendingOrderHeader = () => {
         `;
 };
 
+// renders a single order
+// contains the values for the order id, notes, quantity, item name
+// accept/decline
+// time order was created
+// inputs for owner to set pickup time
+// confirm button to submit form
 const singleIncomingOrder = (data, orderItems) => {
   return `
   <div class="owner-dash-grid-row">
@@ -69,7 +76,7 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     <div class="accept-decline">
       <label>Accept</label>
-      <input type="checkbox" name="accept" value="accept" id="accept-${data.order_id}">
+      <input type="checkbox" name="accept" value="accept"       id="accept-${data.order_id}">
       <label>Decline</label>
       <input type="checkbox" name="decline" value="decline" id="decline-${data.order_id}">
     </div>
@@ -89,10 +96,10 @@ const singleIncomingOrder = (data, orderItems) => {
   </div>
     `;
 };
+
 // !! can get the id for the form time via the form id value (confirm-${data.order_id})
 
 const renderOwnerDashboard = (owner) => {
-
   $.ajax({
     url: `http://localhost:8080/getRestaurantOrders`,
     method: 'GET',
