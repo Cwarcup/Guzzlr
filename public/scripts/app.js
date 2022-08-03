@@ -95,7 +95,8 @@ $(function () {
     console.log("userLoginData", userLoginData);
     $.ajax({
       url: '/userOrderHistory',
-      method: 'GET',
+      method: 'get',
+      dataType: 'json',
       data: {
         userId: userLoginData
       },
