@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/buttons.css" type="text/css" />
   <link rel="stylesheet" href="/styles/ownerDashboard.css" type="text/css" />
   <!-- CSS only -->
      <!-- no bootstrap, uncomment if you want it back -->
@@ -50,8 +51,8 @@
 <body>
   <nav>
     <a class="navbar-brand" href="/">
-      <!-- <img class = "logomark" src="https://raw.githubusercontent.com/Cwarcup/Guzzlr/main/public/img/pighead.png"> -->
-      <div class = "logo-image"></div>
+      <img class = "logomark" src="https://raw.githubusercontent.com/Cwarcup/Guzzlr/main/public/img/pighead.png">
+      <!-- <div class = "logo-image"></div> -->
       <div class = "logotype">guzzlr</div>
 
       <!-- <div class="logo-image">
@@ -60,11 +61,11 @@
       </div> -->
     </a>
     <div class="nav-links">
-      <a class="login" href="/">
+      <button class="login" href="/">
         <i class="fa-solid fa-right-to-bracket"></i>
         Login
-      </a>
-      <a class='sign-up' href="/">Sign Up</a>
+        </button>
+      <button class='sign-up' href="/">Sign Up</button>
     </div>
     <a href="/" class="cart-demo-btn">
       <i class="fa-solid fa-cart-shopping"></i>
@@ -74,10 +75,31 @@
   </nav>
   <div class="header-welcome">
     <h1>Welcome to Guzzlr</h1>
-    <p>Restaurants and more, ready for pickup!</p>
+    <p>Restaurants &amp; more, ready for pickup</p>
   </div>
   <main>
-    <div class="main-container w-100">
+
+    <div class="cuisine-container">
+      <article>
+        <img class="article-img" src="./../public/img/pizza-pink.png">
+        <h1>PIZZA</h1>
+      </article>
+      <article>
+        <img class="article-img" src="./../public/img/burger-pink.png">
+        <h1>COMFORT</h1>
+      </article>
+      <article>
+        <img class="article-img" src="./../public/img/coffee-pink.png">
+        <h1>COFFEE</h1>
+      </article>
+      <article>
+        <img class="article-img" src="./../public/img/sushi-pink.png">
+        <h1>SUSHI</h1>
+      </article>
+    </div>
+
+
+    <div class="main-container">
       <section class="owner-dashboard-container"></section>
       <div class="menu-options-container"></div>
       <div class="previous-orders-container"></div>

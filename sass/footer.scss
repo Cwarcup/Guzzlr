@@ -1,16 +1,28 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2em;
-  min-height: 50px;
   width: 100%;
-  background: PapayaWhip;
+  background: $dark-pink;
   opacity: 0.8;
-  margin-top: auto;
+  margin: 25px;
 
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+
+  i {
+    margin:5px;
+  }
   a {
-    color: rgba(163, 208, 219, 1);
+    color: $mayonnaise;
     text-decoration: none;
+    margin:5px;
   }
 }

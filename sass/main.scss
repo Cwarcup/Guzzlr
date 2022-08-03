@@ -1,5 +1,8 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
 $piggy-pink: #FF99EE;
-$dark-pink: #DF4BDD;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
 
 body {
   display: flex;
@@ -8,6 +11,29 @@ body {
   min-height: 100vh;
 
   background-color: $dark-pink;
+  background: linear-gradient(180deg, #ff99ee, #f074e5, #df4bdd);
+
+  .cuisine-container {
+    margin-top: 120px;
+    display: flex;
+    flex-wrap: row;
+
+    h1 {
+      color: $chocolate;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      margin:0;
+      padding: 25px;
+      line-height: 0.8;
+    }
+
+    .article-img {
+      height: 200px;
+      padding: 5px;
+      -webkit-filter: drop-shadow(0px 0px 40px #222);
+      filter: drop-shadow(0px 0px 40px #F1EAD4);
+    }
+  }
 
   main {
     margin-top: auto;
@@ -23,6 +49,9 @@ body {
     padding: 0 1em;
     margin: 0;
     overflow: hidden;
+
+    -webkit-filter: drop-shadow(0px 0px 40px #222);
+  filter: drop-shadow(0px 0px 40px #F1EAD4);
 
     h2.rest-name {
       padding-top: 0.5em;

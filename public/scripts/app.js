@@ -19,6 +19,7 @@ $(function () {
   // login btn top right of main page
   $('.login').click((event) => {
     event.preventDefault();
+    $('.cuisine-container').hide();
     $('.header-welcome').hide();
     $('.main-container').children().hide();
     $('.menu-options-container').hide();
@@ -313,6 +314,7 @@ $(function () {
   $('.cart-demo-btn').click((event) => {
     event.preventDefault();
     userCart();
+    $('.cuisine-container').hide();
     $('.main-container').children().hide();
 
   });
@@ -408,7 +410,7 @@ $(function () {
 
     console.log(formData);
   });
-  
+
 
 
   // do not delete below this line
