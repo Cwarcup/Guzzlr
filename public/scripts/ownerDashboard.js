@@ -68,7 +68,9 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     <div class="accept-decline">
       <label>Accept</label>
-      <input type="checkbox" name="accept" value="accept">
+      <input type="checkbox" name="accept" value="accept" id="accept-${data.order_id}">
+      <label>Decline</label>
+      <input type="checkbox" name="decline" value="decline" id="decline-${data.order_id}">
     </div>
     <div class="time-created">
       <span>
@@ -82,7 +84,7 @@ const singleIncomingOrder = (data, orderItems) => {
       </div>
     </form>
     <div class="confirm-order">
-      <button form="confirm-${data.order_id}" type=submit>Send</button>
+      <button form="confirm-${data.order_id}" id="submit-forms">Send</button>
     </div>
   </div>
     `;
@@ -120,22 +122,9 @@ const renderOwnerDashboard = (owner) => {
       }
     }
   });
-  
+};
 
 
-
-
-  // $('.owner-dashboard-container')
-  //   .show()
-  //   .append(ownerHeader(owner.name))
-  //   .append(pendingOrderHeader())
-  //   .append(singleIncomingOrder({
-  //     id: 1,
-  //     request: 'I want to eat a lot of pizza',
-  //     items: [{
-  //       name: 'Pizza',
-  //       quantity: 2,
-  //     }],
-  //     createdAt: '12:00'
-  //   }));
+const submitForms = () => {
+  console.log("submit forms");
 };
