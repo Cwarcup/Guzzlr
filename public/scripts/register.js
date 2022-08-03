@@ -138,7 +138,7 @@ $(function () {
 
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-list').append(`
-          <div id="${prevOrder.id}" class="card" style="width: 12rem;">
+          <div id="${prevOrder.id}" class="card">
             <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>

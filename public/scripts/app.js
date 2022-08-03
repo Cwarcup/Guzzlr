@@ -26,7 +26,7 @@ $(function () {
     getMenuItems();
     $('.treat-container').children().hide();
     $('.header-welcome').hide();
-    $('.menu-options-container').show();
+    $('.view-restaurant').show();
 
   });
 
@@ -82,19 +82,23 @@ $(function () {
       dataType: 'json',
       success: (data) => {
         const menuItems = data.menuItems;
-        const restaurantName = `<h2 class="display-6 align-self-start rest-name">${menuItems[0].rest_name}</h2>`;
-        $('.main-container').prepend(restaurantName);
+        const restaurantName = `<h2 class="rest-name">${menuItems[0].rest_name}</h2>`;
+        $('.restaurant-info-container').prepend(restaurantName);
 
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
-            <div id="${menuItem.id}" class="card" style="width: 12rem;">
-              <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="...">
+            <div id="${menuItem.id}" class="card">
+             <!-- <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="..."> -->
               <div class="card-body">
-                <h5 class="card-title">${menuItem.name}</h5>
-                <p class="card-text">${menuItem.description}</p>
-                <p class="card-text">$${menuItem.price / 100}</p>
-                <a href="#" class="addToCart btn btn-primary">Add to cart</a>
+                <div class="card-left">
+                  <h5 class="card-title">${menuItem.name}</h5>
+                  <p class="card-text">${menuItem.description}</p>
+                </div>
+                <div class="card-right">
+                  <p class="card-text">$${menuItem.price / 100}</p>
+                <button href="#" class="addToCart">Add to cart</a>
+                </div>
               </div>
             </div>
           `);
@@ -129,7 +133,7 @@ $(function () {
 
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-list').append(`
-          <div id="${prevOrder.id}" class="card" style="width: 12rem;">
+          <div id="${prevOrder.id}" class="card">
             <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>

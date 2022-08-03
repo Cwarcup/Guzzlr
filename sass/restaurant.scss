@@ -1,0 +1,48 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
+.view-restaurant {
+  display:flex;
+  width:100%;
+}
+
+.restaurant-info-container {
+  display:flex;
+  flex-direction: column;
+// h2 .rest-name
+//
+
+}
+
+.card {
+  width:800px;
+}
+.card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .card-left {
+    display: flex;
+    flex-direction: column;
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: $mayonnaise;
+      margin: 0;
+    }
+    .card-text {
+      font-family:'Courier New', Courier, monospace;
+      font-size: 18px;
+      color: $chocolate;
+      margin: 0;
+    }
+  }
+  .card-right {
+    display:flex;
+    flex-direction: row;
+    color: $mayonnaise;
+  }
+}
