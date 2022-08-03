@@ -37,27 +37,27 @@ const pendingOrderHeader = () => {
         `;
 };
 
-const singleIncomingOrder = (order) => {
+const singleIncomingOrder = (data, orderItems) => {
   return `
   <div class="owner-dash-grid-row">
     <div class="order-num-header">
-      ${order.order_id}
+      ${data.order_id}
     </div>
     <div class="request-text">
-      ${order.order_notes}
+      ${data.order_notes || 'No special requests'}
     </div>
     <div class="items-list">
-      ${order.items.map(item => {
+      ${orderItems.map(item => {
     return `
       <div class="single-item">
         <div class="quality">
           <span>
-          ${item.quantity}
+            XX
           </span>
         </div>
         <div class="item-name">
           <span>
-          ${item.name}
+          ${item.item_name}
           </span>
         </div>
       </div>
@@ -70,7 +70,7 @@ const singleIncomingOrder = (order) => {
     </div>
     <div class="time-created">
       <span>
-        ${order.createdAt}
+        ${data.time_order_created}
       </span>
     </div>
     <form class="confirm-order-time">
@@ -87,21 +87,50 @@ const singleIncomingOrder = (order) => {
 };
 
 const renderOwnerDashboard = (owner) => {
-  $('.menu-options-container').hide();
-  $('.previous-orders-container').hide();
-  $('.login-container').hide();
 
-  $('.owner-dashboard-container')
-    .show()
-    .append(ownerHeader(owner.name))
-    .append(pendingOrderHeader())
-    .append(singleIncomingOrder({
-      id: 1,
-      request: 'I want to eat a lot of pizza',
-      items: [{
-        name: 'Pizza',
-        quantity: 2,
-      }],
-      createdAt: '12:00'
-    }));
+  $.ajax({
+    url: `http://localhost:8080/getRestaurantOrders`,
+    method: 'GET',
+    success: (data) => {
+      $('.menu-options-container').hide();
+      $('.previous-orders-container').hide();
+      $('.login-container').hide();
+      $('.owner-dashboard-container')
+        .show()
+        .append(ownerHeader(owner.name));
+      // for each order, render a row
+      for (let i = 0; i < data.length; i++) {
+        console.log(data[i]);
+        $.ajax({
+          url: `http://localhost:8080/getMenuItemsFromOrderId`,
+          method: 'GET',
+          data: {
+            orderId: data[i].order_id,
+          },
+          success: (orderItems) => {
+            console.log("order items: ", orderItems);
+            $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
+          }
+        });
+      }
+    }
+  });
+  
+
+
+
+
+  // $('.owner-dashboard-container')
+  //   .show()
+  //   .append(ownerHeader(owner.name))
+  //   .append(pendingOrderHeader())
+  //   .append(singleIncomingOrder({
+  //     id: 1,
+  //     request: 'I want to eat a lot of pizza',
+  //     items: [{
+  //       name: 'Pizza',
+  //       quantity: 2,
+  //     }],
+  //     createdAt: '12:00'
+  //   }));
 };
