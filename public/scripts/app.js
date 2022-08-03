@@ -398,7 +398,7 @@ $(function () {
     $('.sign-up').hide(); // hide sign up button in nav
     $('.login').hide();   // hide children in login container
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`); // display user name in nav
-    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`); // add button to logout on navbar
+    $('.nav-links').append(`<a class="nav-link" href="/" id="logout-btn">Logout</a>`); // add button to logout on navbar
 
     getUserOrderHistory(data.id); // run function with the user's id to get order history and display it on main page
   });
