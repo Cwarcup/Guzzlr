@@ -21,6 +21,7 @@ $(function () {
   // click to go to mcdonalds
   $('.featured-restaurant').click((event) => {
     event.preventDefault();
+    getMenuItems();
     $('.treat-container').children().hide();
     $('.header-welcome').hide();
     $('.menu-options-container').show();
@@ -76,7 +77,7 @@ $(function () {
       success: (data) => {
         const menuItems = data.menuItems;
         const restaurantName = `<h2 class="display-6 align-self-start rest-name">${menuItems[0].rest_name}</h2>`;
-        //$('.main-container').prepend(restaurantName);
+        $('.main-container').prepend(restaurantName);
 
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
@@ -98,7 +99,7 @@ $(function () {
       }
     });
   };
-  getMenuItems();
+  //getMenuItems();
 
 
 
