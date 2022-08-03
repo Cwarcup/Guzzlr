@@ -349,25 +349,18 @@ $(function () {
 
         if (response.length > 0) {
           currUserID = response[0].id;
-          console.log('currUserID', currUserID);
-          console.log("login success", response);
+
           // create homepage according to user information
           if (response[0].id === 3) {
             renderOwnerDashboard(response[0]);
-
             setTimeout(() => {
-
               $(".single-incoming-order-form").each(function () {
                 $(this).submit(function (event) {
                   event.preventDefault();
-              
-                  console.log('handleConfirmOrder clicked!!!');
-                  console.log(this);
-              
+
                   const time = $(this).find('input[name="etaTime"]').val();
                   const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val();
-                  console.log(time);
-                  console.log(confirmOrder);
+
                   $.ajax({
                     url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
                     method: 'POST',
@@ -381,20 +374,17 @@ $(function () {
                   });
                 });
               });
-
-
             } , 1000);
-
-
-
             return;
           }
 
+          // if user is a customer, NOT an owner
           createHomepageForUser(response[0]);
         } else {
+
+          // if user is not found in database, show error message
           console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
-
       }
     });
   });
@@ -414,56 +404,9 @@ $(function () {
   });
 
 
-  // TODO: work in progress
-  // function to reset homepage to default state
-  // use for logout and page first render and NOT logged in
-  // const resetToDefaultHomepage = () => {
-  //   $('.main-container').css('margin-top', '0px');
-  //   $('.menu-options-container').show();
-  //   // hide the login html and container
-  //   $('#login').hide();
-  //   // show sign up button
-  //   $('.sign-up').show();
-  //   // change login btn text
-  //   $('.login').html(`Login`);
-  // };
-  // resetToDefaultHomepage();
-
-  // function to get numbers from form
-  // converts string into phone number format
-  // !! used for getting phone numbner. NOT IN USE ATM
-  // $('.main-container').on('click', '#checkout-btn', function (event) {
-  //   event.preventDefault();
-  //   const formData = `${$('#areaCode').val() + $('#exchangeNum').val() + $('#lineNum').val()}`;
-
-
-  //   console.log(formData);
-  // });
 
 
 
-  // listner for owner homepage
-  // used to trigger Submitform() foun in ownerDashboard.js
-  // function of submitForms() is to submit all inputs from a pending order (accept/decline, set pickup time)
-  // !! currently not working.
-  // !! only working on first item in pending order list
-  $(".main-container").on("click", '#submit-all-order-confirmation-forms', function (event) {
-    event.preventDefault();
-    // get the class of the clicked button
-    const className = $(this).attr('class'); // gets the class of the clicked button. Will be the order id
 
-    // get the value of every form with that class equal to className
-    const formData = {
-      id: $(`.${className}`).find('#order-id').val(),
-      accept: $(`.${className}`).find('#accept-order').val(),
-      decline: $(`.${className}`).find('#decline-order').val(),
-      pickupTime: $(`.${className}`).find('#pickup-time').val()
-    };
-    console.log("formData", formData);
-    
-    console.log('confirm-order-time', className);
-  });
-
-
-  // do not delete below this line
+  // !! do not delete below this line
 });

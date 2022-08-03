@@ -1,6 +1,8 @@
 /* eslint-disable prefer-template */
 /* eslint-disable no-undef */
 
+//!! do not change the name of any classes!!!! It will break the jquery
+
 // displays admin ame on  under navbar
 const ownerHeader = (name) => {
   return `
@@ -128,6 +130,7 @@ const renderOwnerDashboard = (owner) => {
         .show()
         .append(ownerHeader(owner.name)) // shows restaurant owners name
         .append(pendingOrderHeader()); // appends pending order container where individual orders append to
+
       // for each order, render a row with class of single-incoming-order-form
       for (let i = 0; i < data.length; i++) {
         if (data[i].time_order_started === null) {
@@ -140,8 +143,6 @@ const renderOwnerDashboard = (owner) => {
             },
             success: (orderItems) => {
               $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
-
-              
             }
           });
         }

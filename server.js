@@ -52,6 +52,7 @@ const getRestaurantData = require('./routes/getRestaurantData');
 const checkIfUserExists = require('./routes/checkIfUserExists');
 const createUser = require('./routes/createUser');
 const confirmOrder = require('./routes/confirmOrder');
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use('/api/users', usersRoutes(db));
