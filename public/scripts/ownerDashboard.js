@@ -59,26 +59,37 @@ const singleIncomingOrder = (data, orderItems) => {
     <div class="items-list">
       ${orderItems.map(item => {
     return `
-      <div class="single-item">
-        <div class="quality">
-          <span>
-            XX
-          </span>
-        </div>
-        <div class="item-name">
-          <span>
-          ${item.item_name}
-          </span>
-        </div>
-      </div>
-      `;
+            <div class="single-item">
+              <div class="quality">
+                <span>
+                  XX
+                </span>
+              </div>
+              <div class="item-name">
+                <span>
+                  ${item.item_name}
+                </span>
+              </div>
+            </div>
+            `;
   })}
     </div>
     <div class="accept-decline">
       <label>Accept</label>
-      <input type="checkbox" name="accept" value="accept"       id="accept-${data.order_id}">
+      <input 
+        type="checkbox" 
+        name="accept" 
+        value="accept"       
+        id="accept-${data.order_id}"
+      >
+
       <label>Decline</label>
-      <input type="checkbox" name="decline" value="decline" id="decline-${data.order_id}">
+      <input 
+        type="checkbox" 
+        name="decline" 
+        value="decline" 
+        id="decline-${data.order_id}"
+      >
     </div>
     <div class="time-created">
       <span>
@@ -87,11 +98,20 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     <form class="confirm-order-time">
       <div>
-        <input type="text" class="eta-time" id="submit-forms-${data.order_id}" placeholder="4:00pm">
+        <input 
+          type="text" 
+          class="eta-time" 
+          id="submit-order-time-${data.order_id}" 
+          placeholder="4:00pm"
+        >
       </div>
     </form>
     <div class="confirm-order">
-      <button form="confirm-${data.order_id}" id="submit-forms" class="submit-${data.order_id}">Send</button>
+      <button 
+        form="confirm-${data.order_id}" 
+        id="submit-forms">
+        Send
+      </button>
     </div>
   </div>
     `;
