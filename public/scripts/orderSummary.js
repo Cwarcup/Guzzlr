@@ -87,6 +87,8 @@ const createOrder = (arr, price) => {
       $('.main-container').children().remove();
       $('.header-welcome').remove();
       createSummary();
+      // empty cart after making the order.
+      cartArr = [];
     });
 };
 
@@ -134,7 +136,7 @@ $(function () {
   $(".main-container").on("click", ".checkout", function (event) {
     event.preventDefault();
     createOrder(cartArr, event.currentTarget.children[0].children[0].textContent);
-    sendText();
+    //sendText();
   });
 
 })
