@@ -357,7 +357,6 @@ $(function () {
 
             setTimeout(() => {
 
-              console.log($(".single-incoming-order-form"));
               $(".single-incoming-order-form").each(function () {
                 $(this).submit(function (event) {
                   event.preventDefault();

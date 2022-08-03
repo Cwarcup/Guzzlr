@@ -114,14 +114,10 @@ const singleIncomingOrder = (data, orderItems) => {
     `;
 };
 
-
-
-// !! can get the id for the form time via the form id value (confirm-${data.order_id})
-// TODO: filter values
+// called when response[0].id === 3 from the /lookupAllLogins route
+// currently only user with id of 3 is the owner
 const renderOwnerDashboard = (owner) => {
   $.ajax({
-    // get all orders using an id
-    // hard coded ID = 1
     url: `http://localhost:8080/getRestaurantOrders`,
     method: 'GET',
     success: (data) => {
@@ -132,15 +128,10 @@ const renderOwnerDashboard = (owner) => {
         .show()
         .append(ownerHeader(owner.name)) // shows restaurant owners name
         .append(pendingOrderHeader()); // appends pending order container where individual orders append to
-
-      
-      // for each order, render a row
-      // takes in a single order using data from previous request
-      // takes in array of order numbers
-      // GET request for a single order
-      // appends singleIncomingOrder if successful
+      // for each order, render a row with class of single-incoming-order-form
       for (let i = 0; i < data.length; i++) {
         if (data[i].time_order_started === null) {
+          // GET request for a single order to get all menu items in a single order
           $.ajax({
             url: `http://localhost:8080/getMenuItemsFromOrderId`,
             method: 'GET',
@@ -158,23 +149,3 @@ const renderOwnerDashboard = (owner) => {
     }
   });
 };
-
-// !! TODO: currently not working. Only works for first order.
-// runs when confirmation button is clicked on admin dashboard
-// each confirm button should have a unique id
-// each input (accept/decline, order pikcup time) should have a unique id equal to the order numbe
-// function runs in app.js
-// const submitForms = () => {
-//   console.log("submit confirmation forms has run");
-
-//   // get the input from the time-pickup input
-//   const time = $('input[class="eta-time"]').val();
-
-//   // get the input from the accept/decline input
-//   const confirmOrder = $('input[name="accept"]:checked').val() || $('input[name="decline"]:checked').val();
-  
-//   // log these in the browser
-//   console.log("ordertime: ", time);
-//   console.log("confirmOrder : ", confirmOrder);
-
-// };
