@@ -49,8 +49,10 @@ const pendingOrderHeader = () => {
 // confirm button to submit form
 const singleIncomingOrder = (data, orderItems) => {
   return `
-  <div class="owner-dash-grid-row">
-    <div class="order-num-header">
+  <form class="owner-dash-grid-row" method="POST" action="/confirmOrder/${data.order_id}">
+
+    <div 
+      class="order-num-header">
       ${data.order_id}
     </div>
     <div class="request-text">
@@ -74,21 +76,20 @@ const singleIncomingOrder = (data, orderItems) => {
             `;
   })}
     </div>
+    
     <div class="accept-decline">
       <label>Accept</label>
       <input 
-        type="checkbox" 
-        name="accept" 
-        value="accept"       
-        id="accept-${data.order_id}"
+        name="acceptOrDecline" 
+        type="radio" 
+        value="Decline"  
       >
 
       <label>Decline</label>
       <input 
-        type="checkbox" 
-        name="decline" 
-        value="decline" 
-        id="decline-${data.order_id}"
+        name="acceptOrDecline" 
+        type="radio" 
+        value="Decline" 
       >
     </div>
     <div class="time-created">
@@ -96,29 +97,25 @@ const singleIncomingOrder = (data, orderItems) => {
         ${getHumanDate(data.time_order_created)}
       </span>
     </div>
-    <form class="confirm-order-time">
       <div>
         <input 
-          type="text" 
-          class="eta-time" 
-          id="submit-order-time-${data.order_id}" 
+          type="time" 
           placeholder="4:00pm"
+          name="etaTime"
         >
       </div>
-    </form>
-    <div class="confirm-order">
-      <button 
-        form="confirm-${data.order_id}" 
-        id="submit-forms">
+      <div class="confirm-order">
+      <button type="submit">
         Send
       </button>
-    </div>
-  </div>
+      </div>
+      </form>
+
     `;
 };
 
 // !! can get the id for the form time via the form id value (confirm-${data.order_id})
-
+// TODO: filter values
 const renderOwnerDashboard = (owner) => {
   $.ajax({
     // get all orders using an id
@@ -140,17 +137,19 @@ const renderOwnerDashboard = (owner) => {
       // GET request for a single order
       // appends singleIncomingOrder if successful
       for (let i = 0; i < data.length; i++) {
-        console.log(data[i]);
-        $.ajax({
-          url: `http://localhost:8080/getMenuItemsFromOrderId`,
-          method: 'GET',
-          data: {
-            orderId: data[i].order_id,
-          },
-          success: (orderItems) => {
-            $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
-          }
-        });
+        console.log("data[i]", data[i]);
+        if (data[i].time_order_started === null) {
+          $.ajax({
+            url: `http://localhost:8080/getMenuItemsFromOrderId`,
+            method: 'GET',
+            data: {
+              orderId: data[i].order_id,
+            },
+            success: (orderItems) => {
+              $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
+            }
+          });
+        }
       }
     }
   });

@@ -128,12 +128,11 @@ $(function () {
         });
       },
       error: (err) => {
-        console.log("error bro:");
-        console.log(err);
+        console.log("Error at getUserOrderHistory", err);
       }
     });
   };
-  // getUserOrderHistory();
+
 
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
@@ -354,10 +353,7 @@ $(function () {
           console.log("login success", response);
           // create homepage according to user information
           if (response[0].id === 3) {
-            console.log("owner id is 3");
             renderOwnerDashboard(response[0]);
-
-
             return;
           }
 
@@ -418,9 +414,21 @@ $(function () {
   // function of submitForms() is to submit all inputs from a pending order (accept/decline, set pickup time)
   // !! currently not working.
   // !! only working on first item in pending order list
-  $(".main-container").on("click", '#submit-forms', function (event) {
+  $(".main-container").on("click", '#submit-all-order-confirmation-forms', function (event) {
     event.preventDefault();
-    submitForms();
+    // get the class of the clicked button
+    const className = $(this).attr('class'); // gets the class of the clicked button. Will be the order id
+
+    // get the value of every form with that class equal to className
+    const formData = {
+      id: $(`.${className}`).find('#order-id').val(),
+      accept: $(`.${className}`).find('#accept-order').val(),
+      decline: $(`.${className}`).find('#decline-order').val(),
+      pickupTime: $(`.${className}`).find('#pickup-time').val()
+    };
+    console.log("formData", formData);
+    
+    console.log('confirm-order-time', className);
   });
 
 

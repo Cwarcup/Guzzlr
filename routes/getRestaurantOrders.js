@@ -13,7 +13,8 @@ module.exports = (db) => {
       orders.order_placed as time_order_created,
       orders.order_completed as time_order_completed,
       orders.notes as order_notes,
-      orders.price as total_order_price
+      orders.price as total_order_price,
+      orders.order_started as time_order_started
     FROM
       restaurants
       JOIN orders ON orders.restaurant_id = restaurants.id
