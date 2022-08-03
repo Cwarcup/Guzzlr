@@ -101,6 +101,8 @@ const singleIncomingOrder = (data, orderItems) => {
 
 const renderOwnerDashboard = (owner) => {
   $.ajax({
+    // get all orders using an id
+    // hard coded ID = 1
     url: `http://localhost:8080/getRestaurantOrders`,
     method: 'GET',
     success: (data) => {
@@ -109,10 +111,14 @@ const renderOwnerDashboard = (owner) => {
       $('.login-container').hide();
       $('.owner-dashboard-container')
         .show()
-        .append(ownerHeader(owner.name))
-        .append(pendingOrderHeader());
+        .append(ownerHeader(owner.name)) // shows restaurant owners name
+        .append(pendingOrderHeader()); // appends pending order container where individual orders append to
 
       // for each order, render a row
+      // takes in a single order using data from previous request
+      // takes in array of order numbers
+      // GET request for a single order
+      // appends singleIncomingOrder if successful
       for (let i = 0; i < data.length; i++) {
         console.log(data[i]);
         $.ajax({
@@ -122,7 +128,6 @@ const renderOwnerDashboard = (owner) => {
             orderId: data[i].order_id,
           },
           success: (orderItems) => {
-            console.log("order items: ", orderItems);
             $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
           }
         });
