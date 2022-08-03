@@ -4,7 +4,6 @@ const router  = express.Router();
 module.exports = (db) => {
   router.post('/', (req, res) => {
     let restaurantID = 0;
-    //console.log('RESPONSE!:', res);
     db.query(
       `
       SELECT restaurants.id
@@ -25,7 +24,7 @@ module.exports = (db) => {
           )
           VALUES
           (
-          1,
+          ${req.body.userID},
           ${restaurantID},
           ${req.body.price * 100}
           );
@@ -35,7 +34,7 @@ module.exports = (db) => {
             db.query(
               `
               SELECT id FROM orders
-              WHERE user_id = 1 AND order_completed IS NULL
+              WHERE user_id = ${req.body.userID} AND order_completed IS NULL
               ORDER BY order_placed DESC
               LIMIT 1;
               `
@@ -54,7 +53,7 @@ module.exports = (db) => {
                 queryStatement += `\n;`;
                 db.query(queryStatement)
                   .then(data => {
-                    res.status(201)
+                    res.status(200)
                     res.json( { data });
                   })
               })

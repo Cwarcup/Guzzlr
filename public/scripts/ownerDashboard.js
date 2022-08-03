@@ -1,6 +1,7 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-undef */
 
-
+// displays admin ame on  under navbar
 const ownerHeader = (name) => {
   return `
         <div class="owner-dash-header">
@@ -9,6 +10,7 @@ const ownerHeader = (name) => {
     `;
 };
 
+// creates a grid of 7 columns with each column representing a field of the order (order id, notes, quantity...)
 const pendingOrderHeader = () => {
   return `
         <div class="owner-dash-grid-col-header">
@@ -39,6 +41,12 @@ const pendingOrderHeader = () => {
         `;
 };
 
+// renders a single order
+// contains the values for the order id, notes, quantity, item name
+// accept/decline
+// time order was created
+// inputs for owner to set pickup time
+// confirm button to submit form
 const singleIncomingOrder = (data, orderItems) => {
   return `
   <div class="owner-dash-grid-row">
@@ -68,30 +76,33 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     <div class="accept-decline">
       <label>Accept</label>
-      <input type="checkbox" name="accept" value="accept">
+      <input type="checkbox" name="accept" value="accept"       id="accept-${data.order_id}">
+      <label>Decline</label>
+      <input type="checkbox" name="decline" value="decline" id="decline-${data.order_id}">
     </div>
     <div class="time-created">
       <span>
         ${getHumanDate(data.time_order_created)}
       </span>
     </div>
-    <form class="confirm-order-time" id="confirm-${data.order_id}">
+    <form class="confirm-order-time">
       <div>
-        <input type="text" class="pickup-time-input" placeholder="4:00pm">
-        </input>
+        <input type="text" class="eta-time" id="submit-forms-${data.order_id}" placeholder="4:00pm">
       </div>
     </form>
     <div class="confirm-order">
-      <button form="confirm-${data.order_id}" type=submit>Send</button>
+      <button form="confirm-${data.order_id}" id="submit-forms" class="submit-${data.order_id}">Send</button>
     </div>
   </div>
     `;
 };
+
 // !! can get the id for the form time via the form id value (confirm-${data.order_id})
 
 const renderOwnerDashboard = (owner) => {
-
   $.ajax({
+    // get all orders using an id
+    // hard coded ID = 1
     url: `http://localhost:8080/getRestaurantOrders`,
     method: 'GET',
     success: (data) => {
@@ -100,10 +111,14 @@ const renderOwnerDashboard = (owner) => {
       $('.login-container').hide();
       $('.owner-dashboard-container')
         .show()
-        .append(ownerHeader(owner.name))
-        .append(pendingOrderHeader());
+        .append(ownerHeader(owner.name)) // shows restaurant owners name
+        .append(pendingOrderHeader()); // appends pending order container where individual orders append to
 
       // for each order, render a row
+      // takes in a single order using data from previous request
+      // takes in array of order numbers
+      // GET request for a single order
+      // appends singleIncomingOrder if successful
       for (let i = 0; i < data.length; i++) {
         console.log(data[i]);
         $.ajax({
@@ -113,29 +128,29 @@ const renderOwnerDashboard = (owner) => {
             orderId: data[i].order_id,
           },
           success: (orderItems) => {
-            console.log("order items: ", orderItems);
             $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
           }
         });
       }
     }
   });
+};
+
+// !! TODO: currently not working. Only works for first order.
+// runs when confirmation button is clicked on admin dashboard
+// each confirm button should have a unique id
+// each input (accept/decline, order pikcup time) should have a unique id equal to the order numbe
+// function runs in app.js
+const submitForms = () => {
+  console.log("submit confirmation forms has run");
+
+  // get the input from the time-pickup input
+  const time = $('input[class="eta-time"]').val();
+
+  // get the input from the accept/decline input
+  const confirmOrder = $('input[name="accept"]:checked').val() || $('input[name="decline"]:checked').val();
   
-
-
-
-
-  // $('.owner-dashboard-container')
-  //   .show()
-  //   .append(ownerHeader(owner.name))
-  //   .append(pendingOrderHeader())
-  //   .append(singleIncomingOrder({
-  //     id: 1,
-  //     request: 'I want to eat a lot of pizza',
-  //     items: [{
-  //       name: 'Pizza',
-  //       quantity: 2,
-  //     }],
-  //     createdAt: '12:00'
-  //   }));
+  // log these in the browser
+  console.log("ordertime: ", time);
+  console.log("confirmOrder : ", confirmOrder);
 };
