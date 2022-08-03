@@ -13,10 +13,16 @@ nav {
   z-index: 1;
 
   .navbar-brand {
+    display: flex;
     padding-left: 1em;
     order: 0;
   }
 
+  .logo-image {
+    height:50px;
+    width: 50px;
+    background: url('https://raw.githubusercontent.com/Cwarcup/Guzzlr/main/public/img/pighead.png');
+  }
   a {
     text-decoration: none;
   }
