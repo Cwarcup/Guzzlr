@@ -48,7 +48,6 @@ $(function () {
   $('.menu-item').click(function (event) {
     // get id of closest div
     let id = $(event.target).closest('.menu-item').attr('id', '#done');
-    console.log(this.id);
   });
 
 
@@ -170,7 +169,6 @@ $(function () {
         let cartCopy = cartArr.map(x => x);
         cartCopy.sort();
         const menuItemData = data.menuItems;
-        console.log('menuItemData', menuItemData);
         let cartItem = `\n`;
         let cartTotal = 0;
         const count = {};

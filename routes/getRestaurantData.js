@@ -5,15 +5,12 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
       `
-      SELECT
-        *
-      FROM
-        menu_items
+      SELECT * from restaurants WHERE id = ${req.body.id};
       `
     )
       .then(data => {
-        const menuItems = data.rows;
-        res.json({ menuItems });
+        let restaurant = data.rows[0];
+        res.json({ restaurant });
       })
       .catch(err => {
         res
