@@ -7,6 +7,7 @@
 
 // array to add items into cart from main screen
 let cartArr = [];
+let currUserID;
 
 $(function () {
   console.log('app.js is loaded');
@@ -14,6 +15,7 @@ $(function () {
 
   // hide login HTML on load
   $('#login').hide();
+  $('#register').hide();
 
 
   // login btn top right of main page
@@ -27,7 +29,7 @@ $(function () {
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
     $('#login').show();
-    $('#login').append(`
+    $('#login').html(`
         <h1>Login</h1>
         <form id="login-form">
           <div>
@@ -98,7 +100,6 @@ $(function () {
   // returns previous orders of this user
   // used to append previous order container and items upon logging in
   const getUserOrderHistory = (userLoginData) => {
-    console.log("userLoginData", userLoginData);
     $.ajax({
       url: '/userOrderHistory',
       method: 'get',
@@ -346,12 +347,17 @@ $(function () {
         password: `${formData.password}`
       },
       success: (response) => {
+
         if (response.length > 0) {
+          currUserID = response[0].id;
+          console.log('currUserID', currUserID);
           console.log("login success", response);
           // create homepage according to user information
           if (response[0].id === 3) {
             console.log("owner id is 3");
             renderOwnerDashboard(response[0]);
+
+
             return;
           }
 
@@ -359,6 +365,7 @@ $(function () {
         } else {
           console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
+
       }
     });
   });
@@ -403,13 +410,13 @@ $(function () {
 
   //   console.log(formData);
   // });
-  
+
 
 
   // listner for owner homepage
   // used to trigger Submitform() foun in ownerDashboard.js
   // function of submitForms() is to submit all inputs from a pending order (accept/decline, set pickup time)
-  // !! currently not working. 
+  // !! currently not working.
   // !! only working on first item in pending order list
   $(".main-container").on("click", '#submit-forms', function (event) {
     event.preventDefault();

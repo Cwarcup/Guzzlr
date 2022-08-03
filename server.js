@@ -49,6 +49,8 @@ const getRestaurantOrders = require('./routes/getRestaurantOrders');
 const getMenuItemsFromOrderId = require('./routes/getMenuItemsFromOrderId');
 const getNewestOrder = require('./routes/getNewestOrder');
 const getRestaurantData = require('./routes/getRestaurantData');
+const checkIfUserExists = require('./routes/checkIfUserExists');
+const createUser = require('./routes/createUser');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use('/api/users', usersRoutes(db));
@@ -64,6 +66,8 @@ app.use('/getNewestOrder', getNewestOrder(db));
 app.use('/getRestaurantData', getRestaurantData(db));
 app.use('/getRestaurantOrders', getRestaurantOrders(db));
 app.use('/getMenuItemsFromOrderId', getMenuItemsFromOrderId(db));
+app.use('/checkIfUserExists', checkIfUserExists(db));
+app.use('/createUser', createUser(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
