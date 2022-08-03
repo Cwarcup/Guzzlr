@@ -31,10 +31,8 @@ module.exports = (db) => {
         menu_items.price
       LIMIT 4;
     `;
-    console.log('req.body: ', req.body);
     const userId = parseInt(req.body.userId);
     const values = [userId];
-    console.log('values from order history:', values);
     db.query(queryText, values)
       .then(data => {
         const userOrderHistory = data.rows;
