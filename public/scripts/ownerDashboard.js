@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-undef */
 
 
@@ -77,14 +78,13 @@ const singleIncomingOrder = (data, orderItems) => {
         ${getHumanDate(data.time_order_created)}
       </span>
     </div>
-    <form class="confirm-order-time" id="confirm-${data.order_id}">
+    <form class="confirm-order-time">
       <div>
-        <input type="text" class="pickup-time-input" placeholder="4:00pm">
-        </input>
+        <input type="text" class="eta-time" id="submit-forms-${data.order_id}" placeholder="4:00pm">
       </div>
     </form>
     <div class="confirm-order">
-      <button form="confirm-${data.order_id}" id="submit-forms">Send</button>
+      <button form="confirm-${data.order_id}" id="submit-forms" class="submit-${data.order_id}">Send</button>
     </div>
   </div>
     `;
@@ -124,7 +124,16 @@ const renderOwnerDashboard = (owner) => {
   });
 };
 
-
+// runs when confirmation button is clicked on admin dashboard
 const submitForms = () => {
-  console.log("submit forms");
+  console.log("submit confirmation forms has run");
+
+  const time = $('input[class="eta-time"]').val();
+
+
+  const confirmOrder = $('input[name="accept"]:checked').val() || $('input[name="decline"]:checked').val();
+  console.log("ordertime: ", time);
+  console.log("confirmOrder : ", confirmOrder);
+
+
 };

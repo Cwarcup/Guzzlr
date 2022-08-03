@@ -412,6 +412,8 @@ $(function () {
 
   $(".main-container").on("click", '#submit-forms', function (event) {
     event.preventDefault();
+
+
     submitForms();
   });
 
