@@ -6,23 +6,25 @@ $chocolate: #392C2E;
 
 footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2em;
   width: 100%;
   background: $dark-pink;
   opacity: 0.8;
-  margin: 25px;
-
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
+  margin-top: 120px;
 
-  i {
-    margin:5px;
-  }
-  a {
+  p {
     color: $mayonnaise;
     text-decoration: none;
-    margin:5px;
+    margin:5px 0px 0px;
+  }
+
+  .footer-links a {
+    margin: 0px 25px 0px;
+    text-decoration: none;
+    color: $mayonnaise
   }
 }

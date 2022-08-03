@@ -14,12 +14,24 @@ $(function () {
 
   // hide login HTML on load
   $('#login').hide();
+  $('.main-container').children().hide();
+  $('.h2.rest-name').hide();
 
+
+  // click to go to mcdonalds
+  $('.featured-restaurant').click((event) => {
+    event.preventDefault();
+    $('.treat-container').children().hide();
+    $('.header-welcome').hide();
+    $('.menu-options-container').show();
+
+  });
 
   // login btn top right of main page
   $('.login').click((event) => {
     event.preventDefault();
-    $('.cuisine-container').hide();
+    // treat-container is the hardcoded cuisines and restaurants
+    $('.treat-container').children().hide();
     $('.header-welcome').hide();
     $('.main-container').children().hide();
     $('.menu-options-container').hide();
@@ -314,7 +326,7 @@ $(function () {
   $('.cart-demo-btn').click((event) => {
     event.preventDefault();
     userCart();
-    $('.cuisine-container').hide();
+    $('.treat-container').children().hide();
     $('.main-container').children().hide();
 
   });

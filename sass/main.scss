@@ -13,9 +13,13 @@ body {
   background-color: $dark-pink;
   background: linear-gradient(180deg, #ff99ee, #f074e5, #df4bdd);
 
+
+//  ==== START OF HARDCODED CONTENT (treats) ====
   .cuisine-container {
     display: flex;
     flex-wrap: row;
+    justify-content: space-evenly;
+
 
     h1 {
       color: $chocolate;
@@ -25,17 +29,55 @@ body {
       padding: 25px;
       line-height: 0.8;
     }
-
-    .article-img {
-      height: 200px;
-      padding: 5px;
-      -webkit-filter: drop-shadow(0px 0px 40px #222);
-      filter: drop-shadow(0px 0px 40px #F1EAD4);
-    }
   }
 
+  .restaurant-container {
+    display: flex;
+    flex-direction: row;
+
+
+    h1 {
+      color: $mayonnaise;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      margin:0;
+      padding: 0;
+      line-height: 0.8;
+    }
+
+    article {
+      padding:0px 15px 0px;
+      p {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 36px;
+        line-height: 0.8;
+        margin:0;
+      }
+    }
+
+    .featured-restaurant {
+      text-align: left;
+      padding: 0;
+      p {
+        color: $chocolate;
+      }
+    }
+
+  }
+  .article-img {
+    height: 200px;
+    padding: 5px;
+    -webkit-filter: drop-shadow(0px 0px 40px #222);
+    filter: drop-shadow(0px 0px 40px #F1EAD4);
+  }
+
+// ==== END OF HARDCODED CONTENT ====
+
+
+
+
   main {
-    margin-top: auto;
+    margin-top: 0;
   }
 
   .main-container {
@@ -56,6 +98,7 @@ body {
       padding-top: 0.5em;
       margin-bottom: 0;
       z-index: 99;
+      color:green;
     }
 
     .login-container {
@@ -66,9 +109,19 @@ body {
       height: 250px;
       width: 75%;
       padding: 20px;
-      border-radius: 10px;
-      background-color: #fff;
+      border-radius: 3px;
+      background-color: $piggy-pink;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Bebas Neue', sans-serif;
+
+      h1 {
+        font-size: 16px;
+      }
+      form div input {
+        border: none;
+        background:$minions-yellow;
+        font-family: 'Courier New', Courier, monospace;
+      }
     }
 
     .menu-options-container {
@@ -79,8 +132,6 @@ body {
       gap: 2em;
       margin-top: 1em;
       margin-bottom: 1em;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
       overflow: hidden;
 
       .menu-item {
