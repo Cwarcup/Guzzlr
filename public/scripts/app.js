@@ -5,7 +5,7 @@
 
 
 
-
+// array to add items into cart from main screen
 let cartArr = [];
 
 $(function () {
@@ -17,6 +17,9 @@ $(function () {
 
 
   // login btn top right of main page
+  // when clicked, user is presented with login container and can enter cradentials
+  // cradentials currently hard coded
+  // TODO: for presentation, remove hard coded email and password
   $('.login').click((event) => {
     event.preventDefault();
     $('.header-welcome').hide();
@@ -53,8 +56,9 @@ $(function () {
 
 
   // render list of all menu items
-  // load menu items from /api/homepageMenu
-  // use for first render to initialize menu items and containers
+  // load menu items from /homepageMenu
+  // runs when main page is first loaded
+  // adds menu items for restairant with ID of 1
   const getMenuItems = () => {
     $.ajax({
       url: '/homepageMenu',
@@ -89,8 +93,10 @@ $(function () {
 
 
 
-  // POST request to /userOrderHistory with userId
-  // only if a user is logged in
+  // GET to /userOrderHistory
+  // takes in a user ID
+  // returns previous orders of this user
+  // used to append previous order container and items upon logging in
   const getUserOrderHistory = (userLoginData) => {
     console.log("userLoginData", userLoginData);
     $.ajax({
@@ -320,15 +326,8 @@ $(function () {
 
 
 
-
-  // <a href="#transitionExample" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">Slide down</a>
-  // <div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
-  // <p>I'm a simple popup.</p>
-  // </div>
-
-
-
-
+  // submits email and password from login screen
+  // renders unique homepage with previous order using renderOwnerDashboard()
   // #login is the button only visible AFTER a user clicked the login link in navbar
   $('#login').submit(function (event) {
     event.preventDefault();
@@ -369,18 +368,13 @@ $(function () {
   const createHomepageForUser = ((data) => {
     // DOM already has restaurant name and food items. We just need to show them.
     $('.main-container').children().show();
-    $('#login').hide();
-    $('.sign-up').hide();
-    // change login btn htl
-    $('.login').hide();
-    // display user name in nav
-    $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
-    // add button to logout on navbar
-    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
+    $('#login').hide();   // hide login button in nav
+    $('.sign-up').hide(); // hide sign up button in nav
+    $('.login').hide();   // hide children in login container
+    $('.nav-links').append(`<a>Welcome, ${data.name}</a>`); // display user name in nav
+    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`); // add button to logout on navbar
 
-    // run function with the user's id to get order history and display it
-    console.log("data.id from createhomepage:", data.id);
-    getUserOrderHistory(data.id);
+    getUserOrderHistory(data.id); // run function with the user's id to get order history and display it on main page
   });
 
 
@@ -412,10 +406,13 @@ $(function () {
   
 
 
+  // listner for owner homepage
+  // used to trigger Submitform() foun in ownerDashboard.js
+  // function of submitForms() is to submit all inputs from a pending order (accept/decline, set pickup time)
+  // !! currently not working. 
+  // !! only working on first item in pending order list
   $(".main-container").on("click", '#submit-forms', function (event) {
     event.preventDefault();
-
-
     submitForms();
   });
 

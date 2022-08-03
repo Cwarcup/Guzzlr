@@ -136,16 +136,21 @@ const renderOwnerDashboard = (owner) => {
   });
 };
 
+// !! TODO: currently not working. Only works for first order.
 // runs when confirmation button is clicked on admin dashboard
+// each confirm button should have a unique id
+// each input (accept/decline, order pikcup time) should have a unique id equal to the order numbe
+// function runs in app.js
 const submitForms = () => {
   console.log("submit confirmation forms has run");
 
+  // get the input from the time-pickup input
   const time = $('input[class="eta-time"]').val();
 
-
+  // get the input from the accept/decline input
   const confirmOrder = $('input[name="accept"]:checked').val() || $('input[name="decline"]:checked').val();
+  
+  // log these in the browser
   console.log("ordertime: ", time);
   console.log("confirmOrder : ", confirmOrder);
-
-
 };
