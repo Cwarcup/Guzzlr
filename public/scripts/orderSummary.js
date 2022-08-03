@@ -4,8 +4,7 @@ const createSummary = function() {
     method: 'GET',
     dataType: 'json',
     success: (data) => {
-    //  console.log('AHHH', data);
-      let orderItem = '\n';
+      let orderItems = '\n';
       let topHTML = `
       <div class='mainSummary'>
         <div class='summaryHeader'>
@@ -26,7 +25,7 @@ const createSummary = function() {
             <div class='order'>`
 
             for(let i = 0; i < data.out.length; i++) {
-              orderItem += `
+              orderItems += `
               <div>
                 <h5>${data.out[i].food_name}</h5>
                 <p>${data.out[i].description}</p>
@@ -34,15 +33,13 @@ const createSummary = function() {
               </div>`;
             }
 
-
-
             let bottomHTML = `
             </div>
           </div>
         </div>
       </div>
       `;
-      $('.main-container').append(topHTML + orderItem + bottomHTML);
+      $('.main-container').append(topHTML + orderItems + bottomHTML);
     },
     error: (err) => {
       console.log(err);
@@ -79,10 +76,10 @@ const sendText = function() {
 
 
 
-const createOrder = (arr, price) => {
+const createOrder = (arr, price, userID) => {
   console.log('createOrder has run');
   price = Number(price.substring(1, price.length));
-  $.post("/createOrder", { arr, price },
+  $.post("/createOrder", { arr, price, userID },
     function (data, status) {
       $('.main-container').children().remove();
       $('.header-welcome').remove();
@@ -135,7 +132,8 @@ $(function () {
 
   $(".main-container").on("click", ".checkout", function (event) {
     event.preventDefault();
-    createOrder(cartArr, event.currentTarget.children[0].children[0].textContent);
+    console.log('checkout', currUserID);
+    createOrder(cartArr, event.currentTarget.children[0].children[0].textContent, currUserID);
     //sendText();
   });
 
