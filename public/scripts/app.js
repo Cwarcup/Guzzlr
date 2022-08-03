@@ -92,6 +92,7 @@ $(function () {
   // POST request to /userOrderHistory with userId
   // only if a user is logged in
   const getUserOrderHistory = (userLoginData) => {
+    console.log("userLoginData", userLoginData);
     $.ajax({
       url: '/userOrderHistory',
       method: 'GET',
@@ -119,6 +120,7 @@ $(function () {
         });
       },
       error: (err) => {
+        console.log("error bro:");
         console.log(err);
       }
     });
@@ -348,9 +350,12 @@ $(function () {
           console.log("login success", response);
           // create homepage according to user information
           if (response[0].id === 3) {
+            console.log("owner id is 3");
             renderOwnerDashboard(response[0]);
             return;
           }
+
+          createHomepageForUser(response[0]);
         } else {
           console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
@@ -373,6 +378,7 @@ $(function () {
     $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
 
     // run function with the user's id to get order history and display it
+    console.log("data.id from createhomepage:", data.id);
     getUserOrderHistory(data.id);
   });
 

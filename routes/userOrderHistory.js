@@ -1,8 +1,9 @@
 const express = require('express');
 const router  = express.Router();
 
-// have hard coded user id for now = 1
-// TODO: returning all the same prices for now
+
+
+
 module.exports = (db) => {
   router.get('/', (req, res) => {
     const queryText = `
@@ -32,6 +33,7 @@ module.exports = (db) => {
       LIMIT 4;
     `;
     const userId = parseInt(req.body.userId);
+    console.log('userId:', userId);
     const values = [userId];
     db.query(queryText, values)
       .then(data => {
