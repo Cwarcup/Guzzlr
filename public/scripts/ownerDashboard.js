@@ -49,7 +49,7 @@ const pendingOrderHeader = () => {
 // confirm button to submit form
 const singleIncomingOrder = (data, orderItems) => {
   return `
-  <form class="owner-dash-grid-row" method="POST" action="/confirmOrder/${data.order_id}">
+  <form class="owner-dash-grid-row single-incoming-order-form" id="${data.order_id}">
 
     <div 
       class="order-num-header">
@@ -78,18 +78,18 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     
     <div class="accept-decline">
-      <label>Accept</label>
+      <label>accept</label>
       <input 
         name="acceptOrDecline" 
         type="radio" 
-        value="Decline"  
+        value="accept" 
       >
 
       <label>Decline</label>
       <input 
         name="acceptOrDecline" 
         type="radio" 
-        value="Decline" 
+        value="decline" 
       >
     </div>
     <div class="time-created">
@@ -114,6 +114,8 @@ const singleIncomingOrder = (data, orderItems) => {
     `;
 };
 
+
+
 // !! can get the id for the form time via the form id value (confirm-${data.order_id})
 // TODO: filter values
 const renderOwnerDashboard = (owner) => {
@@ -131,13 +133,13 @@ const renderOwnerDashboard = (owner) => {
         .append(ownerHeader(owner.name)) // shows restaurant owners name
         .append(pendingOrderHeader()); // appends pending order container where individual orders append to
 
+      
       // for each order, render a row
       // takes in a single order using data from previous request
       // takes in array of order numbers
       // GET request for a single order
       // appends singleIncomingOrder if successful
       for (let i = 0; i < data.length; i++) {
-        console.log("data[i]", data[i]);
         if (data[i].time_order_started === null) {
           $.ajax({
             url: `http://localhost:8080/getMenuItemsFromOrderId`,
@@ -147,6 +149,8 @@ const renderOwnerDashboard = (owner) => {
             },
             success: (orderItems) => {
               $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
+
+              
             }
           });
         }
@@ -160,16 +164,17 @@ const renderOwnerDashboard = (owner) => {
 // each confirm button should have a unique id
 // each input (accept/decline, order pikcup time) should have a unique id equal to the order numbe
 // function runs in app.js
-const submitForms = () => {
-  console.log("submit confirmation forms has run");
+// const submitForms = () => {
+//   console.log("submit confirmation forms has run");
 
-  // get the input from the time-pickup input
-  const time = $('input[class="eta-time"]').val();
+//   // get the input from the time-pickup input
+//   const time = $('input[class="eta-time"]').val();
 
-  // get the input from the accept/decline input
-  const confirmOrder = $('input[name="accept"]:checked').val() || $('input[name="decline"]:checked').val();
+//   // get the input from the accept/decline input
+//   const confirmOrder = $('input[name="accept"]:checked').val() || $('input[name="decline"]:checked').val();
   
-  // log these in the browser
-  console.log("ordertime: ", time);
-  console.log("confirmOrder : ", confirmOrder);
-};
+//   // log these in the browser
+//   console.log("ordertime: ", time);
+//   console.log("confirmOrder : ", confirmOrder);
+
+// };

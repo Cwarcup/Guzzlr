@@ -354,6 +354,40 @@ $(function () {
           // create homepage according to user information
           if (response[0].id === 3) {
             renderOwnerDashboard(response[0]);
+
+            setTimeout(() => {
+
+              console.log($(".single-incoming-order-form"));
+              $(".single-incoming-order-form").each(function () {
+                $(this).submit(function (event) {
+                  event.preventDefault();
+              
+                  console.log('handleConfirmOrder clicked!!!');
+                  console.log(this);
+              
+                  const time = $(this).find('input[name="etaTime"]').val();
+                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val();
+                  console.log(time);
+                  console.log(confirmOrder);
+                  $.ajax({
+                    url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
+                    method: 'POST',
+                    data: {
+                      time: time,
+                      confirmOrder: confirmOrder,
+                    },
+                    success: (data) => {
+                      console.log("data", data);
+                    }
+                  });
+                });
+              });
+
+
+            } , 1000);
+
+
+
             return;
           }
 
