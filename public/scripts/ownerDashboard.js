@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+
+
 const ownerHeader = (name) => {
   return `
         <div class="owner-dash-header">
@@ -70,21 +72,22 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     <div class="time-created">
       <span>
-        ${data.time_order_created}
+        ${getHumanDate(data.time_order_created)}
       </span>
     </div>
-    <form class="confirm-order-time">
+    <form class="confirm-order-time" id="confirm-${data.order_id}">
       <div>
-        <input type="number" class="pickup-time">
+        <input type="text" class="pickup-time-input" placeholder="4:00pm">
         </input>
       </div>
-      <div class="confirm-order">
-        <button type=submit>Send</button>
-      </div>
     </form>
+    <div class="confirm-order">
+      <button form="confirm-${data.order_id}" type=submit>Send</button>
+    </div>
   </div>
     `;
 };
+// !! can get the id for the form time via the form id value (confirm-${data.order_id})
 
 const renderOwnerDashboard = (owner) => {
 
@@ -97,7 +100,9 @@ const renderOwnerDashboard = (owner) => {
       $('.login-container').hide();
       $('.owner-dashboard-container')
         .show()
-        .append(ownerHeader(owner.name));
+        .append(ownerHeader(owner.name))
+        .append(pendingOrderHeader());
+
       // for each order, render a row
       for (let i = 0; i < data.length; i++) {
         console.log(data[i]);
