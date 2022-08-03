@@ -155,12 +155,32 @@ const makeRandomPostalCode = function() {
   return postalCode;
 };
 
+// return an array with a random set of hours of operation
+const makeRestaurantHours = function() {
+  let adjust = Math.floor(Math.random() * 3);
+  let minutes = "00";
+  let openTime;
+  let closeTime;
+
+  if (Math.random() >= 0.6) {
+    minutes = "30";
+  }
+
+  if (Math.random() >= 0.8) {
+    openTime = (adjust + 16) + ':' + minutes + ':00';
+    closeTime = (adjust + 21) + ':' + minutes + ':00';
+  } else {
+    openTime = (adjust + 9) + ':' + minutes + ':00';
+    closeTime = (adjust + 17) + ':' + minutes + ':00';
+  }
+  return [openTime, closeTime];
+};
 
 // INSERT INTO restaurants (owner_id, name, phone_number, country, street, city, province, post_code) VALUES (3, 'McDonalds', '867-5309', 'Canada', '123 Sesame St', 'Victoria', 'BC', 'A2C 4E6');
 
 const makeInsertStatements = function() {
 
-  let template = `INSERT INTO restaurants (owner_id, name, cuisine_type, phone_number, country, street, city, province, post_code) VALUES `;
+  let template = `INSERT INTO restaurants (owner_id, name, cuisine_type, phone_number, country, street, city, province, post_code, time_open, time_closes) VALUES `;
 
   let toReturn = "";
   let idNumber = 1;
@@ -168,7 +188,7 @@ const makeInsertStatements = function() {
   for (let cuisine in restaurantNamesByCuisine) {
     for (let i = 0; i < restaurantNamesByCuisine[cuisine].length; i++) {
       toReturn += template;
-      toReturn += `(${idNumber}, '${restaurantNamesByCuisine[cuisine][i]}', '${cuisine}', '${makeRandomPhoneNumber()}', 'Canada', '${intBetweenZeroAnd(3000) + ' ' + streets[intBetweenZeroAnd(streets.length - 1)]}', '${cities[intBetweenZeroAnd(cities.length - 1)]}', 'BC', '${makeRandomPostalCode()}'); \n`;
+      toReturn += `(${idNumber}, '${restaurantNamesByCuisine[cuisine][i]}', '${cuisine}', '${makeRandomPhoneNumber()}', 'Canada', '${intBetweenZeroAnd(3000) + ' ' + streets[intBetweenZeroAnd(streets.length - 1)]}', '${cities[intBetweenZeroAnd(cities.length - 1)]}', 'BC', '${makeRandomPostalCode()}', '${makeRestaurantHours()[0]}', '${makeRestaurantHours()[1]}'); \n`;
       idNumber++;
     }
   }
