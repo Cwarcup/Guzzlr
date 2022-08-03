@@ -5,8 +5,150 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>G U Z Z L R</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Benne&display=swap" rel="stylesheet">
+
+
+
+  <style>
+
+    /* Buttons styles start */
+    button {
+        display: inline-block;
+        border: none;
+        padding: 1rem 2rem;
+        margin: 0;
+        text-decoration: none;
+        background: transparent;
+        color: #F1EAD4;
+        font-family: sans-serif;
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        text-align: center;
+        transition: background 250ms ease-in-out, transform 150ms ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    button:hover,
+    button:focus {
+        background: #F4E04D;
+    }
+
+    button:hover {
+      color: #FF99EE;
+    }
+
+    button:focus {
+        outline: 1px solid rgb(222, 16, 195);
+        outline-offset: -4px;
+    }
+
+    button:active {
+        transform: scale(0.99);
+    }
+    /* Button styles end */
+
+    body {background: #df4bdd; margin:0; display:flex; flex-direction: column; }
+    h1   {color: #F1EAD4; font-family: 'Bebas Neue', sans-serif; font-size: 72px; margin:0; padding: 25px; line-height: 0.8;}
+    p    {color: #392C2E; font-family: 'Benne', serif; font-size: 24px; margin:0; padding-left: 25px;}
+    main {display:flex; flex-direction: column; width: 100%; margin:auto; background-color: #FF99EE;}
+
+
+
+    .restaurant-container, .cuisine-container {margin: 20px; display:flex; justify-content: space-evenly; flex-direction: row; }
+
+    /* overflow-x: auto; commented out */
+    .cuisine-container {margin-top: 120px; }
+    .cuisine-container h1 {color:#392C2E}
+    .restaurant-container {background: linear-gradient(180deg, #ff99ee, #f074e5, #df4bdd); margin: 0;}
+    .restaurant-container h1 {font-size: 48px;}
+
+    .cuisine-container article {display: flex; flex-direction: column; align-items: center; width: 90; padding: 25px;}
+    .article-img {height: 200px; padding: 5px; -webkit-filter: drop-shadow(0px 0px 40px #222);
+  filter: drop-shadow(0px 0px 40px #F1EAD4);}
+
+    article p { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 0.8;}
+
+
+    nav  {background: transparent; position: fixed; height: 120px; width:100%; display: flex; justify-content: space-between; align-items: baseline; padding: 10px;}
+    .logo {display: flex; justify-content: space-evenly; align-items: center;}
+    .logomark {position: relative; top: 7px; width: 25px; height: 25px; padding:10px;}
+    .logotype {color: #F1EAD4; font-family: 'Abril Fatface', cursive; font-size: 48px;}
+
+    .nav-cart {display: flex; color: #F1EAD4; font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin:0; padding: 5px; line-height: 0.8;}
+
+    .login-container {display: flex; color: #F1EAD4; font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin-right:25px; padding: 5px; line-height: 0.8;}
+    .login-container button {display: flex; font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin:0; padding: 5px; line-height: 0.8;}
+
+    footer {height: 120px; background-color: #df4bdd; display:flex; flex-direction: row; justify-content: center; margin-top:50px;}
+    .footer-text {color: #F1EAD4; font-family: 'Bebas Neue', sans-serif; font-size: 16px; margin:0; padding: 25px; line-height: 0.8; text-align: center;}
+  </style>
 </head>
 <body>
-  
+<nav>
+<div class = "logo">
+  <img class = "logomark" src="./../public/img/pighead.png">
+  <div class = "logotype">guzzlr</div>
+</div>
+<div class = "nav-cart">🛒 - 5 ITEMS - </div>
+<div class = "login-container">
+  <button class = "login-button">LOG IN</button>
+  <button class = "register-button">REGISTER</button>
+</div>
+</nav>
+
+<main>
+  <div class="cuisine-container">
+    <article>
+      <img class="article-img" src="./../public/img/pizza-pink.png">
+      <h1>PIZZA</h1>
+    </article>
+    <article>
+      <img class="article-img" src="./../public/img/burger-pink.png">
+      <h1>COMFORT</h1>
+    </article>
+    <article>
+      <img class="article-img" src="./../public/img/coffee-pink.png">
+      <h1>COFFEE</h1>
+    </article>
+    <article>
+      <img class="article-img" src="./../public/img/sushi-pink.png">
+      <h1>SUSHI</h1>
+    </article>
+  </div>
+
+
+  <div class="restaurant-container">
+  <article>
+  <h1>Santa Fe Wings & More</h1>
+  <p>1928 Main Street</p>
+  <p>Open until 11 PM</p>
+</article>
+<article>
+  <h1>Rick's Country Grill</h1>
+  <p>904 Burrard Street</p>
+  <p>Opens at 4 PM</p>
+</article>
+<article>
+  <h1>Mama Luigi's Family Trattoria</h1>
+  <p>2537 Howe Street</p>
+  <p>Open until 9:30 PM</p>
+</article>
+<article>
+  <h1>Frank's Noodle Hut</h1>
+  <p>1345 E. Douglas Ave</p>
+  <p>Open until 10 PM</p>
+</article>
+</div>
+</main>
+
+
+<footer>
+  <p class = "footer-text">COPYRIGHT 2022 GROUP 3 DESIGNS <br><br> CONTACT US | CAREERS  | PRIVACY POLICY | TERMS OF USE</p>
+</footer>
 </body>
 </html>
