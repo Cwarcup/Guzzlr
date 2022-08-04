@@ -6,15 +6,29 @@ $chocolate: #392C2E;
 
 .view-restaurant {
   display:flex;
+  flex-direction: row;
+  justify-content: space-between;
   width:100%;
+  gap: 4em;
 }
 
 .restaurant-info-container {
   display:flex;
   flex-direction: column;
-// h2 .rest-name
-//
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: $chocolate;
 
+  .rest-name {
+    order: 0;
+    color: $mayonnaise;
+    font-size: 72px;
+    margin: 0px 0px 40px;
+  }
+  .rest-cuisine, .rest-street, .rest-phone, .rest-hours {
+    order: 2;
+    margin: 0px 0px 0px;
+  }
 }
 
 .card {

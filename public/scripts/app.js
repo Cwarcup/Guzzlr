@@ -84,6 +84,15 @@ $(function () {
         const menuItems = data.menuItems;
         const restaurantName = `<h2 class="rest-name">${menuItems[0].rest_name}</h2>`;
         $('.restaurant-info-container').prepend(restaurantName);
+        // this is fake hardcoded data
+        const fakeRestaurantData = `
+          <h3 class = "rest-cuisine">Fast Food</h3>
+          <h3 class = "rest-street">1870 Main Street</h3>
+          <h3 class = "rest-phone">(604) 555-1234</h3>
+          <h3 class = "rest-hours">8:00 A.M to 11:30 P.M.</h3>
+        `;
+        $('.restaurant-info-container').prepend(fakeRestaurantData);
+
 
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
