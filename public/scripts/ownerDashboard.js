@@ -135,6 +135,11 @@ const renderOwnerDashboard = (owner) => {
         .append(ownerHeader(owner.name)) // shows restaurant owners name
         .append(pendingOrderHeader()); // appends pending order container where individual orders append to
 
+      // current orders show and and header
+      $('.owner-current-orders')
+        .show()
+        .append(currentOrdersHeader()); // appends after all pending orders
+
       console.log("data", data);
 
       // for each order, render a row with class of single-incoming-order-form
@@ -153,8 +158,8 @@ const renderOwnerDashboard = (owner) => {
           });
         }
 
-        // if order has been confirmed and started, render a row with class of single-incoming-order-form
-        if (data[i].time_order_started !== null) {
+        // if order has been confirmed and started
+        if (data[i].time_order_started !== null || data[i].pickup_time !== null) {
           // GET request for a single order to get all menu items in a single order
           $.ajax({
             url: `http://localhost:8080/getMenuItemsFromOrderId`,
@@ -163,33 +168,12 @@ const renderOwnerDashboard = (owner) => {
               orderId: data[i].order_id,
             },
             success: (orderItems) => {
-              $('.owner-dashboard-container')
-                .append(currentOrdersHeader())
-                .append(singleCurrentOrder(data[i], orderItems));
+              // $('.owner-current-orders')
+              //   .append(singleCurrentOrder(data[i], orderItems)); // individual current orders
             }
           });
         }
       }
-      // for (let i = 0; i < data.length; i++) {
-      //   if (data[i].time_order_started === null) {
-      //     // GET request for a single order to get all menu items in a single order
-      //     $.ajax({
-      //       url: `http://localhost:8080/getMenuItemsFromOrderId/confirmed`,
-      //       method: 'GET',
-      //       data: {
-      //         orderId: data[i].order_id,
-      //       },
-      //       success: (orderItems) => {
-      //         $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
-      //       }
-      //     });
-      //   }
-      // }
-      // setTimeout(() => {
-      //   $('.owner-dashboard-container')
-      //     .append(currentOrdersHeader()); // appends pending order container where individual orders append to
-        
-      // }, 101);
     }
   });
 };
@@ -201,10 +185,10 @@ const renderOwnerDashboard = (owner) => {
 ////////////////////////////////////////////////////////////////////////////////
 const currentOrdersHeader = () => {
   return `
-        <div class="current-orders-first-row">
+        <div class="current-header">
           <h2>Current Orders</h2>
         </div>
-        <div class="owner-dash-grid-row">
+        <div class="current-orders-first-row">
           <div class="order-num-header">Order Number</div>
           <div class="customer-requests">Special Requests</div>
           <div class="items-list">
@@ -217,10 +201,9 @@ const currentOrdersHeader = () => {
               </div>
             </div>
           </div>
-          <div class="time-created">Time</div>
           <div class="pickup-time">Pickup time</div>
           <div class="confirm-order">
-            <p>Confirm</p>
+            <p>Send RFP</p>
           </div>
         </div>
         `;
@@ -263,7 +246,7 @@ const singleCurrentOrder = (data, orderItems) => {
     </div>
     <div class="time-created">
       <span>
-        ${orderItems.order_started}
+        ${data.pickup_time}
       </span>
     </div>
       <div>
