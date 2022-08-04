@@ -17,7 +17,7 @@
 
   // create a grid that is 2 row, 7 columns wide
   // all columns should space 2 rows except for the last two columns
-  .owner-dash-grid-row {
+  .pending-orders-rows-cols {
     display: grid;
     grid-template-columns: 1fr 4fr 8fr 2fr 2fr 3fr 1fr;
     grid-template-rows: repeat(1, 1fr);
@@ -27,7 +27,7 @@
     border-bottom: 2px solid grey;
   }
 
-  .single-item {
+  .quantity-itemName-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(1, 1fr);
@@ -35,5 +35,46 @@
 
   .pickup-time-input {
     width: 75px;
+  }
+}
+
+
+
+.owner-current-orders {
+  min-width: 500px;
+  max-width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+
+  .current-header {
+    align-self: flex-start;
+  }
+
+  .current-orders-first-row {
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr 3fr 2fr;
+    grid-template-rows: repeat(1, 1fr);
+    grid-gap: 1em;
+    margin-top: 1em;
+    width: 100%;
+    border-bottom: 2px solid grey;
+  }
+
+  .current-single-item-row {
+    display: grid;
+    grid-template-columns: 1fr 4fr 4fr 2fr 2fr;
+    grid-template-rows: repeat(1, 1fr);
+    grid-gap: 1em;
+    margin-top: 1em;
+    width: 100%;
+    border-bottom: 2px solid grey;
+  }
+
+  .quantity-itemName-container {
+    display: flex;
+    justify-content: space-around;
   }
 }

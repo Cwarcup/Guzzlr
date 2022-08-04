@@ -155,12 +155,11 @@ $(function () {
         });
       },
       error: (err) => {
-        console.log("error bro:");
-        console.log(err);
+        console.log("Error at getUserOrderHistory", err);
       }
     });
   };
-  // getUserOrderHistory();
+
 
   // @Adam: renders this on the homepage at the moment
   // display cart items for logged in user
@@ -378,22 +377,59 @@ $(function () {
 
         if (response.length > 0) {
           currUserID = response[0].id;
-          console.log('currUserID', currUserID);
-          console.log("login success", response);
+
           // create homepage according to user information
           if (response[0].id === 3) {
-            console.log("owner id is 3");
             renderOwnerDashboard(response[0]);
+            setTimeout(() => {
+              // incoming orders SUBMIT FORM
+              $(".single-incoming-order-form").each(function () {
+                $(this).submit(function (event) {
+                  event.preventDefault();
 
+                  const time = $(this).find('input[name="etaTime"]').val();
+                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val();
 
+                  $.ajax({
+                    url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
+                    method: 'POST',
+                    data: {
+                      time: time,
+                      confirmOrder: confirmOrder,
+                    },
+                    success: (data) => {
+                      console.log("data", data);
+                    }
+                  });
+                });
+              });
+
+              // current orders SUBMIT FORM
+              $(".current-order-form").each(function () {
+                $(this).submit(function (event) {
+                  event.preventDefault();
+
+                  $.ajax({
+                    url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
+                    method: 'POST',
+                    success: (data) => {
+                      console.log("RFP", data);
+                    }
+                  });
+                });
+              });
+
+            } , 100);
             return;
           }
 
+          // if user is a customer, NOT an owner
           createHomepageForUser(response[0]);
         } else {
+
+          // if user is not found in database, show error message
           console.log('❌ ❌ user not found in database ❌ ❌ ');
         }
-
       }
     });
   });
@@ -413,45 +449,9 @@ $(function () {
   });
 
 
-  // TODO: work in progress
-  // function to reset homepage to default state
-  // use for logout and page first render and NOT logged in
-  // const resetToDefaultHomepage = () => {
-  //   $('.main-container').css('margin-top', '0px');
-  //   $('.menu-options-container').show();
-  //   // hide the login html and container
-  //   $('#login').hide();
-  //   // show sign up button
-  //   $('.sign-up').show();
-  //   // change login btn text
-  //   $('.login').html(`Login`);
-  // };
-  // resetToDefaultHomepage();
-
-  // function to get numbers from form
-  // converts string into phone number format
-  // !! used for getting phone numbner. NOT IN USE ATM
-  // $('.main-container').on('click', '#checkout-btn', function (event) {
-  //   event.preventDefault();
-  //   const formData = `${$('#areaCode').val() + $('#exchangeNum').val() + $('#lineNum').val()}`;
-
-
-  //   console.log(formData);
-  // });
 
 
 
-  // listner for owner homepage
-  // used to trigger Submitform() foun in ownerDashboard.js
-  // function of submitForms() is to submit all inputs from a pending order (accept/decline, set pickup time)
-  // !! currently not working.
-  // !! only working on first item in pending order list
-  $(".main-container").on("click", '#submit-forms', function(event) {
-    event.preventDefault();
-    submitForms();
-  });
 
-
-
-  // do not delete below this line
+  // !! do not delete below this line
 });
