@@ -44,7 +44,6 @@ $(function () {
     $('.previous-orders-container').hide();
     $('#login').show();
     $('#login').html(`
-        <h1>Login</h1>
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
