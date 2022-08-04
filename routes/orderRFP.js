@@ -12,14 +12,14 @@ module.exports = (db) => {
     console.log("RFP ROUTE");
     console.log("[req.params.order_id]:", req.params.order_id);
 
-    client.messages
-      .create({
-        body: `Your order is ready for pickup! Come and get it now! 🤤`,
-        from: +19896449291,
-        to: +16043744652
-      })
-      .then(message => console.log(message.status))
-      .done();
+    // client.messages
+    //   .create({
+    //     body: `Your order is ready for pickup! Come and get it now! 🤤`,
+    //     from: +19896449291,
+    //     to: +16043744652
+    //   })
+    //   .then(message => console.log(message.status))
+    //   .done();
 
     // update  to completed in the database
     const queryText = `
