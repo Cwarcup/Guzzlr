@@ -57,10 +57,10 @@ const pendingOrderHeader = () => {
 // time order was created
 // inputs for owner to set pickup time
 // confirm button to submit form
+// !! DO NOT DELETE single-incoming-order-form class
 const singleIncomingOrder = (data, orderItems) => {
   return `
   <form class="pending-orders-rows-cols single-incoming-order-form" id="${data.order_id}">
-
     <div>
       ${data.order_id}
     </div>
@@ -89,7 +89,6 @@ const singleIncomingOrder = (data, orderItems) => {
         type="radio" 
         value="accept" 
       >
-
       <label>Decline</label>
       <input 
         name="acceptOrDecline" 
@@ -97,25 +96,25 @@ const singleIncomingOrder = (data, orderItems) => {
         value="decline" 
       >
     </div>
+
     <div class="time-created">
       <span>
         ${getHumanDate(data.time_order_created)}
       </span>
     </div>
-      <div>
-        <input 
-          type="time" 
-          placeholder="4:00pm"
-          name="etaTime"
-        >
-      </div>
-      <div>
+    <div>
+      <input 
+        type="time" 
+        placeholder="4:00pm"
+        name="etaTime"
+      >
+    </div>
+    <div>
       <button type="submit">
         Send
       </button>
-      </div>
-      </form>
-
+    </div>
+  </form>
     `;
 };
 
@@ -200,9 +199,10 @@ const currentOrdersHeader = () => {
         `;
 };
 
+// !! DO NOT DELETE current-order-form class
 const singleCurrentOrder = (data, orderItems) => {
   return `
-  <form class="current-single-item-row single-incoming-order-form" id="${data.order_id}">
+  <form class="current-single-item-row current-order-form" id="${data.order_id}">
     <div>
       ${data.order_id}
     </div>

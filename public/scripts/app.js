@@ -354,6 +354,7 @@ $(function () {
           if (response[0].id === 3) {
             renderOwnerDashboard(response[0]);
             setTimeout(() => {
+              // incoming orders SUBMIT FORM
               $(".single-incoming-order-form").each(function () {
                 $(this).submit(function (event) {
                   event.preventDefault();
@@ -374,6 +375,22 @@ $(function () {
                   });
                 });
               });
+
+              // current orders SUBMIT FORM
+              $(".current-order-form").each(function () {
+                $(this).submit(function (event) {
+                  event.preventDefault();
+
+                  $.ajax({
+                    url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
+                    method: 'POST',
+                    success: (data) => {
+                      console.log("RFP", data);
+                    }
+                  });
+                });
+              });
+
             } , 100);
             return;
           }
