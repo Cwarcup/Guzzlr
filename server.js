@@ -36,26 +36,27 @@ app.use(express.static('public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+const getMenuItemsFromOrderId = require('./routes/getMenuItemsFromOrderId');
+const menuItems = require('./routes/menuItems');
 const usersRoutes = require('./routes/users');
 const widgetsRoutes = require('./routes/widgets');
-const homepageMenu = require('./routes/homepageMenu');
 const userOrderHistory = require('./routes/userOrderHistory');
 const userCart = require('./routes/userCart');
-const menuItems = require('./routes/menuItems');
 const createOrder = require('./routes/createOrder');
 const lookupAllLogins = require('./routes/lookupAllLogins');
 const incomingOrder = require('./routes/incomingOrder');
 const getRestaurantOrders = require('./routes/getRestaurantOrders');
-const getMenuItemsFromOrderId = require('./routes/getMenuItemsFromOrderId');
 const getNewestOrder = require('./routes/getNewestOrder');
 const getRestaurantData = require('./routes/getRestaurantData');
 const checkIfUserExists = require('./routes/checkIfUserExists');
 const createUser = require('./routes/createUser');
 const confirmOrder = require('./routes/confirmOrder');
 const orderRFP = require('./routes/orderRFP');
+const homepageMenu = require('./routes/homepageMenu');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
+app.use('/getMenuItemsFromOrderId', getMenuItemsFromOrderId(db));
 app.use('/api/users', usersRoutes(db));
 app.use('/api/widgets', widgetsRoutes(db));
 app.use('/homepageMenu', homepageMenu(db));
@@ -68,7 +69,6 @@ app.use('/incomingOrder', incomingOrder(db));
 app.use('/getNewestOrder', getNewestOrder(db));
 app.use('/getRestaurantData', getRestaurantData(db));
 app.use('/getRestaurantOrders', getRestaurantOrders(db));
-app.use('/getMenuItemsFromOrderId', getMenuItemsFromOrderId(db));
 app.use('/checkIfUserExists', checkIfUserExists(db));
 app.use('/createUser', createUser(db));
 app.use('/confirmOrder', confirmOrder(db));

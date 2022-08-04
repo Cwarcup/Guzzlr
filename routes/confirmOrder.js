@@ -65,7 +65,7 @@ module.exports = (db) => {
       `;
     db.query(queryText, [req.params.order_id])
       .then(result => {
-        res.json(result.rows);
+        res.json(result);
       })
       .catch(err => {
         console.log('err:', err);

@@ -359,13 +359,22 @@ $(function () {
             // !! this is the listener for all buttons in the admin page
             setTimeout(() => {
               // incoming orders SUBMIT FORM
+              // this section attaches listeners to each order in the admin page
+              // must be attached here because we need renderOwnerDashboard(response[0]); to finish rendering the pending/current orders first
               $(".single-incoming-order-form").each(function () {
+                console.log("listener attached to single-incoming-order-form");
                 $(this).submit(function (event) {
                   event.preventDefault();
+                  console.log("listener attached to ", $(this).attr('id'));
 
-                  const time = $(this).find('input[name="etaTime"]').val();
-                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val();
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
 
+                  const time = $(this).find('input[name="etaTime"]').val(); // gets the time from the Pending orders form
+                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val(); // gets valuer from radio btn in order from Pending orders form
+
+                  // request to update order status (accepted or declined) and update time if accepted
                   $.ajax({
                     url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
                     method: 'POST',
@@ -374,13 +383,10 @@ $(function () {
                       confirmOrder: confirmOrder,
                     },
                     success: (data) => {
-                      console.log("Data for single order", data);
-
                       // !! reload page to show updated order
                       $('.owner-dashboard-container').empty();
                       $('.owner-current-orders').empty();
-
-                      renderOwnerDashboard(response[0]);
+                      runLoginAgain();
                     }
                   });
                 });
@@ -391,12 +397,15 @@ $(function () {
                 $(this).submit(function (event) {
                   event.preventDefault();
 
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
+
+                  // updates `oders` table to set order_completed to now()
                   $.ajax({
                     url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
                     method: 'POST',
-                    success: (data) => {
-                      console.log("Button for RFP clicked ", data);
-
+                    success: () => {
                       // !! reload page to show updated order
                       $('.owner-dashboard-container').empty();
                       $('.owner-current-orders').empty();
@@ -439,7 +448,102 @@ $(function () {
     getUserOrderHistory(data.id); // run function with the user's id to get order history and display it on main page
   });
 
+  const runLoginAgain = () => {
+    $.ajax({
+      url: 'http://localhost:8080/lookupAllLogins',
+      method: 'POST',
+      data: {
+        email: `AdamRoxx97@gmail.com`,
+        password: `1234`
+      },
+      success: (response) => {
 
+        if (response.length > 0) {
+          currUserID = response[0].id;
+
+          // create homepage according to user information
+          if (response[0].id === 3) {
+
+            // load owner dashboard after login
+            renderOwnerDashboard(response[0]);
+          
+            // !! this is the listener for all buttons in the admin page
+            setTimeout(() => {
+            // incoming orders SUBMIT FORM
+            // this section attaches listeners to each order in the admin page
+            // must be attached here because we need renderOwnerDashboard(response[0]); to finish rendering the pending/current orders first
+              $(".single-incoming-order-form").each(function () {
+                console.log("listener attached to single-incoming-order-form");
+                $(this).submit(function (event) {
+                  event.preventDefault();
+                  console.log("listener attached to ", $(this).attr('id'));
+
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
+
+                  const time = $(this).find('input[name="etaTime"]').val(); // gets the time from the Pending orders form
+                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val(); // gets valuer from radio btn in order from Pending orders form
+
+                  // request to update order status (accepted or declined) and update time if accepted
+                  $.ajax({
+                    url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
+                    method: 'POST',
+                    data: {
+                      time: time,
+                      confirmOrder: confirmOrder,
+                    },
+                    success: (data) => {
+                    // !! reload page to show updated order
+                      $('.owner-dashboard-container').empty();
+                      $('.owner-current-orders').empty();
+                      renderOwnerDashboard(response[0]);
+                    }
+                  });
+                });
+              });
+
+              // current orders SUBMIT FORM
+              $(".current-order-form").each(function () {
+                $(this).submit(function (event) {
+                  event.preventDefault();
+
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
+
+                  // updates `oders` table to set order_completed to now()
+                  $.ajax({
+                    url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
+                    method: 'POST',
+                    success: () => {
+                    // !! reload page to show updated order
+                      $('.owner-dashboard-container').empty();
+                      $('.owner-current-orders').empty();
+
+                      // !! test out to render owner page
+                      renderOwnerDashboard(response[0]);
+
+                    // TODO: At the moment, this works if one button is clicked. Page will "refresh". But second click sends user back to homepage.
+                    }
+                  });
+                });
+              });
+
+            } , 100);
+            return;
+          }
+
+          // if user is a customer, NOT an owner
+          createHomepageForUser(response[0]);
+        } else {
+
+          // if user is not found in database, show error message
+          console.log('❌ ❌ user not found in database ❌ ❌ ');
+        }
+      }
+    });
+  };
 
 
 

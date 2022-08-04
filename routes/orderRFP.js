@@ -10,7 +10,6 @@ const client = new twilio(accountSid, authToken);
 module.exports = (db) => {
   router.post('/:order_id/', (req, res) => {
     console.log("RFP ROUTE");
-    console.log("[req.params.order_id]:", req.params.order_id);
 
     // client.messages
     //   .create({
