@@ -115,7 +115,7 @@ $(function () {
     // display user name in nav
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
     // add button to logout on navbar
-    $('.nav-links').append(`<a class="nav-link" href="#" id="logout-btn">Logout</a>`);
+    $('.nav-links').append(`<a class="nav-link" href="/" id="logout-btn">Logout</a>`);
 
     // run function with the user's id to get order history and display it
     console.log("data.id from createhomepage:", data.id);

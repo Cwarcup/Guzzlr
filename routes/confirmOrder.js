@@ -15,31 +15,52 @@ module.exports = (db) => {
     const { time, confirmOrder } = req.body;
 
     if (confirmOrder === "decline") {
-      return client.messages
-        .create({
-          body: `Your order has been DECLINE! Please call the restaurant and reschedule your order.`,
-          from: +19896449291, // twilio number from which text will be sent
-          to: +16043744652 // user's phone number
+
+      // set order values to null if order is declined
+      const queryText = `
+      UPDATE orders
+      SET order_started = null,
+          order_completed = null,
+          pickup_time = null,
+          order_placed = null
+      WHERE id = $1;
+      `;
+      db.query(queryText, [req.params.order_id])
+        .then(result => {
+          console.log("Order has been declined");
         })
-        .then(message => console.log(message.status))
-        .done();
+        .catch(err => {
+          console.log('err:', err);
+          res.json(err);
+        });
+      
+      // SMS to customer stating that order has been declined
+      // return client.messages
+      //   .create({
+      //     body: `Your order has been DECLINE! Please call the restaurant and reschedule your order.`,
+      //     from: +19896449291, // twilio number from which text will be sent
+      //     to: +16043744652 // user's phone number
+      //   })
+      //   .then(message => console.log(message.status))
+      //   .then(res.sendStatus(200))
+      //   .done();
     }
 
     // happy path, order is accepted by owner
-    client.messages
-      .create({
-        body: `Your order has been confirmed! Pickup time is ${time}`,
-        from: +19896449291,
-        to: +16043744652
-      })
-      .then(message => console.log(message.status))
-      .done();
+    // client.messages
+    //   .create({
+    //     body: `Your order has been confirmed! Pickup time is ${time}`,
+    //     from: +19896449291,
+    //     to: +16043744652
+    //   })
+    //   .then(message => console.log(message.status))
+    //   .done();
 
     // update order status to completed in the database
     const queryText = `
       UPDATE orders
-      SET order_started = now()
-      SET pickup_time = '${time}'
+      SET order_started = now(),
+          pickup_time = '${time}'
       WHERE id = $1;
       `;
     db.query(queryText, [req.params.order_id])

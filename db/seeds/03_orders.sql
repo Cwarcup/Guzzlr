@@ -4,7 +4,6 @@ INSERT INTO
     user_id,
     restaurant_id,
     order_placed,
-    order_completed,
     notes,
     price
   )
@@ -13,8 +12,7 @@ VALUES
     1,
     1,
     '2015-03-08 02:00:00',
-    '2015-03-08 02:30:00',
-    '',
+    'Im pending',
     2000
   );
 
@@ -31,11 +29,12 @@ VALUES
     1,
     1,
     '2015-03-08 04:00:00',
-    '',
+    'I am pending',
     2000
   );
 
 -- current order
+-- order_started is NOT null
 INSERT INTO
   orders (
     user_id,
@@ -52,12 +51,13 @@ VALUES
     1,
     '2015-03-08 04:00:00',
     '2015-03-08 04:01:00',
-    'Make sure to bring a fork',
+    'I am a current order',
     5000,
     '6:00 PM'
   );
 
 -- completed order
+-- should not show up on admin
 INSERT INTO
   orders (
     user_id,
@@ -76,7 +76,7 @@ VALUES
     '2015-03-08 02:00:00',
     '2015-03-08 02:11:00',
     '2015-03-08 02:30:00',
-    'I like lots of mayo',
+    'Should not show up on admin',
     8000,
     '6:00 PM'
   );

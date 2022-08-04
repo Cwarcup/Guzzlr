@@ -379,7 +379,11 @@ $(function () {
 
           // create homepage according to user information
           if (response[0].id === 3) {
+
+            // load owner dashboard after login
             renderOwnerDashboard(response[0]);
+            
+            // !! this is the listener for all buttons in the admin page
             setTimeout(() => {
               // incoming orders SUBMIT FORM
               $(".single-incoming-order-form").each(function () {
@@ -397,7 +401,13 @@ $(function () {
                       confirmOrder: confirmOrder,
                     },
                     success: (data) => {
-                      console.log("data", data);
+                      console.log("Data for single order", data);
+
+                      // !! reload page to show updated order
+                      $('.owner-dashboard-container').empty();
+                      $('.owner-current-orders').empty();
+
+                      renderOwnerDashboard(response[0]);
                     }
                   });
                 });
@@ -412,7 +422,16 @@ $(function () {
                     url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
                     method: 'POST',
                     success: (data) => {
-                      console.log("RFP", data);
+                      console.log("Button for RFP clicked ", data);
+
+                      // !! reload page to show updated order
+                      $('.owner-dashboard-container').empty();
+                      $('.owner-current-orders').empty();
+
+                      // !! test out to render owner page
+                      renderOwnerDashboard(response[0]);
+
+                      // TODO: At the moment, this works if one button is clicked. Page will "refresh". But second click sends user back to homepage.
                     }
                   });
                 });

@@ -15,7 +15,7 @@ const restaurantNamesByCuisine = {
   pizza: [
     "Third Slice Pizza",
     "A2 Pizza",
-    "Uncle Fatty''s Pizza",
+    "Aunt Fatty''s Pizza",
     "Panagone",
     "Unfresh Slice",
     "Double Pizza",
@@ -25,7 +25,7 @@ const restaurantNamesByCuisine = {
   italian: [
     "Don''t Ask For Luigi",
     "New Spaghetti Factory",
-    "Lupone Reestaurant & Vinoteca",
+    "Lupone Restaurant & Vinoteca",
     "ConCon Ristorante",
     "Shoppino''s",
     "Stupida Volpe",
