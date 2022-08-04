@@ -131,10 +131,15 @@ $(function () {
   });
 
   $(".main-container").on("click", ".checkout", function (event) {
-    event.preventDefault();
-    console.log('checkout', currUserID);
-    createOrder(cartArr, event.currentTarget.children[0].children[0].textContent, currUserID);
-    //sendText();
+    if (!currUserID) {
+      alert('Please login or register to start your order!');
+    } else {
+      event.preventDefault();
+      console.log('checkout', currUserID);
+      createOrder(cartArr, event.currentTarget.children[0].children[0].textContent, currUserID);
+      //sendText();
+    }
+
   });
 
 })
