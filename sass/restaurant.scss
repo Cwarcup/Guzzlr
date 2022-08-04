@@ -4,9 +4,15 @@ $piggy-pink: #FF99EE;
 $dark-pink: #df4bdd;
 $chocolate: #392C2E;
 
+// STILL TO IMPLEMENT: Main is a min of 848 pixels. from card being too wide.
+
 .view-restaurant {
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
+  @media only screen and (min-width: 1180px) {
+		flex-direction: row;
+	}
+
   justify-content: space-between;
   width:100%;
   gap: 4em;
@@ -33,6 +39,10 @@ $chocolate: #392C2E;
 
 .card {
   width:800px;
+
+  @media only screen and (max-width: 900px) {
+		width: auto;
+	}
 }
 .card-body {
   display: flex;
