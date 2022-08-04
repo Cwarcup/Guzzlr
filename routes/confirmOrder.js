@@ -21,7 +21,8 @@ module.exports = (db) => {
       UPDATE orders
       SET order_started = null,
           order_completed = null,
-          pickup_time = null
+          pickup_time = null,
+          order_placed = null
       WHERE id = $1;
       `;
       db.query(queryText, [req.params.order_id])
@@ -34,26 +35,26 @@ module.exports = (db) => {
         });
       
       // SMS to customer stating that order has been declined
-      return client.messages
-        .create({
-          body: `Your order has been DECLINE! Please call the restaurant and reschedule your order.`,
-          from: +19896449291, // twilio number from which text will be sent
-          to: +16043744652 // user's phone number
-        })
-        .then(message => console.log(message.status))
-        .then(res.sendStatus(200))
-        .done();
+      // return client.messages
+      //   .create({
+      //     body: `Your order has been DECLINE! Please call the restaurant and reschedule your order.`,
+      //     from: +19896449291, // twilio number from which text will be sent
+      //     to: +16043744652 // user's phone number
+      //   })
+      //   .then(message => console.log(message.status))
+      //   .then(res.sendStatus(200))
+      //   .done();
     }
 
     // happy path, order is accepted by owner
-    client.messages
-      .create({
-        body: `Your order has been confirmed! Pickup time is ${time}`,
-        from: +19896449291,
-        to: +16043744652
-      })
-      .then(message => console.log(message.status))
-      .done();
+    // client.messages
+    //   .create({
+    //     body: `Your order has been confirmed! Pickup time is ${time}`,
+    //     from: +19896449291,
+    //     to: +16043744652
+    //   })
+    //   .then(message => console.log(message.status))
+    //   .done();
 
     // update order status to completed in the database
     const queryText = `

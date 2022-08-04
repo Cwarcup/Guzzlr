@@ -20,7 +20,7 @@ module.exports = (db) => {
       restaurants
       JOIN orders ON orders.restaurant_id = restaurants.id
     WHERE
-      restaurants.id = 1;
+      restaurants.id = 1 AND orders.order_placed IS NOT NULL;
       `
     )
       .then(data => {
