@@ -1,7 +1,16 @@
 /* eslint-disable prefer-template */
 /* eslint-disable no-undef */
 
-//!! do not change the name of any classes!!!! It will break the jquery
+// !! do not change the following classes or ID
+// - .menu-options-container
+// - .previous-orders-container
+// - .owner-dashboard-container
+// - .owner-current-orders
+// - .single-incoming-order-form
+// - input name="etaTime"
+// - input name="acceptOrDecline"
+// anything with an ID
+
 
 // displays admin ame on  under navbar
 const ownerHeader = (name) => {
@@ -22,7 +31,7 @@ const pendingOrderHeader = () => {
           <div class="order-num-header">Order Number</div>
           <div class="customer-requests">Special Requests</div>
           <div class="items-list">
-            <div class="single-item">
+            <div class="quantity-itemName-container">
               <div class="quality">
                 <span>Quantity</span>
               </div>
@@ -36,9 +45,7 @@ const pendingOrderHeader = () => {
           </div>
           <div class="time-created">Time</div>
           <div class="pickup-time">Pickup time</div>
-          <div class="confirm-order">
-            <p>Confirm</p>
-          </div>
+          <p>Confirm</p>
         </div>
         `;
 };
@@ -67,17 +74,13 @@ const singleIncomingOrder = (data, orderItems) => {
     <div class="items-list">
       ${orderItems.map(item => {
     return `
-            <div class="single-item">
-              <div class="quality">
+            <div class="quantity-itemName-container">
                 <span>
                   XX
                 </span>
-              </div>
-              <div class="item-name">
                 <span>
                   ${item.item_name}
                 </span>
-              </div>
             </div>
             `;
   })}
@@ -140,8 +143,6 @@ const renderOwnerDashboard = (owner) => {
         .show()
         .append(currentOrdersHeader()); // appends after all pending orders
 
-      console.log("data", data);
-
       // for each order, render a row with class of single-incoming-order-form
       for (let i = 0; i < data.length; i++) {
         if (data[i].time_order_started === null) {
@@ -192,26 +193,20 @@ const currentOrdersHeader = () => {
           <div class="order-num-header">Order Number</div>
           <div class="customer-requests">Special Requests</div>
           <div class="items-list">
-            <div class="single-item">
-              <div class="quality">
+            <div class="quantity-itemName-container">
                 <span>Quantity</span>
-              </div>
-              <div class="item-name">
                 <span>Item name</span>
-              </div>
             </div>
           </div>
           <div class="pickup-time">Pickup time</div>
-          <div class="confirm-order">
-            <p>Send RFP</p>
-          </div>
+          <p>Send RFP</p>
         </div>
         `;
 };
 
 const singleCurrentOrder = (data, orderItems) => {
   return `
-  <form class="single-item-row single-incoming-order-form" id="${data.order_id}">
+  <form class="current-single-item-row single-incoming-order-form" id="${data.order_id}">
     <div 
       class="order-num-header">
       ${data.order_id}
@@ -222,7 +217,7 @@ const singleCurrentOrder = (data, orderItems) => {
     <div class="items-list">
       ${orderItems.map(item => {
     return `
-            <div class="single-item">
+            <div class="quantity-itemName-container">
               <div class="quality">
                 <span>
                   XX
@@ -237,11 +232,9 @@ const singleCurrentOrder = (data, orderItems) => {
             `;
   })}
     </div>
-    <div class="time-created">
-      <span>
-        ${data.pickup_time}
-      </span>
-    </div>
+    <span>
+      ${data.pickup_time}
+    </span>
     <div class="confirm-order">
       <button type="submit">
         RFP
