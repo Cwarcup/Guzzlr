@@ -353,6 +353,8 @@ $(function () {
           // create homepage according to user information
           if (response[0].id === 3) {
             renderOwnerDashboard(response[0]);
+            
+            // !! this is the listener for all buttons in the admin page
             setTimeout(() => {
               // incoming orders SUBMIT FORM
               $(".single-incoming-order-form").each(function () {
@@ -370,7 +372,7 @@ $(function () {
                       confirmOrder: confirmOrder,
                     },
                     success: (data) => {
-                      console.log("data", data);
+                      console.log("Order", data);
                     }
                   });
                 });

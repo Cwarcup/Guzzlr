@@ -22,24 +22,25 @@ module.exports = (db) => {
           to: +16043744652 // user's phone number
         })
         .then(message => console.log(message.status))
+        .then(res.sendStatus(200))
         .done();
     }
 
     // happy path, order is accepted by owner
-    client.messages
-      .create({
-        body: `Your order has been confirmed! Pickup time is ${time}`,
-        from: +19896449291,
-        to: +16043744652
-      })
-      .then(message => console.log(message.status))
-      .done();
+    // client.messages
+    //   .create({
+    //     body: `Your order has been confirmed! Pickup time is ${time}`,
+    //     from: +19896449291,
+    //     to: +16043744652
+    //   })
+    //   .then(message => console.log(message.status))
+    //   .done();
 
     // update order status to completed in the database
     const queryText = `
       UPDATE orders
-      SET order_started = now()
-      SET pickup_time = '${time}'
+      SET order_started = now(),
+          pickup_time = '${time}'
       WHERE id = $1;
       `;
     db.query(queryText, [req.params.order_id])
