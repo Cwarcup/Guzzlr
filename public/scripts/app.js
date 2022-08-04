@@ -17,6 +17,12 @@ $(function () {
   $('#login').hide();
   $('#register').hide();
 
+  // !! from max
+  // $('#login').hide();
+  $('.main-container').children().hide();
+  $('.h2.rest-name').hide();
+  $('#register').hide();
+
 
   // login btn top right of main page
   // when clicked, user is presented with login container and can enter cradentials

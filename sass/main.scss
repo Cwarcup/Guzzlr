@@ -1,3 +1,9 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
 body {
   display: flex;
   flex-direction: column;
@@ -8,7 +14,7 @@ body {
   background: linear-gradient(180deg, #ff99ee, #f074e5, #df4bdd);
 
 
-//  ==== START OF HARDCODED CONTENT (treats) ====
+  //  ==== START OF HARDCODED CONTENT (treats) ====
   .cuisine-container {
     display: flex;
     flex-wrap: wrap;
@@ -19,7 +25,7 @@ body {
       color: $chocolate;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 72px;
-      margin:0;
+      margin: 0;
       padding: 25px;
       line-height: 0.8;
     }
@@ -28,6 +34,7 @@ body {
   .restaurant-container {
     display: flex;
     flex-direction: row;
+
     @media only screen and (max-width: 850px) {
       overflow-x: scroll;
     }
@@ -36,31 +43,34 @@ body {
       color: $mayonnaise;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 72px;
-      margin:0;
+      margin: 0;
       padding: 0;
       line-height: 0.8;
     }
 
     article {
-      padding:0px 15px 0px;
+      padding: 0px 15px 0px;
       flex-grow: 1;
+
       p {
         font-family: 'Bebas Neue', sans-serif;
         font-size: 36px;
         line-height: 0.8;
-        margin:0;
+        margin: 0;
       }
     }
 
     .featured-restaurant {
       text-align: left;
       padding: 0;
+
       p {
         color: $chocolate;
       }
     }
 
   }
+
   .article-img {
     // max-width: 200px;
     padding: 5px;
@@ -68,13 +78,13 @@ body {
     filter: drop-shadow(0px 0px 40px #F1EAD4);
   }
 
-// ==== END OF HARDCODED CONTENT ====
+  // ==== END OF HARDCODED CONTENT ====
 
 
 
 
   main {
-    margin-top: auto;
+    margin-top: 0;
   }
 
   .main-container {
@@ -85,17 +95,18 @@ body {
     width: 100%;
     height: 100%;
     padding: 0 1em;
-    margin-top: 60px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
     overflow: hidden;
 
-    h2.rest-name {
-      padding-top: 0.5em;
-      margin-bottom: 0;
-      z-index: 99;
-    }
+    -webkit-filter: drop-shadow(0px 0px 40px #222);
+    filter: drop-shadow(0px 0px 40px #F1EAD4);
+
+    // h2.rest-name {
+    //   padding-top: 0.5em;
+    //   margin-bottom: 0;
+    //   z-index: 99;
+    //   color:green;
+    // }
 
     .login-container {
       display: flex;
@@ -105,9 +116,24 @@ body {
       height: 250px;
       width: 75%;
       padding: 20px;
-      border-radius: 10px;
-      background-color: #fff;
+      border-radius: 3px;
+      background-color: $piggy-pink;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Bebas Neue', sans-serif;
+
+      h1 {
+        font-size: 16px;
+      }
+
+      form div input {
+        border: none;
+        background: $minions-yellow;
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      // .login-btn {
+      //  font-family: 'Bebas Neue', sans-serif;
+      // }
     }
 
     .register-container {
@@ -125,14 +151,12 @@ body {
 
     .menu-options-container {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: flex-start;
       gap: 2em;
       margin-top: 1em;
       margin-bottom: 1em;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      margin-left: 1em;
       overflow: hidden;
 
       .menu-item {
@@ -190,11 +214,13 @@ body {
       display: flex;
       flex-direction: column;
     }
+
     .right {
       width: 50%;
       height: 90%;
       overflow: scroll;
     }
+
     .orderinfo {
       flex-direction: row;
       display: flex;
@@ -202,6 +228,7 @@ body {
       width: 100%;
       height: 100%;
     }
+
     .summaryHeader {
       width: 100%;
       align-items: center;
