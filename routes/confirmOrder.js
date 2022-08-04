@@ -15,6 +15,25 @@ module.exports = (db) => {
     const { time, confirmOrder } = req.body;
 
     if (confirmOrder === "decline") {
+
+      // set order values to null if order is declined
+      const queryText = `
+      UPDATE orders
+      SET order_started = null,
+          order_completed = null,
+          pickup_time = null
+      WHERE id = $1;
+      `;
+      db.query(queryText, [req.params.order_id])
+        .then(result => {
+          console.log("Order has been declined");
+        })
+        .catch(err => {
+          console.log('err:', err);
+          res.json(err);
+        });
+      
+      // SMS to customer stating that order has been declined
       return client.messages
         .create({
           body: `Your order has been DECLINE! Please call the restaurant and reschedule your order.`,
@@ -27,14 +46,14 @@ module.exports = (db) => {
     }
 
     // happy path, order is accepted by owner
-    // client.messages
-    //   .create({
-    //     body: `Your order has been confirmed! Pickup time is ${time}`,
-    //     from: +19896449291,
-    //     to: +16043744652
-    //   })
-    //   .then(message => console.log(message.status))
-    //   .done();
+    client.messages
+      .create({
+        body: `Your order has been confirmed! Pickup time is ${time}`,
+        from: +19896449291,
+        to: +16043744652
+      })
+      .then(message => console.log(message.status))
+      .done();
 
     // update order status to completed in the database
     const queryText = `
