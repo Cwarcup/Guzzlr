@@ -1,4 +1,4 @@
-const createSummary = function() {
+const createSummary = function () {
   $.ajax({
     url: '/getNewestOrder',
     method: 'GET',
@@ -22,18 +22,18 @@ const createSummary = function() {
             </div>
           </div>
           <div class='right'>
-            <div class='order'>`
+            <div class='order'>`;
 
-            for(let i = 0; i < data.out.length; i++) {
-              orderItems += `
+      for (let i = 0; i < data.out.length; i++) {
+        orderItems += `
               <div>
                 <h5>${data.out[i].food_name}</h5>
                 <p>${data.out[i].description}</p>
-                <p>$${addZeroes(data.out[i].price/100)}</p>
+                <p>$${addZeroes(data.out[i].price / 100)}</p>
               </div>`;
-            }
+      }
 
-            let bottomHTML = `
+      let bottomHTML = `
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ const createSummary = function() {
     error: (err) => {
       console.log(err);
     }
-    });
+  });
 };
 
 
@@ -58,7 +58,7 @@ const getRestaurant = (id) => {
     });
 };
 
-const sendText = function() {
+const sendText = function () {
   $.ajax({
     url: '/incomingOrder',
     method: 'POST',
@@ -69,9 +69,9 @@ const sendText = function() {
     error: (err) => {
       console.log(err);
     }
-    });
+  });
 
-}
+};
 
 
 
@@ -94,7 +94,7 @@ $(function () {
 
   $(".menu-options-container").on("click", ".addToCart", function (event) {
     event.preventDefault();
-    cartArr.push(Number(event['originalEvent']['path'][2]['id']));
+    cartArr.push(Number(event['originalEvent']['path'][3]['id']));
     console.log('cartArr', cartArr);
     document.getElementsByClassName("cart-demo-btn")[0]['children'][1]['textContent']++;
   });
@@ -142,5 +142,5 @@ $(function () {
 
   });
 
-})
+});
 

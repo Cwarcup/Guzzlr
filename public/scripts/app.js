@@ -11,6 +11,7 @@ let currUserID;
 
 $(function () {
   console.log('app.js is loaded');
+  console.log("check check");
 
 
   // hide login HTML on load
@@ -138,6 +139,7 @@ $(function () {
 
         $('.previous-orders-container').append(`<h2>Previous Orders</h2>`);
         $('.previous-orders-container').append(`<div class="previous-orders-list">`);
+        console.log(userOrderHistory);
 
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-list').append(`
@@ -145,7 +147,7 @@ $(function () {
             <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>
-                <p class="card-text">${prevOrder.description}</p>
+
               <p class="card-text">$${prevOrder.price / 100}</p>
               <a href="#" class="btn btn-primary">Add to cart</a>
             </div>
@@ -201,12 +203,14 @@ $(function () {
       method: 'GET',
       dataType: 'json',
       success: (data) => {
+        console.log(data);
         let cartCopy = cartArr.map(x => x);
         cartCopy.sort();
         const menuItemData = data.menuItems;
         let cartItem = `\n`;
         let cartTotal = 0;
         const count = {};
+
 
         for (let index = 0; index < cartArr.length; index++) {
           const element = cartCopy[index];
@@ -460,6 +464,7 @@ $(function () {
     $('#login').hide();   // hide login button in nav
     $('.sign-up').hide(); // hide sign up button in nav
     $('.login').hide();   // hide children in login container
+    $('.register-container').hide(); // hide children in register container');
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`); // display user name in nav
     $('.nav-links').append(`<a class="nav-link" href="/" id="logout-btn">Logout</a>`); // add button to logout on navbar
 
