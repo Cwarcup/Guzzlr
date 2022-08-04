@@ -74,7 +74,7 @@ const singleIncomingOrder = (data, orderItems) => {
     return `
             <div class="quantity-itemName-container">
                 <span>
-                  XX
+                  1
                 </span>
                 <span>
                   ${item.item_name}
