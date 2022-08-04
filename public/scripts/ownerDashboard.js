@@ -168,8 +168,8 @@ const renderOwnerDashboard = (owner) => {
               orderId: data[i].order_id,
             },
             success: (orderItems) => {
-              // $('.owner-current-orders')
-              //   .append(singleCurrentOrder(data[i], orderItems)); // individual current orders
+              $('.owner-current-orders')
+                .append(singleCurrentOrder(data[i], orderItems)); // individual current orders
             }
           });
         }
@@ -211,8 +211,7 @@ const currentOrdersHeader = () => {
 
 const singleCurrentOrder = (data, orderItems) => {
   return `
-  <form class="owner-dash-grid-row single-incoming-order-form" id="${data.order_id}">
-
+  <form class="single-item-row single-incoming-order-form" id="${data.order_id}">
     <div 
       class="order-num-header">
       ${data.order_id}
@@ -238,29 +237,16 @@ const singleCurrentOrder = (data, orderItems) => {
             `;
   })}
     </div>
-    
-    <div class="accept-decline">
-      
-
-      <label>Accepted</label>
-    </div>
     <div class="time-created">
       <span>
         ${data.pickup_time}
       </span>
     </div>
-      <div>
-        <input 
-          type="time" 
-          placeholder="4:00pm"
-          name="etaTime"
-        >
-      </div>
-      <div class="confirm-order">
+    <div class="confirm-order">
       <button type="submit">
         RFP
       </button>
-      </div>
-      </form>
+    </div>
+  </form>
     `;
 };
