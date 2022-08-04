@@ -24,7 +24,10 @@ $(function () {
   // click to go to mcdonalds
   $('.featured-restaurant').click((event) => {
     event.preventDefault();
-    getMenuItems();
+    let restaurantID = event.originalEvent.path[1].id;
+    restaurantID = restaurantID.substring(4,restaurantID.length);
+    console.log(Number(restaurantID));
+    getMenuItems(restaurantID);
     $('.treat-container').children().hide();
     $('.header-welcome').hide();
     $('.view-restaurant').show();
@@ -75,13 +78,15 @@ $(function () {
   // load menu items from /homepageMenu
   // runs when main page is first loaded
   // adds menu items for restairant with ID of 1
-  const getMenuItems = () => {
+  const getMenuItems = (restaurantID) => {
     $.ajax({
       url: '/homepageMenu',
       method: 'GET',
       dataType: 'json',
-      success: (data) => {
-        const menuItems = data.menuItems;
+      data: {data: restaurantID},
+      success: (response) => {
+        console.log(response);
+        const menuItems = response.menuItems;
         const restaurantName = `<h2 class="rest-name">${menuItems[0].rest_name}</h2>`;
         $('.restaurant-info-container').prepend(restaurantName);
         // this is fake hardcoded data
@@ -386,7 +391,7 @@ $(function () {
 
             // load owner dashboard after login
             renderOwnerDashboard(response[0]);
-            
+
             // !! this is the listener for all buttons in the admin page
             setTimeout(() => {
               // incoming orders SUBMIT FORM
