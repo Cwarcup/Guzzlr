@@ -17,7 +17,7 @@
 
   // create a grid that is 2 row, 7 columns wide
   // all columns should space 2 rows except for the last two columns
-  .owner-dash-grid-row {
+  .pending-orders-rows-cols {
     display: grid;
     grid-template-columns: 1fr 4fr 8fr 2fr 2fr 3fr 1fr;
     grid-template-rows: repeat(1, 1fr);

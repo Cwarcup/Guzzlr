@@ -27,15 +27,15 @@ const pendingOrderHeader = () => {
         <div class="owner-dash-grid-col-header">
           <h2>Pending Orders</h2>
         </div>
-        <div class="owner-dash-grid-row">
-          <div class="order-num-header">Order Number</div>
+        <div class="pending-orders-rows-cols">
+          <div>Order Number</div>
           <div class="customer-requests">Special Requests</div>
           <div class="items-list">
             <div class="quantity-itemName-container">
-              <div class="quality">
+              <div>
                 <span>Quantity</span>
               </div>
-              <div class="item-name">
+              <div>
                 <span>Item name</span>
               </div>
             </div>
@@ -50,9 +50,6 @@ const pendingOrderHeader = () => {
         `;
 };
 
-// current orders NOT completed
-// creates a grid of 7 columns with each column representing a field of the order (order id, notes, quantity...)
-
 
 // renders a single order
 // contains the values for the order id, notes, quantity, item name
@@ -62,13 +59,12 @@ const pendingOrderHeader = () => {
 // confirm button to submit form
 const singleIncomingOrder = (data, orderItems) => {
   return `
-  <form class="owner-dash-grid-row single-incoming-order-form" id="${data.order_id}">
+  <form class="pending-orders-rows-cols single-incoming-order-form" id="${data.order_id}">
 
-    <div 
-      class="order-num-header">
+    <div>
       ${data.order_id}
     </div>
-    <div class="request-text">
+    <div>
       ${data.order_notes || 'No special requests'}
     </div>
     <div class="items-list">
@@ -113,7 +109,7 @@ const singleIncomingOrder = (data, orderItems) => {
           name="etaTime"
         >
       </div>
-      <div class="confirm-order">
+      <div>
       <button type="submit">
         Send
       </button>
@@ -190,7 +186,7 @@ const currentOrdersHeader = () => {
           <h2>Current Orders</h2>
         </div>
         <div class="current-orders-first-row">
-          <div class="order-num-header">Order Number</div>
+          <div>Order Number</div>
           <div class="customer-requests">Special Requests</div>
           <div class="items-list">
             <div class="quantity-itemName-container">
@@ -207,23 +203,22 @@ const currentOrdersHeader = () => {
 const singleCurrentOrder = (data, orderItems) => {
   return `
   <form class="current-single-item-row single-incoming-order-form" id="${data.order_id}">
-    <div 
-      class="order-num-header">
+    <div>
       ${data.order_id}
     </div>
-    <div class="request-text">
+    <div>
       ${data.order_notes || 'No special requests'}
     </div>
     <div class="items-list">
       ${orderItems.map(item => {
     return `
             <div class="quantity-itemName-container">
-              <div class="quality">
+              <div>
                 <span>
                   XX
                 </span>
               </div>
-              <div class="item-name">
+              <div>
                 <span>
                   ${item.item_name}
                 </span>
@@ -235,7 +230,7 @@ const singleCurrentOrder = (data, orderItems) => {
     <span>
       ${data.pickup_time}
     </span>
-    <div class="confirm-order">
+    <div>
       <button type="submit">
         RFP
       </button>
