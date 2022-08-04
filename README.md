@@ -1,6 +1,14 @@
 LHL Node Skeleton
 =========
 
+
+# Admin user
+- email: adam@gmail.com
+- password: 1234
+
+# Good customer with some orders
+- email
+
 ## Project Setup
 
 The following steps are only for _one_ of the group members to perform.

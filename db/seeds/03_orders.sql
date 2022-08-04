@@ -1,4 +1,5 @@
 -- Orders table seeds here (Example)
+-- two pending orders
 INSERT INTO
   orders (
     user_id,
@@ -11,9 +12,9 @@ VALUES
   (
     1,
     1,
-    '2015-03-08 02:00:00',
-    'Im pending',
-    2000
+    '2022-08-05 17:02:00',
+    'Please make sure to bring a large plate for the entree.',
+    45000
   );
 
 INSERT INTO
@@ -26,11 +27,11 @@ INSERT INTO
   )
 VALUES
   (
+    20,
     1,
-    1,
-    '2015-03-08 04:00:00',
-    'I am pending',
-    2000
+    '2022-08-05 17:10:00',
+    'Extra napkins please.',
+    1875
   );
 
 -- current order
@@ -41,7 +42,6 @@ INSERT INTO
     restaurant_id,
     order_placed,
     order_started,
-    notes,
     price,
     pickup_time
   )
@@ -49,11 +49,10 @@ VALUES
   (
     2,
     1,
-    '2015-03-08 04:00:00',
-    '2015-03-08 04:01:00',
-    'I am a current order',
-    5000,
-    '6:00 PM'
+    '2022-08-05 16:52',
+    '2022-08-05 16:53',
+    7250,
+    '10:15 AM'
   );
 
 -- completed order

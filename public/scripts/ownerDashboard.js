@@ -59,6 +59,8 @@ const pendingOrderHeader = () => {
 // confirm button to submit form
 // !! DO NOT DELETE single-incoming-order-form class
 const singleIncomingOrder = (data, orderItems) => {
+  console.log("orderItems", orderItems);
+  console.log("data", data);
   return `
   <form class="pending-orders-rows-cols single-incoming-order-form" id="${data.order_id}">
     <div>
