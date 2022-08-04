@@ -43,6 +43,10 @@ const pendingOrderHeader = () => {
         `;
 };
 
+// current orders NOT completed
+// creates a grid of 7 columns with each column representing a field of the order (order id, notes, quantity...)
+
+
 // renders a single order
 // contains the values for the order id, notes, quantity, item name
 // accept/decline
@@ -131,6 +135,8 @@ const renderOwnerDashboard = (owner) => {
         .append(ownerHeader(owner.name)) // shows restaurant owners name
         .append(pendingOrderHeader()); // appends pending order container where individual orders append to
 
+      console.log("data", data);
+
       // for each order, render a row with class of single-incoming-order-form
       for (let i = 0; i < data.length; i++) {
         if (data[i].time_order_started === null) {
@@ -146,7 +152,132 @@ const renderOwnerDashboard = (owner) => {
             }
           });
         }
+
+        // if order has been confirmed and started, render a row with class of single-incoming-order-form
+        if (data[i].time_order_started !== null) {
+          // GET request for a single order to get all menu items in a single order
+          $.ajax({
+            url: `http://localhost:8080/getMenuItemsFromOrderId`,
+            method: 'GET',
+            data: {
+              orderId: data[i].order_id,
+            },
+            success: (orderItems) => {
+              $('.owner-dashboard-container')
+                .append(currentOrdersHeader())
+                .append(singleCurrentOrder(data[i], orderItems));
+            }
+          });
+        }
       }
+      // for (let i = 0; i < data.length; i++) {
+      //   if (data[i].time_order_started === null) {
+      //     // GET request for a single order to get all menu items in a single order
+      //     $.ajax({
+      //       url: `http://localhost:8080/getMenuItemsFromOrderId/confirmed`,
+      //       method: 'GET',
+      //       data: {
+      //         orderId: data[i].order_id,
+      //       },
+      //       success: (orderItems) => {
+      //         $('.owner-dashboard-container').append(singleIncomingOrder(data[i], orderItems));
+      //       }
+      //     });
+      //   }
+      // }
+      // setTimeout(() => {
+      //   $('.owner-dashboard-container')
+      //     .append(currentOrdersHeader()); // appends pending order container where individual orders append to
+        
+      // }, 101);
     }
   });
+};
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// !! current orders
+////////////////////////////////////////////////////////////////////////////////
+const currentOrdersHeader = () => {
+  return `
+        <div class="current-orders-first-row">
+          <h2>Current Orders</h2>
+        </div>
+        <div class="owner-dash-grid-row">
+          <div class="order-num-header">Order Number</div>
+          <div class="customer-requests">Special Requests</div>
+          <div class="items-list">
+            <div class="single-item">
+              <div class="quality">
+                <span>Quantity</span>
+              </div>
+              <div class="item-name">
+                <span>Item name</span>
+              </div>
+            </div>
+          </div>
+          <div class="time-created">Time</div>
+          <div class="pickup-time">Pickup time</div>
+          <div class="confirm-order">
+            <p>Confirm</p>
+          </div>
+        </div>
+        `;
+};
+
+const singleCurrentOrder = (data, orderItems) => {
+  return `
+  <form class="owner-dash-grid-row single-incoming-order-form" id="${data.order_id}">
+
+    <div 
+      class="order-num-header">
+      ${data.order_id}
+    </div>
+    <div class="request-text">
+      ${data.order_notes || 'No special requests'}
+    </div>
+    <div class="items-list">
+      ${orderItems.map(item => {
+    return `
+            <div class="single-item">
+              <div class="quality">
+                <span>
+                  XX
+                </span>
+              </div>
+              <div class="item-name">
+                <span>
+                  ${item.item_name}
+                </span>
+              </div>
+            </div>
+            `;
+  })}
+    </div>
+    
+    <div class="accept-decline">
+      
+
+      <label>Accepted</label>
+    </div>
+    <div class="time-created">
+      <span>
+        ${orderItems.order_started}
+      </span>
+    </div>
+      <div>
+        <input 
+          type="time" 
+          placeholder="4:00pm"
+          name="etaTime"
+        >
+      </div>
+      <div class="confirm-order">
+      <button type="submit">
+        RFP
+      </button>
+      </div>
+      </form>
+    `;
 };

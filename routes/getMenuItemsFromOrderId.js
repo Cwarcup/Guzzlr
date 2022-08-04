@@ -27,5 +27,25 @@ module.exports = (db) => {
         res.json(orderItems);
       });
   });
+
+
+  router.get('/confirmed', (req, res) => {
+    let orderId = req.query.orderId;
+    const query = `
+      SELECT
+        menu_items.name as item_name,
+        menu_items.price as item_price
+      FROM
+        order_items
+        JOIN menu_items ON menu_items.id = order_items.menu_item
+      WHERE
+        order_items.order_id = ${orderId};
+      `;
+    db.query(query)
+      .then(orderData => {
+        const orderItems = orderData.rows;
+        res.json(orderItems);
+      });
+  });
   return router;
 };

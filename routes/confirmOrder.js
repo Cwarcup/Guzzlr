@@ -39,6 +39,7 @@ module.exports = (db) => {
     const queryText = `
       UPDATE orders
       SET order_started = now()
+      SET pickup_time = '${time}'
       WHERE id = $1;
       `;
     db.query(queryText, [req.params.order_id])
