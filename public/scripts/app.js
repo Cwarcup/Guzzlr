@@ -52,11 +52,11 @@ $(function () {
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='adamgrharvey@gmail.com'/>
+            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='adam@gmail.com'/>
           </div>
           <div>
             <label for="password">Password</label>
-            <input name="password" placeholder="Password" id="login-password" value="a"/>
+            <input name="password" placeholder="Password" id="login-password" value="1234"/>
           </div>
           <div>
             <button type="submit" class="login-btn">Login
