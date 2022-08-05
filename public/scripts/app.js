@@ -190,12 +190,11 @@ $(function () {
           };
 
           if (prevOrders[order][0].order_started) {
-            orderStatus = "Order being prepared."
+            orderStatus = `Order being prepared.\nOrder pickup time: ${prevOrders[order][0].pickup_time}`
           }
           if (prevOrders[order][0].order_completed) {
             orderStatus = "Order Completed."
           }
-          console.log(prevOrders[order]);
           $('.previous-orders-list').append(`
           <div class="outerPrevOrder">
             <div class="prevOrderRest">
