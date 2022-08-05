@@ -104,7 +104,6 @@ $(function () {
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
             <div id="${menuItem.id}" class="card">
-             <!-- <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="..."> -->
               <div class="card-body">
                 <div class="card-left">
                   <h5 class="card-title">${menuItem.name}</h5>
@@ -150,7 +149,6 @@ $(function () {
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-list').append(`
           <div id="${prevOrder.id}" class="card">
-            <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>
               <p class="card-text">$${prevOrder.price / 100}</p>
@@ -178,17 +176,17 @@ $(function () {
     console.log('userCart has run');
     let cartTop = `
 
-    <section class="h-100 h-custom" style="background-color: #eee;">
+    <section class="shopping-cart">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
           <div class="card">
-            <div class="card-body p-4">
+            <div class="card-body" style="width:700px;">
               <div class="row">
                 <div class="col-lg-7">
                 <!-- order container -->
                   <h5 class="mb-3">
-                    <a href="#!" class="text-body">
+                    <a href="#!" class="text-body" style="color:yellow; text-transform-capitalize; letter-spacing: 5px;">
                       <i class="fas fa-long-arrow-alt-left me-2"></i>
                       Back to restaurant
                     </a>
@@ -196,7 +194,7 @@ $(function () {
                   <hr>
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
-                      <p class="mb-1">Current cart</p>
+                      <h1 style="margin:50px 0px 10px; padding:0;">Current Cart</h1>
                     </div>
                   </div>
                   <div class="card mb-3">
@@ -233,24 +231,22 @@ $(function () {
             cartTotal += count[i] * menuItemData[i - 1].price;
             cartItem += `<div id="cartItem_${i}" class="card-body">
               <div class="d-flex justify-content-between">
-                <div class="d-flex flex-row align-items-center">
-                  <div>
-                    <img src="https://picsum.photos/150/150?random=1" class="img-fluid rounded-3"
-                      alt="Shopping item" style="width: 65px;">
+                <div class="card-body" style="width: 800px;">
+                  <div class="card-left">
+                    <h5 class = "card-title">${menuItemData[i - 1].name}</h5>
+                    <p class="card-text">${menuItemData[i - 1].description}</p>
                   </div>
-                  <div class="ms-3">
-                    <h5>${menuItemData[i - 1].name}</h5>
-                    <p class="small mb-0">${menuItemData[i - 1].description}</p>
-                  </div>
-                </div>
-                <div class="d-flex flex-row align-items-center">
+
+                <div class="card-right">
                   <div style="width: 50px;">
                     <h5 class="fw-normal mb-0">${count[i]}</h5>
                   </div>
                   <div style="width: 80px;">
                     <h5 class="mb-0">$${addZeroes(count[i] * menuItemData[i - 1].price / 100)}</h5>
                   </div>
-                  <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                  <button href="#!" style="color: #cecece; padding-top:18px;"><i class="fas fa-trash-alt"></i></button>
+
+                  </div>
                 </div>
               </div>
             </div>\n`;
@@ -264,67 +260,68 @@ $(function () {
     <div class="col-lg-5">
 
       <div class="card bg-primary text-white rounded-3">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="mb-0">Card details</h5>
-          </div>
+      <hr>
+        <div class="payment-area">
 
-          <p class="small mb-2">Card type</p>
-          <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
-          <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
-          <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
-          <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
+          <div class = "credit-card-details">
+            <h3 style="color:yellow; font-size:36px; margin-bottom:10px;">Payment Information</h3>
+            <h3 style="margin-bottom:10px">Card type</h3>
+            <div class = "credit-card-type">
+              <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-mastercard fa-2x me-2" style="color:#F1EAD4"></i></a>
+              <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-visa fa-2x me-2" style="color:#F1EAD4"></i></a>
+              <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-amex fa-2x me-2" style="color:#F1EAD4"></i></a>
+              <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x" style="color:#F1EAD4"></i></a>
+            </div>
 
-          <form class="mt-4">
-            <div class="form-outline form-white mb-4">
-              <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                placeholder="Cardholder's Name" />
+            <form class="mt-4">
+              <div class="form-outline form-white mb-4">
               <label class="form-label" for="typeName">Cardholder's Name</label>
-            </div>
+                <input type="text" id="typeName" class="form-control form-control-lg" size="17"
+                  placeholder="Cardholder's Name" />
+              </div>
 
-            <div class="form-outline form-white mb-4">
-              <input type="text" class="typeText form-control form-control-lg" siez="17"
-                placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+              <div class="form-outline form-white mb-4">
               <label class="form-label" for="typeText">Card Number</label>
-            </div>
+                <input type="text" class="typeText form-control form-control-lg" siez="17"
+                  placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+              </div>
 
-            <div class="row mb-4">
-              <div class="col-md-6">
-                <div class="form-outline form-white">
-                  <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
-                    size="7" id="exp" minlength="7" maxlength="7" />
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <div class="form-outline form-white">
                   <label class="form-label" for="typeExp">Expiration</label>
+                    <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
+                      size="7" id="exp" minlength="7" maxlength="7" />
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-outline form-white">
-                  <input type="password" class="typeText form-control form-control-lg"
-                    placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                <div class="col-md-6">
+                  <div class="form-outline form-white">
                   <label class="form-label" for="typeText">Cvv</label>
+                    <input type="password" class="typeText form-control form-control-lg"
+                      placeholder="&#9679;&#9679;&#9679;" size="5" minlength="3" maxlength="3" />
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
-
-          <hr class="my-4">
-
-          <div class="d-flex justify-content-between">
-            <p class="mb-2">Subtotal</p>
-            <p class="mb-2">$${addZeroes(cartTotal / 100)}</p>
+            </form>
           </div>
 
-          <div class="d-flex justify-content-between mb-4">
-            <p class="mb-2">Total(Incl. taxes)</p>
-            <p class="mb-2">$${addZeroes(cartTotal / 100 * 1.12)}</p>
-          </div>
-
-          <button type="button" class="checkout btn btn-info btn-block btn-lg">
-            <div class="d-flex justify-content-between">
-              <span>$${addZeroes(cartTotal / 100 * 1.12)}</span>
-              <span>&nbsp;Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+          <div class = "cart-right">
+            <div class="payment-subtotal">
+              <p>Subtotal</p>
+              <p>$${addZeroes(cartTotal / 100)}</p>
             </div>
-          </button>
 
+            <div class="payment-total">
+              <p>Total(Incl. taxes)</p>
+              <p >$${addZeroes(cartTotal / 100 * 1.12)}</p>
+            </div>
+
+            <button type="button" class="big-checkout-btn">
+              <H3>
+                <span>&nbsp;Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+              </H3>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -501,7 +498,7 @@ $(function () {
       success: (response) => {
         // load owner dashboard after login
         renderOwnerDashboard(response[0]);
-          
+
         // !! this is the listener for all buttons in the admin page
         setTimeout(() => {
           // incoming orders SUBMIT FORM

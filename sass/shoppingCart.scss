@@ -1,0 +1,51 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
+
+.payment-area{
+  color: $chocolate;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  label {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  .credit-card-details
+.credit-card-type {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.cart-right {
+margin-top:36px;
+
+.payment-subtotal, .payment-total {
+  margin:0 0 36px;
+  p {
+    margin:0;
+  }
+}
+
+.payment-total {
+  color:#F1EAD4;
+}
+
+.big-checkout-btn {
+  color: $mayonnaise;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 48px;
+}
+
+
+}
+}
