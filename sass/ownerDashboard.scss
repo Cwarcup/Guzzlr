@@ -93,12 +93,14 @@ $chocolate: #392C2E;
   font-family: 'Bebas Neue', sans-serif;
   color: $chocolate;
   min-width: 500px;
-  max-width: auto;
+  width: 1030px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 1em;
+  margin-bottom: 5em;
+
 
   .current-header {
     align-self: flex-start;
