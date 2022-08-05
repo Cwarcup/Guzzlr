@@ -166,8 +166,10 @@ $(function () {
         };
         let orderItems = [];
         let orderTotal = 0;
+        let index = 0;
         let orderItemsString = "";
         for (const order of keys) {
+          orderStatus = "Order Placed";
           orderItems = [];
           orderItemsString = "";
           orderTotal = 0;
@@ -189,10 +191,10 @@ $(function () {
             orderItemsString += `\n`;
           };
 
-          if (prevOrders[order][0].order_started) {
-            orderStatus = `Order being prepared.\nOrder pickup time: ${prevOrders[order][0].pickup_time}`
+          if (prevOrders[order][index].order_started) {
+            orderStatus = `Order being prepared.\nOrder pickup time: ${prevOrders[order][index].pickup_time}`
           }
-          if (prevOrders[order][0].order_completed) {
+          if (prevOrders[order][index].order_completed) {
             orderStatus = "Order Completed."
           }
           $('.previous-orders-list').append(`
@@ -215,6 +217,7 @@ $(function () {
             </div>
           </div>
         `);
+        index++;
         }
 
       },
