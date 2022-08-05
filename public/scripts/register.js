@@ -95,7 +95,8 @@ $(function () {
           }
 
         });
-        console.log(response);
+        console.log('resp', response);
+        console.log('resp0', response[0]);
         $('#register').hide();
         $('.register-container').hide();
         $('.header-welcome').show();
@@ -112,6 +113,7 @@ $(function () {
   const createHomepageForUser = ((data) => {
     // DOM already has restaurant name and food items. We just need to show them.
     $('.main-container').children().show();
+    console.log('fjaskdh', data);
     $('#login').hide();
     $('.sign-up').hide();
     // change login btn htl

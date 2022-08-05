@@ -31,6 +31,8 @@ $(function () {
     $('.treat-container').children().hide();
     $('.header-welcome').hide();
     $('.view-restaurant').show();
+    $('.previous-orders-container').hide();
+
 
   });
 
@@ -44,14 +46,13 @@ $(function () {
     $('.treat-container').children().hide();
     $('.header-welcome').hide();
     $('.main-container').children().hide();
-    $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
     $('#login').show();
     $('#login').html(`
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='AdamRoxx97@gmail.com'/>
+            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='adam@gmail.com'/>
           </div>
           <div>
             <label for="password">Password</label>
@@ -152,9 +153,7 @@ $(function () {
             <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>
-
               <p class="card-text">$${prevOrder.price / 100}</p>
-              <a href="#" class="btn btn-primary">Add to cart</a>
             </div>
           </div>
         `);
@@ -458,7 +457,11 @@ $(function () {
 
             } , 100);
             return;
+          } else {
+            $('.treat-container').children().show();
+            $('.main-container').children().show();
           }
+
 
           // if user is a customer, NOT an owner
           createHomepageForUser(response[0]);

@@ -11,6 +11,7 @@ module.exports = (db) => {
       SELECT
         orders.id as order_id,
         orders.order_placed,
+        orders.*,
         restaurants.name as restaurant,
         menu_items.price,
         menu_items.name,
@@ -30,8 +31,7 @@ module.exports = (db) => {
         orders.order_placed,
         menu_items.name,
         menu_items.id,
-        menu_items.price
-      LIMIT 4;
+        menu_items.price;
     `;
     const userId = parseInt(req.query.userId);
     const values = [userId];
