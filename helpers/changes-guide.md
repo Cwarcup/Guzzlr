@@ -10,7 +10,6 @@
 Added restaurant.scss file in /sass to style elements when viewing restaurant (restaurant info, menu).
 Added buttons.scss file in /sass to provide default styling to buttons.
 
-
 ## INDEX.ejs ##
 
 Added <link> to restaurant.scss and buttons.scss.
