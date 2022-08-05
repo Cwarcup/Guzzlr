@@ -66,8 +66,11 @@ margin-top:36px;
       font-weight: bolder;
     }
     .total {
+      font-weight: bolder;
+      transform: rotate(354deg);
+      font-size:100px;
       position: absolute;
-      top: 400px;
+      top: 300px;
     }
   }
 }
