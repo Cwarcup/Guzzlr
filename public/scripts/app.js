@@ -91,10 +91,10 @@ $(function () {
         $('.restaurant-info-container').prepend(restaurantName);
         // this is fake hardcoded data
         const fakeRestaurantData = `
-          <h3 class = "rest-cuisine">Fast Food</h3>
-          <h3 class = "rest-street">1870 Main Street</h3>
-          <h3 class = "rest-phone">(604) 555-1234</h3>
-          <h3 class = "rest-hours">8:00 A.M to 11:30 P.M.</h3>
+          <h3 class = "rest-cuisine">${menuItems[0].cuisine_type}</h3>
+          <h3 class = "rest-street">${menuItems[0].street}</h3>
+          <h3 class = "rest-phone">${menuItems[0].phone_number}</h3>
+          <h3 class = "rest-hours">${menuItems[0].time_open} to ${menuItems[0].time_closes}</h3>
         `;
         $('.restaurant-info-container').prepend(fakeRestaurantData);
 
@@ -361,6 +361,7 @@ $(function () {
 
 
 
+  //////// FROM HERE
 
   // submits email and password from login screen
   // renders unique homepage with previous order using renderOwnerDashboard()
@@ -395,13 +396,22 @@ $(function () {
             // !! this is the listener for all buttons in the admin page
             setTimeout(() => {
               // incoming orders SUBMIT FORM
+              // this section attaches listeners to each order in the admin page
+              // must be attached here because we need renderOwnerDashboard(response[0]); to finish rendering the pending/current orders first
               $(".single-incoming-order-form").each(function () {
+                console.log("listener attached to single-incoming-order-form");
                 $(this).submit(function (event) {
                   event.preventDefault();
+                  console.log("listener attached to ", $(this).attr('id'));
 
-                  const time = $(this).find('input[name="etaTime"]').val();
-                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val();
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
 
+                  const time = $(this).find('input[name="etaTime"]').val(); // gets the time from the Pending orders form
+                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val(); // gets valuer from radio btn in order from Pending orders form
+
+                  // request to update order status (accepted or declined) and update time if accepted
                   $.ajax({
                     url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
                     method: 'POST',
@@ -410,13 +420,10 @@ $(function () {
                       confirmOrder: confirmOrder,
                     },
                     success: (data) => {
-                      console.log("Data for single order", data);
-
                       // !! reload page to show updated order
                       $('.owner-dashboard-container').empty();
                       $('.owner-current-orders').empty();
-
-                      renderOwnerDashboard(response[0]);
+                      runLoginAgain();
                     }
                   });
                 });
@@ -427,12 +434,15 @@ $(function () {
                 $(this).submit(function (event) {
                   event.preventDefault();
 
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
+
+                  // updates `oders` table to set order_completed to now()
                   $.ajax({
                     url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
                     method: 'POST',
-                    success: (data) => {
-                      console.log("Button for RFP clicked ", data);
-
+                    success: () => {
                       // !! reload page to show updated order
                       $('.owner-dashboard-container').empty();
                       $('.owner-current-orders').empty();
@@ -460,6 +470,7 @@ $(function () {
       }
     });
   });
+
 
 
   // use to render homepage for user if logged in successfully

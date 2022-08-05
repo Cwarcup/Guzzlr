@@ -12,7 +12,7 @@ const fs = require('fs');
 
 // CUISINES
 const restaurantNamesByCuisine = {
-  pizza: [
+  Pizza: [
     "Third Slice Pizza",
     "A2 Pizza",
     "Aunt Fatty''s Pizza",
@@ -22,7 +22,7 @@ const restaurantNamesByCuisine = {
     "Pizza Jardin",
     "Pi R Cubed"
   ],
-  italian: [
+  Italian: [
     "Don''t Ask For Luigi",
     "New Spaghetti Factory",
     "Lupone Restaurant & Vinoteca",
@@ -32,7 +32,7 @@ const restaurantNamesByCuisine = {
     "Jefferelli''s",
     "Rick''s Spaghetti House"
   ],
-  mexican: [
+  Mexican: [
     "Chipootle",
     "Sal y Jamón",
     "L.A. Taqueria",
@@ -42,7 +42,7 @@ const restaurantNamesByCuisine = {
     "La Basura",
     "Comida de Piso"
   ],
-  comfort: [
+  Comfort: [
     "The Clambie",
     "Schemeworks Brewing",
     "The Alibye Room",
@@ -52,7 +52,7 @@ const restaurantNamesByCuisine = {
     "The Scottish Heather",
     "Delish Pub"
   ],
-  fineDining: [
+  FineDining: [
     "Le Alligator",
     "Flojo''s",
     "Eaglesworth Restaurant",
@@ -62,7 +62,7 @@ const restaurantNamesByCuisine = {
     "Metropolis Steakhouse",
     "Jane Fortes Seafood & Chop House"
   ],
-  japanese: [
+  Japanese: [
     "Kōhī-Kyahuhon",
     "Konpyuta Ramen",
     "Nōdo Sushi",
@@ -72,7 +72,7 @@ const restaurantNamesByCuisine = {
     "Hensū Izakaya",
     "Dētabēsu"
   ],
-  chinese: [
+  Chinese: [
     "Shu Juku Teahouse",
     "Ka Fei",
     "Dapi Noodles",
@@ -82,7 +82,7 @@ const restaurantNamesByCuisine = {
     "Wei Zhaodao Yonghu",
     "Ruanjian BBQ"
   ],
-  coffee: [
+  Coffee: [
     "OJ Bean",
     "Kafkaesque",
     "Revolving Coffee",
