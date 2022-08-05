@@ -101,7 +101,7 @@ $(function () {
         console.log('resp0', response[0]);
         $('#register').hide();
         $('.register-container').hide();
-        $('.header-welcome').show();
+        $('.header-welcome').hide();
         $('.main-container').children().show();
         $('.menu-options-container').show();
         $('.previous-orders-container').show();
@@ -120,7 +120,7 @@ $(function () {
     $('.sign-up').hide();
     // change login btn htl
     $('.login').hide();
-    $('.header-welcome').show();
+    $('.header-welcome').hide();
     $('#register').hide();
     $('.treat-container').show();
     $('.view-restaurant').show();
