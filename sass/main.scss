@@ -171,12 +171,13 @@ body {
     }
 
     .previous-orders-container {
+      font-family: 'Courier New', Courier, monospace;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 1em;
       width: 100%;
-      background-color: #F1EAD4;
+      background-color: transparent;
       margin-bottom: 1em;
       border-radius: 10px;
       box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
@@ -227,15 +228,10 @@ body {
       justify-content: flex-start;
       flex-direction: column;
       display: flex;
-      background-color: rgb(43, 41, 41);
       margin-top: 1.25em;
       margin-right: 0.25em;
       margin-bottom: 1.25em;
       margin-left: 0.25em;
-      border-style: solid;
-      border-color: rgb(54 54 54);
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
       width: 1000px;
       height: 1000px;
     }
