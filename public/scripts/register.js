@@ -94,10 +94,14 @@ $(function () {
         });
         console.log(response);
         $('#register').hide();
+        $('.register-container').hide();
         $('.header-welcome').show();
         $('.main-container').children().show();
         $('.menu-options-container').show();
         $('.previous-orders-container').show();
+        $('.treat-container').hide();
+        $('.view-restaurant').hide();
+        $('.previous-orders-container').hide();
         createHomepageForUser(response[0]);
         }
     });
@@ -111,7 +115,11 @@ $(function () {
     $('.sign-up').hide();
     // change login btn htl
     $('.login').hide();
+    $('.header-welcome').hide();
     $('#register').hide();
+    $('.treat-container').hide();
+    $('.view-restaurant').hide();
+    $('.previous-orders-container').hide();
     // display user name in nav
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
     // add button to logout on navbar
@@ -138,7 +146,7 @@ $(function () {
 
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-list').append(`
-          <div id="${prevOrder.id}" class="card" style="width: 12rem;">
+          <div id="${prevOrder.id}" class="card">
             <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>

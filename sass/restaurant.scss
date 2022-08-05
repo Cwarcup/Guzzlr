@@ -1,0 +1,73 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
+// STILL TO IMPLEMENT: Main is a min of 848 pixels. from card being too wide.
+
+.view-restaurant {
+  display:flex;
+  flex-direction: column;
+  @media only screen and (min-width: 1180px) {
+		flex-direction: row;
+	}
+
+  justify-content: space-between;
+  width:100%;
+  gap: 4em;
+}
+
+.restaurant-info-container {
+  display:flex;
+  flex-direction: column;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: $chocolate;
+
+  .rest-name {
+    width: 50%;
+    order: 0;
+    color: $mayonnaise;
+    font-size: 72px;
+    margin: 0px 0px 40px;
+  }
+  .rest-cuisine, .rest-street, .rest-phone, .rest-hours {
+    order: 2;
+    margin: 0px 0px 0px;
+  }
+}
+
+.card {
+  width:800px;
+
+  @media only screen and (max-width: 900px) {
+		width: auto;
+	}
+}
+.card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .card-left {
+    display: flex;
+    flex-direction: column;
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: $mayonnaise;
+      margin: 0;
+    }
+    .card-text {
+      font-family:'Courier New', Courier, monospace;
+      font-size: 18px;
+      color: $chocolate;
+      margin: 0;
+    }
+  }
+  .card-right {
+    display:flex;
+    flex-direction: row;
+    color: $mayonnaise;
+  }
+}

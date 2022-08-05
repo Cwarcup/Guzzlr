@@ -1,3 +1,9 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
 body {
   display: flex;
   flex-direction: column;
@@ -74,7 +80,7 @@ body {
 
 
   main {
-    margin-top: auto;
+    margin-top: 0;
   }
 
   .main-container {
@@ -85,17 +91,18 @@ body {
     width: 100%;
     height: 100%;
     padding: 0 1em;
-    margin-top: 60px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
     overflow: hidden;
 
-    h2.rest-name {
-      padding-top: 0.5em;
-      margin-bottom: 0;
-      z-index: 99;
-    }
+    -webkit-filter: drop-shadow(0px 0px 40px #222);
+  filter: drop-shadow(0px 0px 40px #F1EAD4);
+
+    // h2.rest-name {
+    //   padding-top: 0.5em;
+    //   margin-bottom: 0;
+    //   z-index: 99;
+    //   color:green;
+    // }
 
     .login-container {
       display: flex;
@@ -105,9 +112,23 @@ body {
       height: 250px;
       width: 75%;
       padding: 20px;
-      border-radius: 10px;
-      background-color: #fff;
+      border-radius: 3px;
+      background-color: $piggy-pink;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Bebas Neue', sans-serif;
+
+      h1 {
+        font-size: 16px;
+      }
+      form div input {
+        border: none;
+        background:$minions-yellow;
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      // .login-btn {
+      //  font-family: 'Bebas Neue', sans-serif;
+      // }
     }
 
     .register-container {
@@ -123,16 +144,18 @@ body {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
 
+    .addToCart {
+      border-radius: 50px;
+    }
+
     .menu-options-container {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: flex-start;
       gap: 2em;
       margin-top: 1em;
       margin-bottom: 1em;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      margin-left: 1em;
       overflow: hidden;
 
       .menu-item {

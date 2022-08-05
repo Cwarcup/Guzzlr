@@ -11,12 +11,28 @@ let currUserID;
 
 $(function () {
   console.log('app.js is loaded');
+  console.log("check check");
 
 
   // hide login HTML on load
   $('#login').hide();
+  $('.main-container').children().hide();
+  $('.h2.rest-name').hide();
   $('#register').hide();
 
+
+  // click to go to mcdonalds
+  $('.featured-restaurant').click((event) => {
+    event.preventDefault();
+    let restaurantID = event.originalEvent.path[1].id;
+    restaurantID = restaurantID.substring(4,restaurantID.length);
+    console.log(Number(restaurantID));
+    getMenuItems(restaurantID);
+    $('.treat-container').children().hide();
+    $('.header-welcome').hide();
+    $('.view-restaurant').show();
+
+  });
 
   // login btn top right of main page
   // when clicked, user is presented with login container and can enter cradentials
@@ -24,13 +40,14 @@ $(function () {
   // TODO: for presentation, remove hard coded email and password
   $('.login').click((event) => {
     event.preventDefault();
+    // treat-container is the hardcoded cuisines and restaurants
+    $('.treat-container').children().hide();
     $('.header-welcome').hide();
     $('.main-container').children().hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
     $('#login').show();
     $('#login').html(`
-        <h1>Login</h1>
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
@@ -61,26 +78,41 @@ $(function () {
   // load menu items from /homepageMenu
   // runs when main page is first loaded
   // adds menu items for restairant with ID of 1
-  const getMenuItems = () => {
+  const getMenuItems = (restaurantID) => {
     $.ajax({
       url: '/homepageMenu',
       method: 'GET',
       dataType: 'json',
-      success: (data) => {
-        const menuItems = data.menuItems;
-        const restaurantName = `<h2 class="display-6 align-self-start rest-name">${menuItems[0].rest_name}</h2>`;
-        $('.main-container').prepend(restaurantName);
+      data: {data: restaurantID},
+      success: (response) => {
+        console.log(response);
+        const menuItems = response.menuItems;
+        const restaurantName = `<h2 class="rest-name">${menuItems[0].rest_name}</h2>`;
+        $('.restaurant-info-container').prepend(restaurantName);
+        // this is fake hardcoded data
+        const fakeRestaurantData = `
+          <h3 class = "rest-cuisine">${menuItems[0].cuisine_type}</h3>
+          <h3 class = "rest-street">${menuItems[0].street}</h3>
+          <h3 class = "rest-phone">${menuItems[0].phone_number}</h3>
+          <h3 class = "rest-hours">${menuItems[0].time_open} to ${menuItems[0].time_closes}</h3>
+        `;
+        $('.restaurant-info-container').prepend(fakeRestaurantData);
+
 
         // iterate through menuItems and append to DOM
         menuItems.forEach((menuItem) => {
           $('.menu-options-container').append(`
-            <div id="${menuItem.id}" class="card" style="width: 12rem;">
-              <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="...">
+            <div id="${menuItem.id}" class="card">
+             <!-- <img src="https://picsum.photos/150/150?random=${Math.floor(Math.random() * 100)}" class="card-img-top" alt="..."> -->
               <div class="card-body">
-                <h5 class="card-title">${menuItem.name}</h5>
-                <p class="card-text">${menuItem.description}</p>
-                <p class="card-text">$${menuItem.price / 100}</p>
-                <a href="#" class="addToCart btn btn-primary">Add to cart</a>
+                <div class="card-left">
+                  <h5 class="card-title">${menuItem.name}</h5>
+                  <p class="card-text">${menuItem.description}</p>
+                </div>
+                <div class="card-right">
+                  <p class="card-text">$${menuItem.price / 100}</p>
+                <button href="#" class="addToCart">Add to cart</a>
+                </div>
               </div>
             </div>
           `);
@@ -91,7 +123,7 @@ $(function () {
       }
     });
   };
-  getMenuItems();
+  //getMenuItems();
 
 
 
@@ -112,14 +144,15 @@ $(function () {
 
         $('.previous-orders-container').append(`<h2>Previous Orders</h2>`);
         $('.previous-orders-container').append(`<div class="previous-orders-list">`);
+        console.log(userOrderHistory);
 
         userOrderHistory.forEach((prevOrder) => {
           $('.previous-orders-list').append(`
-          <div id="${prevOrder.id}" class="card" style="width: 12rem;">
+          <div id="${prevOrder.id}" class="card">
             <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${prevOrder.name}</h5>
-                <p class="card-text">${prevOrder.description}</p>
+
               <p class="card-text">$${prevOrder.price / 100}</p>
               <a href="#" class="btn btn-primary">Add to cart</a>
             </div>
@@ -175,12 +208,14 @@ $(function () {
       method: 'GET',
       dataType: 'json',
       success: (data) => {
+        console.log(data);
         let cartCopy = cartArr.map(x => x);
         cartCopy.sort();
         const menuItemData = data.menuItems;
         let cartItem = `\n`;
         let cartTotal = 0;
         const count = {};
+
 
         for (let index = 0; index < cartArr.length; index++) {
           const element = cartCopy[index];
@@ -319,12 +354,14 @@ $(function () {
   $('.cart-demo-btn').click((event) => {
     event.preventDefault();
     userCart();
+    $('.treat-container').children().hide();
     $('.main-container').children().hide();
 
   });
 
 
 
+  //////// FROM HERE
 
   // submits email and password from login screen
   // renders unique homepage with previous order using renderOwnerDashboard()
@@ -355,17 +392,26 @@ $(function () {
 
             // load owner dashboard after login
             renderOwnerDashboard(response[0]);
-            
+
             // !! this is the listener for all buttons in the admin page
             setTimeout(() => {
               // incoming orders SUBMIT FORM
+              // this section attaches listeners to each order in the admin page
+              // must be attached here because we need renderOwnerDashboard(response[0]); to finish rendering the pending/current orders first
               $(".single-incoming-order-form").each(function () {
+                console.log("listener attached to single-incoming-order-form");
                 $(this).submit(function (event) {
                   event.preventDefault();
+                  console.log("listener attached to ", $(this).attr('id'));
 
-                  const time = $(this).find('input[name="etaTime"]').val();
-                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val();
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
 
+                  const time = $(this).find('input[name="etaTime"]').val(); // gets the time from the Pending orders form
+                  const confirmOrder = $(this).find('input[name="acceptOrDecline"]:checked').val(); // gets valuer from radio btn in order from Pending orders form
+
+                  // request to update order status (accepted or declined) and update time if accepted
                   $.ajax({
                     url: `http://localhost:8080/confirmOrder/${$(this).attr('id')}`,
                     method: 'POST',
@@ -374,13 +420,10 @@ $(function () {
                       confirmOrder: confirmOrder,
                     },
                     success: (data) => {
-                      console.log("Data for single order", data);
-
                       // !! reload page to show updated order
                       $('.owner-dashboard-container').empty();
                       $('.owner-current-orders').empty();
-
-                      renderOwnerDashboard(response[0]);
+                      runLoginAgain();
                     }
                   });
                 });
@@ -391,12 +434,15 @@ $(function () {
                 $(this).submit(function (event) {
                   event.preventDefault();
 
+                  // clear the containers if anything in already in them
+                  $('.owner-dashboard-container').empty();
+                  $('.owner-current-orders').empty();
+
+                  // updates `oders` table to set order_completed to now()
                   $.ajax({
                     url: `http://localhost:8080/orderRFP/${$(this).attr('id')}`,
                     method: 'POST',
-                    success: (data) => {
-                      console.log("Button for RFP clicked ", data);
-
+                    success: () => {
                       // !! reload page to show updated order
                       $('.owner-dashboard-container').empty();
                       $('.owner-current-orders').empty();
@@ -426,6 +472,7 @@ $(function () {
   });
 
 
+
   // use to render homepage for user if logged in successfully
   const createHomepageForUser = ((data) => {
     // DOM already has restaurant name and food items. We just need to show them.
@@ -433,6 +480,7 @@ $(function () {
     $('#login').hide();   // hide login button in nav
     $('.sign-up').hide(); // hide sign up button in nav
     $('.login').hide();   // hide children in login container
+    $('.register-container').hide(); // hide children in register container');
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`); // display user name in nav
     $('.nav-links').append(`<a class="nav-link" href="/" id="logout-btn">Logout</a>`); // add button to logout on navbar
 
