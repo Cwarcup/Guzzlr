@@ -104,9 +104,10 @@ const singleIncomingOrder = (data, orderItems) => {
     </div>
     <div center-text>
       <input 
+      class="etaTime"
+        name="etaTime"
         type="time" 
         placeholder="4:00pm"
-        name="etaTime"
       >
     </div>
     <div class="center-text">
@@ -216,7 +217,7 @@ const singleCurrentOrder = (data, orderItems) => {
     return `
             <div class="quantity-itemName-container">
               <div>
-                  XX
+                  1
               </div>
               <div>
                 <span class="items-list">

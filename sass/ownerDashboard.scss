@@ -4,6 +4,8 @@ $piggy-pink: #FF99EE;
 $dark-pink: #df4bdd;
 $chocolate: #392C2E;
 
+
+
 .owner-dashboard-container {
   font-family: 'Bebas Neue', sans-serif;
   color: $chocolate;
@@ -18,6 +20,7 @@ $chocolate: #392C2E;
   .owner-dash-header {
     align-self: flex-start;
     color: $mayonnaise;
+    font-size: 2em;
   }
 
   .owner-dash-grid-col-header {
@@ -70,8 +73,15 @@ $chocolate: #392C2E;
     align-items: center;
   }
 
+  .etaTime {
+    background-color: $mayonnaise;
+    color: $chocolate;
+    border-radius: 5px;
+  }
 
-
+  button {
+    border-radius: 5px;
+  }
 }
 
 
@@ -126,9 +136,11 @@ $chocolate: #392C2E;
     align-items: center;
   }
 
-
-
   .items-list {
     margin-left: 4em
+  }
+
+  button {
+    border-radius: 5px;
   }
 }
