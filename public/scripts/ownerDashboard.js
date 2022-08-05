@@ -205,10 +205,10 @@ const currentOrdersHeader = () => {
 const singleCurrentOrder = (data, orderItems) => {
   return `
   <form class="current-single-item-row current-order-form" id="${data.order_id}">
-    <div>
+    <div class="grid-item-center">
       ${data.order_id}
     </div>
-    <div>
+    <div class="grid-item-center">
       ${data.order_notes || 'No special requests'}
     </div>
     <div class="items-list">
@@ -219,7 +219,7 @@ const singleCurrentOrder = (data, orderItems) => {
                   XX
               </div>
               <div>
-                <span>
+                <span class="items-list">
                   ${item.item_name}
                 </span>
               </div>
@@ -227,10 +227,10 @@ const singleCurrentOrder = (data, orderItems) => {
             `;
   })}
     </div>
-    <span>
+    <span class="grid-item-center">
       ${data.pickup_time}
     </span>
-    <div>
+    <div class="grid-item-center">
       <button type="submit">
         RFP
       </button>
