@@ -52,11 +52,11 @@ $(function () {
         <form id="login-form">
           <div>
             <label for="email">Email address</label>
-            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='adam@gmail.com'/>
+            <input name="email" placeholder="do_not_perceive_me@outlook.com" id="login-email" value='adamgrharvey@gmail.com'/>
           </div>
           <div>
             <label for="password">Password</label>
-            <input name="password" placeholder="Password" id="login-password" value="1234"/>
+            <input name="password" placeholder="Password" id="login-password" value="a"/>
           </div>
           <div>
             <button type="submit" class="login-btn">Login
@@ -145,19 +145,37 @@ $(function () {
 
         $('.previous-orders-container').append(`<h2>Previous Orders</h2>`);
         $('.previous-orders-container').append(`<div class="previous-orders-list">`);
-        console.log(userOrderHistory);
+        //console.log(userOrderHistory);
+        let prevOrders = {};
+        for (const i of userOrderHistory) {
+          if (!prevOrders[i.order_id]) {
+            prevOrders[i.order_id] = [];
+            prevOrders[i.order_id].push(i);
+          } else {
+            prevOrders[i.order_id].push(i);
+          }
 
-        userOrderHistory.forEach((prevOrder) => {
+        }
+        console.log(prevOrders);
+
+        let keys = Object.keys(prevOrders);
+
+        for (const order of keys) {
+          console.log(prevOrders[order]);
           $('.previous-orders-list').append(`
-          <div id="${prevOrder.id}" class="card">
-            <img src="https://picsum.photos/150/150?random" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">${prevOrder.name}</h5>
-              <p class="card-text">$${prevOrder.price / 100}</p>
+          <div class="outerPrevOrder">
+            <div class="prevOrderRest">
+            <img src="https://picsum.photos/150/150?random=1" class="img-fluid rounded-3"
+            alt="Shopping item" style="width: 65px;">
+              <p>rest</p>
+            </div>
+            <div class="prevOrderFoods">
+            <p>foods</p>
             </div>
           </div>
         `);
-        });
+        }
+
       },
       error: (err) => {
         console.log("Error at getUserOrderHistory", err);

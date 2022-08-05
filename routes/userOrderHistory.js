@@ -13,6 +13,7 @@ module.exports = (db) => {
         orders.order_placed,
         orders.*,
         restaurants.name as restaurant,
+        restaurants.*,
         menu_items.price,
         menu_items.name,
         menu_items.id as menu_item_id,
@@ -28,6 +29,7 @@ module.exports = (db) => {
       GROUP BY
         orders.id,
         restaurants.name,
+        restaurants.id,
         orders.order_placed,
         menu_items.name,
         menu_items.id,
