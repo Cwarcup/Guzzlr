@@ -155,21 +155,64 @@ $(function () {
           }
 
         }
-        console.log(prevOrders);
 
         let keys = Object.keys(prevOrders);
-
+        let orderStatus = "Order Placed";
+        let orderFoodItem =
+        {
+          FoodName: "",
+          quantity: 0,
+          price: 0
+        };
+        let orderItems = [];
+        let orderTotal = 0;
+        let orderItemsString = "";
         for (const order of keys) {
+          orderItems = [];
+          orderItemsString = "";
+          orderTotal = 0;
+          for (let i = 0; i < prevOrders[order].length; i++) {
+            orderFoodItem.FoodName = prevOrders[order][i].name;
+            orderFoodItem.quantity = prevOrders[order][i].count;
+            orderFoodItem.price = prevOrders[order][i].price * orderFoodItem.quantity;
+            orderItems.push(orderFoodItem);
+            orderFoodItem = {
+              FoodName: "",
+              quantity: 0,
+              price: 0
+            };
+          }
+
+          for (let j = 0; j < orderItems.length; j++) {
+            orderTotal += (orderItems[j].price);
+            orderItemsString += `${orderItems[j].quantity} x ${orderItems[j].FoodName}`;
+            orderItemsString += `\n`;
+          };
+
+          if (prevOrders[order][0].order_started) {
+            orderStatus = "Order being prepared."
+          }
+          if (prevOrders[order][0].order_completed) {
+            orderStatus = "Order Completed."
+          }
           console.log(prevOrders[order]);
           $('.previous-orders-list').append(`
           <div class="outerPrevOrder">
             <div class="prevOrderRest">
             <img src="https://picsum.photos/150/150?random=1" class="img-fluid rounded-3"
             alt="Shopping item" style="width: 65px;">
-              <p>rest</p>
+              <p><strong>${prevOrders[order][0].restaurant}</strong></p>
+              <p>${prevOrders[order][0].street}</p>
+            </div>
+            <div class="prevOrderDetails">
+              <p><strong>${orderStatus}</strong>
+              </p>
+              <p>
+              <strong>$${addZeroes(orderTotal / 100 * 1.12) }</strong>
+              </p>
             </div>
             <div class="prevOrderFoods">
-            <p>foods</p>
+            <span>${orderItemsString}</span>
             </div>
           </div>
         `);

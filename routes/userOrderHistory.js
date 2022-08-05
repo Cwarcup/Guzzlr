@@ -11,6 +11,7 @@ module.exports = (db) => {
       SELECT
         orders.id as order_id,
         orders.order_placed,
+        orders.price as order_total,
         orders.*,
         restaurants.name as restaurant,
         restaurants.*,
@@ -30,6 +31,7 @@ module.exports = (db) => {
         orders.id,
         restaurants.name,
         restaurants.id,
+        order_total,
         orders.order_placed,
         menu_items.name,
         menu_items.id,
