@@ -102,8 +102,9 @@ $(function () {
 
   $(".main-container").on("click", ".fa-trash-alt", function (event) {
     event.preventDefault();
-    let subtotal = event.originalEvent.path[7].children[1].children[0].children[0].children[8].children[1].textContent;
-    let total = event.originalEvent.path[7].children[1].children[0].children[0].children[9].children[1].textContent;
+    console.log(event);
+    let subtotal = event.originalEvent.path[9].children[0].children[1].children[0].children[1].children[1].children[0].children[1].textContent;
+    let total = event.originalEvent.path[9].children[0].children[1].children[0].children[1].children[1].children[1].children[1].textContent;
     subtotal = Number(subtotal.substring(1,subtotal.length));
     let itemId = Number(event.originalEvent.path[4].id.substring(9,event.originalEvent.path[4].id.length));
     let index = cartArr.indexOf(itemId);
@@ -137,7 +138,7 @@ $(function () {
       event.preventDefault();
       console.log('checkout', currUserID);
       createOrder(cartArr, event.currentTarget.parentElement.children[1].children[1].textContent, currUserID);
-      //sendText();
+      sendText();
     }
 
   });
