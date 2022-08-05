@@ -49,3 +49,25 @@ margin-top:36px;
 
 }
 }
+
+
+.mainSummary {
+  color: $chocolate;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+}
+
+.orderinfo {
+  .left {
+    .restaurant {
+      font-weight: bolder;
+    }
+    .total {
+      position: absolute;
+      top: 400px;
+    }
+  }
+}
