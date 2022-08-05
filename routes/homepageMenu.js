@@ -3,7 +3,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
-    console.log('req ansdjgkf', req.query);
+    console.log('homepageMenu', req.query);
     db.query(
       `
       SELECT
