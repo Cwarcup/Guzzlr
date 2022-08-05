@@ -79,6 +79,8 @@ $chocolate: #392C2E;
 
 
 .owner-current-orders {
+  font-family: 'Bebas Neue', sans-serif;
+  color: $chocolate;
   min-width: 500px;
   max-width: auto;
   display: flex;
@@ -89,6 +91,12 @@ $chocolate: #392C2E;
 
   .current-header {
     align-self: flex-start;
+  }
+
+  .grid-item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .current-orders-first-row {

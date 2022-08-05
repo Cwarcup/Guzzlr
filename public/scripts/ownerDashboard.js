@@ -185,15 +185,17 @@ const currentOrdersHeader = () => {
           <h2>Current Orders</h2>
         </div>
         <div class="current-orders-first-row">
-          <div>Order Number</div>
-          <div class="customer-requests">Special Requests</div>
-          <div class="items-list">
-            <div class="quantity-itemName-container">
-                <span>Quantity</span>
+          <div class="grid-item-center">Order Number</div>
+          <div class="grid-item-center customer-requests">Special Requests</div>
+          <div class="grid-item-center">
+              <div >
+                <span >Quantity</span>
+              </div>
+              <div class="items-list">
                 <span>Item name</span>
-            </div>
+              </div>
           </div>
-          <div class="pickup-time">Pickup time</div>
+          <div class="grid-item-center pickup-time">Pickup time</div>
           <p>Send RFP</p>
         </div>
         `;
@@ -214,9 +216,7 @@ const singleCurrentOrder = (data, orderItems) => {
     return `
             <div class="quantity-itemName-container">
               <div>
-                <span>
                   XX
-                </span>
               </div>
               <div>
                 <span>
