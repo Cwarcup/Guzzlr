@@ -130,13 +130,13 @@ $(function () {
     //originalEvent.path[2].children[1].children[0].textContent
   });
 
-  $(".main-container").on("click", ".checkout", function (event) {
+  $(".main-container").on("click", ".big-checkout-btn", function (event) {
     if (!currUserID) {
       alert('Please login or register to start your order!');
     } else {
       event.preventDefault();
       console.log('checkout', currUserID);
-      createOrder(cartArr, event.currentTarget.children[0].children[0].textContent, currUserID);
+      createOrder(cartArr, event.currentTarget.parentElement.children[1].children[1].textContent, currUserID);
       //sendText();
     }
 

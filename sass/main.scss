@@ -13,7 +13,14 @@ body {
   background-color: $dark-pink;
   background: linear-gradient(180deg, #ff99ee, #f074e5, #df4bdd);
 
-
+  h1 {
+    color: $chocolate;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    margin:0;
+    padding: 25px;
+    line-height: 0.8;
+  }
 //  ==== START OF HARDCODED CONTENT (treats) ====
   .cuisine-container {
     display: flex;
