@@ -6,6 +6,9 @@ $(function () {
     $('.main-container').children().hide();
     $('.menu-options-container').hide();
     $('.previous-orders-container').hide();
+    $('.treat-container').hide();
+    $('.view-restaurant').hide();
+    $('.previous-orders-container').hide();
     $('#register').show();
     $('#register').html(`
         <h1>Register</h1>
@@ -99,9 +102,7 @@ $(function () {
         $('.main-container').children().show();
         $('.menu-options-container').show();
         $('.previous-orders-container').show();
-        $('.treat-container').hide();
-        $('.view-restaurant').hide();
-        $('.previous-orders-container').hide();
+
         createHomepageForUser(response[0]);
         }
     });
@@ -115,11 +116,11 @@ $(function () {
     $('.sign-up').hide();
     // change login btn htl
     $('.login').hide();
-    $('.header-welcome').hide();
+    $('.header-welcome').show();
     $('#register').hide();
-    $('.treat-container').hide();
-    $('.view-restaurant').hide();
-    $('.previous-orders-container').hide();
+    $('.treat-container').show();
+    $('.view-restaurant').show();
+    $('.previous-orders-container').show();
     // display user name in nav
     $('.nav-links').append(`<a>Welcome, ${data.name}</a>`);
     // add button to logout on navbar

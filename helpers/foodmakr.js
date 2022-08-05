@@ -11,7 +11,7 @@ const fs = require('fs');
 
 
 // PUT HOW MANY TREAT ITEMS YOU WANT BELOW!
-const numTreats = 32;
+const numTreats = 40;
 
 
 
@@ -378,27 +378,18 @@ fs.writeFile('./db/seeds/04a_generated_menu_items.sql', content, err => {
   }
 });
 
-const menuBuild = function(restNum) {
-  let menuBuilder = "";
+let menuBuilder = "";
 
-
-  for (let i = ((restNum-1) * 32) + 1; i <= numTreats + ((restNum-1) * 32); i++) {
-    menuBuilder += `INSERT INTO menus (restaurant_id, menu_item) VALUES (${restNum},${i});\n`;
+let split = 1;
+for (let i = 1; i <= numTreats * 4; i++) {
+  if (i % 40 === 0) {
+    split++;
   }
-  return menuBuilder;
+  menuBuilder += `INSERT INTO menus (restaurant_id, menu_item) VALUES (${split},${i});\n`;
 }
 
-let toFile;
-for (let i = 1; i < 5; i++) {
-  toFile += menuBuild(i);
-}
-
-
-fs.writeFile('./db/seeds/05a_generated_menus.sql', toFile, err => {
+fs.writeFile('./db/seeds/05a_generated_menus.sql', menuBuilder, err => {
   if (err) {
     console.error(err);
   }
 });
-
-
-
