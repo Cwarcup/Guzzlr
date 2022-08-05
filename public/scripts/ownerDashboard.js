@@ -28,27 +28,27 @@ const pendingOrderHeader = () => {
           <h2>Pending Orders</h2>
         </div>
         <div class="pending-orders-rows-cols">
-          <div>Order Number</div>
-          <div class="customer-requests">Special Requests</div>
-          <div class="items-list">
-            <div class="quantity-itemName-container">
-              <div>
-                <span>Quantity</span>
+          <div class="grid-item-center">Order Number</div>
+          <div class="customer-requests  grid-item-center">Special Requests</div>
+          <div class="grid-item-center">
+              <div >
+                <span >Quantity</span>
               </div>
-              <div>
+              <div class="items-list">
                 <span>Item name</span>
               </div>
-            </div>
           </div>
-          <div class="accept-decline">
+          <div class="accept-decline grid-item-center">
             <label>Accept</label>
           </div>
-          <div class="time-created">Time</div>
-          <div class="pickup-time">Pickup time</div>
+          <div class="time-created grid-item-center">Time</div>
+          <div class="pickup-time grid-item-center">Pickup time</div>
           <p>Confirm</p>
         </div>
         `;
 };
+
+
 
 
 // renders a single order
@@ -61,22 +61,22 @@ const pendingOrderHeader = () => {
 const singleIncomingOrder = (data, orderItems) => {
   return `
   <form class="pending-orders-rows-cols single-incoming-order-form" id="${data.order_id}">
-    <div>
+    <div class="grid-item-center">
       ${data.order_id}
     </div>
-    <div>
+    <div class="grid-item-center">
       ${data.order_notes || 'No special requests'}
     </div>
     <div class="items-list">
       ${orderItems.map(item => {
     return `
             <div class="quantity-itemName-container">
-                <span>
-                  XX
-                </span>
-                <span>
+                <div>
+                  1
+                </div>
+                <div>
                   ${item.item_name}
-                </span>
+                </div>
             </div>
             `;
   })}
@@ -97,19 +97,19 @@ const singleIncomingOrder = (data, orderItems) => {
       >
     </div>
 
-    <div class="time-created">
+    <div class="time-created center-text">
       <span>
-        ${getHumanDate(data.time_order_created)}
+        ${convertOrderTime(data.time_order_created)}
       </span>
     </div>
-    <div>
+    <div center-text>
       <input 
         type="time" 
         placeholder="4:00pm"
         name="etaTime"
       >
     </div>
-    <div>
+    <div class="center-text">
       <button type="submit">
         Send
       </button>

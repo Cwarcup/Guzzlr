@@ -1,11 +1,11 @@
-const getHumanDate = (isoDate) => {
-  const date = new Date(isoDate);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  const humanDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-  return humanDate;
+const convertOrderTime = (isoDate) => {
+  let myDate = new Date(isoDate);
+  let pstDate = myDate.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles"
+  });
+
+  const time = pstDate.split(', ');
+
+  return time[1].slice();
+
 };

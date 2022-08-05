@@ -1,4 +1,12 @@
+$minions-yellow: #F4E04D;
+$mayonnaise: #F1EAD4;
+$piggy-pink: #FF99EE;
+$dark-pink: #df4bdd;
+$chocolate: #392C2E;
+
 .owner-dashboard-container {
+  font-family: 'Bebas Neue', sans-serif;
+  color: $chocolate;
   min-width: 500px;
   max-width: auto;
   display: flex;
@@ -9,6 +17,7 @@
 
   .owner-dash-header {
     align-self: flex-start;
+    color: $mayonnaise;
   }
 
   .owner-dash-grid-col-header {
@@ -19,12 +28,20 @@
   // all columns should space 2 rows except for the last two columns
   .pending-orders-rows-cols {
     display: grid;
-    grid-template-columns: 1fr 4fr 8fr 2fr 2fr 3fr 1fr;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 2fr 4fr 6fr 2fr 2fr 3fr 2fr;
     grid-template-rows: repeat(1, 1fr);
     grid-gap: 1em;
     margin-top: 1em;
     width: 100%;
     border-bottom: 2px solid grey;
+  }
+
+  .grid-item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .quantity-itemName-container {
@@ -36,7 +53,28 @@
   .pickup-time-input {
     width: 75px;
   }
+
+  .items-list {
+    margin-left: 4em
+  }
+
+  .center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center-text-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
 }
+
+
 
 
 
@@ -75,6 +113,14 @@
 
   .quantity-itemName-container {
     display: flex;
-    justify-content: space-around;
+    gap: 4;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
+  .items-list {
+    margin-left: 4em
   }
 }
