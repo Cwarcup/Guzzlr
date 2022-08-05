@@ -501,7 +501,7 @@ $(function () {
       success: (response) => {
         // load owner dashboard after login
         renderOwnerDashboard(response[0]);
-          
+
         // !! this is the listener for all buttons in the admin page
         setTimeout(() => {
           // incoming orders SUBMIT FORM
