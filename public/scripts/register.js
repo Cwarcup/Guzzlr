@@ -55,11 +55,13 @@ $(function () {
         if (response.length > 0) {
           // create homepage according to user information
           if (response[0].id) {
-            console.log('❌ ❌ user found in database ❌ ❌ ')
+            console.log('❌ ❌ user found in database ❌ ❌ ');
             alert('Another user has an account with this email, please use another email address.');
           }
         } else {
           console.log('✅ user not found in database ✅');
+          $('.header-welcome').hide();
+
           createUser(formData);
 
         }
@@ -67,7 +69,7 @@ $(function () {
     });
   });
 
-  const createUser = function(userData) {
+  const createUser = function (userData) {
 
 
     $.ajax({
@@ -105,10 +107,10 @@ $(function () {
         $('.previous-orders-container').show();
 
         createHomepageForUser(response[0]);
-        }
+      }
     });
 
-  }
+  };
 
   const createHomepageForUser = ((data) => {
     // DOM already has restaurant name and food items. We just need to show them.
